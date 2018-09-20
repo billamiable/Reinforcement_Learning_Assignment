@@ -65,4 +65,4 @@ python train_pg_f18.py HalfCheetah-v2 -ep 150 --discount 0.9 -n 100 -e 3 -l 2 -s
 python plot.py data/hc_b5* --value AverageReturn
 ```
 
-Thanks for reading!
+## Cheers!
