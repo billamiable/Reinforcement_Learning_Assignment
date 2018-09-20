@@ -20,48 +20,48 @@ In order to rerun the code, follow the command line below:
 ### Problem 4
 #### 1. Training
 
-```python
+```ruby
 python train_pg_f18.py CartPole-v0 -n 100 -b 1000 -e 3 -dna --exp_name sb_no_rtg_dnapython train_pg_f18.py CartPole-v0 -n 100 -b 1000 -e 3 -rtg -dna --exp_name sb_rtg_dnapython train_pg_f18.py CartPole-v0 -n 100 -b 1000 -e 3 -rtg --exp_name sb_rtg_napython train_pg_f18.py CartPole-v0 -n 100 -b 5000 -e 3 -dna --exp_name lb_no_rtg_dnapython train_pg_f18.py CartPole-v0 -n 100 -b 5000 -e 3 -rtg -dna --exp_name lb_rtg_dnapython train_pg_f18.py CartPole-v0 -n 100 -b 5000 -e 3 -rtg --exp_name lb_rtg_na
 ```
 #### 2. Plot Result
 
-```python
+```ruby
 python plot.py data/sb_* --value AverageReturnpython plot.py data/lb* --value AverageReturn
 ```
 
 ### Problem 5
 #### 1. Training
 
-```python
+```ruby
  python train_pg_f18.py InvertedPendulum-v2 -ep 1000 --discount 0.9 -n 100 -e 3 -l 2 -s 64 -b 2000 -lr 3e-2 -rtg --exp_name hc_b2000_r3e-2
 ```
 #### 2. Plot Result
 
-```python
+```ruby
 python plot.py data/hc_b2* --value AverageReturn
 ```
 
 ### Problem 7
 #### 1. Training
 
-```python
+```ruby
 python train_pg_f18.py LunarLanderContinuous-v2 -ep 1000 --discount 0.99 -n 100 -e 3 -l 2 -s 64 -b 40000 -lr 0.005 -rtg --nn_baseline --exp_name ll_b40000_r0.005
 ```
 #### 2. Plot Result
 
-```python
+```ruby
 python plot.py data/ll* --value AverageReturn
 ```
 
 ### Problem 8
 #### 1. Training
 
-```python
+```ruby
 python train_pg_f18.py HalfCheetah-v2 -ep 150 --discount 0.9 -n 100 -e 3 -l 2 -s 32 -b 50000 -lr 0.02 --exp_name hc_b50000_r0.02python train_pg_f18.py HalfCheetah-v2 -ep 150 --discount 0.9 -n 100 -e 3 -l 2 -s 32 -b 50000 -lr 0.02 -rtg --exp_name hc_b50000_r0.02_rtgpython train_pg_f18.py HalfCheetah-v2 -ep 150 --discount 0.9 -n 100 -e 3 -l 2 -s 32 -b 50000 -lr 0.02 --nn_baseline --exp_name hc_b50000_r0.02_nn_baselinepython train_pg_f18.py HalfCheetah-v2 -ep 150 --discount 0.9 -n 100 -e 3 -l 2 -s 32 -b 50000 -lr 0.02 -rtg --nn_baseline --exp_name hc_b50000_r0.02_rtg_nn_baseline
 ```
 #### 2. Plot Result
 
-```python
+```ruby
 python plot.py data/hc_b5* --value AverageReturn
 ```
 
