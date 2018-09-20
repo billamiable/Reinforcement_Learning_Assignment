@@ -17,6 +17,8 @@ See the [HW2 PDF](http://rail.eecs.berkeley.edu/deeprlcourse/static/homeworks/hw
 
 In order to rerun the code, follow the command line below:
 
+# Instructions for Assignment1
+
 ### Problem 4
 #### 1. Training
 
