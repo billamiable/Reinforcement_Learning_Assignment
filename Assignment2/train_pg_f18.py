@@ -94,7 +94,6 @@ class Agent(object):
         self.nn_baseline = estimate_return_args['nn_baseline']
         self.normalize_advantages = estimate_return_args['normalize_advantages']
 
-    # Got you here! TO-DO: Figure out why it works
     def init_tf_sess(self):
         tf_config = tf.ConfigProto(inter_op_parallelism_threads=1, intra_op_parallelism_threads=1) 
         self.sess = tf.Session(config=tf_config)
@@ -157,16 +156,13 @@ class Agent(object):
         # raise NotImplementedError
         if self.discrete:
             # YOUR_CODE_HERE
-            # TO-DO: check if "nn_baseline" 
-            # logits are the log probability of frequency
+            # IMPORTANT: logits are the log probability of frequency
             sy_logits_na = build_mlp(sy_ob_no, self.ac_dim, "nn_nonbaseline", n_layers=self.n_layers, size=self.size)
             return sy_logits_na
         else:
             # YOUR_CODE_HERE
             sy_mean = build_mlp(sy_ob_no, self.ac_dim, "nn_nonbaseline", n_layers=self.n_layers, size=self.size)
-            # print(sy_mean.get_shape())
             sy_logstd = tf.get_variable(name="log_std", shape=[self.ac_dim])
-            # print(sy_logstd.get_shape())
             return (sy_mean, sy_logstd)
 
     #========================================================================================#
@@ -215,7 +211,7 @@ class Agent(object):
                 print('sampled action shape',sy_sampled_ac.get_shape())
                 sy_sampled_ac = tf.squeeze(sy_sampled_ac, axis=0)
             # Wonder: difference between both? (both ok)
-            # sample once for each element in the batch!
+            # Sample once for each element in the batch!
             sy_sampled_ac = tf.multinomial(sy_logits_na, 1)
             # output shape is (batch_size, sample_number), thus needs squeezing
             sy_sampled_ac = tf.squeeze(sy_sampled_ac, axis=1)
@@ -223,17 +219,11 @@ class Agent(object):
                 print('sampled action shape',sy_sampled_ac.get_shape())
                 # exit()
         else:
-            # TO-DO: tuple can be presented as this??
             sy_mean, sy_logstd = policy_parameters
-            # print(sy_mean.get_shape())
-            # print(sy_logstd.get_shape())
-            # exit()
             # YOUR_CODE_HERE
             # distribution version
             sy_sampled_ac = tf.contrib.distributions.MultivariateNormalDiag(loc=sy_mean, scale_diag=tf.exp(sy_logstd)).sample(1)
-            # kind of different from discrete
-            # print(sy_sampled_ac.get_shape())
-            # exit()
+            # axies is kind of different from discrete
             sy_sampled_ac = tf.squeeze(sy_sampled_ac, axis=0)
             # sy_logstd (self.ac_dim,) * z (batch_size, self.ac_dim)
             # mean (batch_size, self.ac_dim)
@@ -276,7 +266,7 @@ class Agent(object):
                 print('input action shape',sy_ac_na.get_shape())
                 print('input logits shape',sy_logits_na.get_shape())
                 exit()
-            # distribution type
+            # distribution version
             if 0:
                 dist = tf.contrib.distributions.Categorical(logits=sy_logits_na)
                 sy_logprob_n = tf.negative(dist.log_prob(sy_ac_na))
@@ -333,13 +323,11 @@ class Agent(object):
         # This will be called in Agent.sample_trajectory() where we generate a rollout.
         self.sy_sampled_ac = self.sample_action(self.policy_parameters)
         print('sampled action shape',self.sy_sampled_ac.get_shape())
-        # exit()
         
         # We can also compute the logprob of the actions that were actually taken by the policy
         # This is used in the loss function.
         self.sy_logprob_n = self.get_log_prob(self.policy_parameters, self.sy_ac_na)
         print('log prob shape',self.sy_logprob_n.get_shape())
-        # exit()
 
         #========================================================================================#
         #                           ----------PROBLEM 2----------
@@ -414,15 +402,16 @@ class Agent(object):
             # Attention: it is stochastic policy, thus needs sampling
             # raise NotImplementedError
             # YOUR CODE HERE
-            # Wonder: two session vs. one session, result same!
+            # Wonder: Two sessions vs. one session, result same!
             if 1:
                 ac = self.sess.run(self.sy_sampled_ac, feed_dict={self.sy_ob_no: ob[None,:]})
+            # Two sessions
             if 0:
                 # policy paramter shape (1, ac_dim)
                 ac = self.sess.run(self.policy_parameters, feed_dict={self.sy_ob_no: ob[None,:]})
                 # action shape (1,)
                 ac = self.sess.run(self.sy_sampled_ac, feed_dict={self.policy_parameters: ac})
-            # Wonder: REALLY REALLY SLOW??
+            # TO-DO: WHY REALLY REALLY SLOW??
             if 0:
                 ac = self.sample_action(self.policy_parameters)
                 ac = self.sess.run(ac, feed_dict={self.sy_ob_no: ob[None,:]})
@@ -508,9 +497,7 @@ class Agent(object):
             like the 'ob_no' and 'ac_na' above. 
         """
         # YOUR_CODE_HERE
-        # re_n_copy = re_n.copy()
         # Difference: get Q value, rather than reward
-        # TO-DO: add discount
         if self.reward_to_go:
             # raise NotImplementedError
             # previous version
@@ -534,8 +521,6 @@ class Agent(object):
                 for i in reversed(range(traj_length-1)):
                     q[i] = self.gamma * q[i+1] + reward[i]
                 q_n.extend(q)
-
-
         else:
             # raise NotImplementedError
             q_n = []
@@ -547,7 +532,6 @@ class Agent(object):
                     re_tmp += np.power(self.gamma, i) * reward[i]
                 q = np.ones(traj_length) * re_tmp
                 q_n.extend(q)
-
         # previous version
         if 0:
             # if copy q_n, then need to use deepcopy
@@ -560,9 +544,7 @@ class Agent(object):
                 pow_n = np.linspace(0, np.shape(re_tmp)[0]-1, np.shape(re_tmp)[0])
                 re_tmp = re_tmp * np.power(self.gamma, pow_n)
                 q_n += list(re_tmp)
-        # print('final', q_n)
-        # print(np.shape(q_n))
-        # exit()  
+
         return q_n
 
     def compute_advantage(self, ob_no, q_n):
@@ -877,8 +859,6 @@ def main():
         os.makedirs(logdir)
 
     max_path_length = args.ep_len if args.ep_len > 0 else None
-    # print(max_path_length)
-    # exit()
 
     processes = []
 
