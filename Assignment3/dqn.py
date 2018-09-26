@@ -174,8 +174,10 @@ class QLearner(object):
     q_tp1 = gamma * (1.0 - self.done_mask_ph) * q_tp1_max    
     target = self.rew_t_ph + q_tp1
     # Get Q_fai(si,ai)
-    q_t_target = tf.reduce_max(q_t * tf.one_hot(indices=self.act_t_ph, depth=self.num_actions, on_value=1.0, off_value=0.0), 1)   
+    # TO-DO: CHECK HERE!
+    q_t_target = tf.reduce_sum(q_t * tf.one_hot(indices=self.act_t_ph, depth=self.num_actions, on_value=1.0, off_value=0.0), 1)   
     # Calculate loss
+    # TO-DO: CHECK HERE!
     self.total_error = target - q_t_target
     self.total_error = tf.reduce_sum(huber_loss(self.total_error))
     # Produce collections of variables to update separately
@@ -184,7 +186,7 @@ class QLearner(object):
     if 0:
         print(q_t.get_shape())
         print(q_tp1.get_shape())
-        print(q_t_action.get_shape())
+        print(self.q_t_action.get_shape())
         print(self.done_mask_ph.get_shape())
         print(q_tp1_max.get_shape())
         print(q_tp1.get_shape())
@@ -270,14 +272,15 @@ class QLearner(object):
     
     # Store observation
     ret = self.replay_buffer.store_frame(self.last_obs)
-    # Encode recent observation
-    recent_obs = self.replay_buffer.encode_recent_observation()    
+     
     # TO-DO: check exploration rule and the mechanism here
     if (not self.model_initialized) or (random.random() < self.exploration.value(self.t)):
         action = np.random.randint(0, self.num_actions)
     else:
         # TO-DO: check image output
-        action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: recent_obs[None,:]})
+        # Encode recent observation
+        recent_obs = self.replay_buffer.encode_recent_observation()   
+        action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
     # print(np.shape(action))
     # Step one step forward
     obs, reward, done, info = self.env.step(action)
@@ -348,18 +351,20 @@ class QLearner(object):
           self.obs_tp1_ph: obs_tp1_batch,
           self.done_mask_ph: done_mask,
           self.learning_rate: self.optimizer_spec.lr_schedule.value(self.t)})
-      print('error', error)
+      # print('error', error)
       # exit()
       # 3.d: periodically update the target network by calling
       # self.session.run(self.update_target_fn)
       # you should update every target_update_freq steps, and you may find the
       # variable self.num_param_updates useful for this (it was initialized to 0)
       #####
-      if (self.num_param_updates % self.target_update_freq == 0):
-          self.session.run(self.update_target_fn)
-      # exit()
       # YOUR CODE HERE
       self.num_param_updates += 1
+      if (self.num_param_updates % self.target_update_freq == 0):
+          print("actually update")
+          self.session.run(self.update_target_fn)
+      # exit()
+      
 
     self.t += 1
     # print('self.t', self.t)
