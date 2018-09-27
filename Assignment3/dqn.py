@@ -223,6 +223,9 @@ class QLearner(object):
     # last_obs intialized here
     self.last_obs = self.env.reset()
     self.log_every_n_steps = 10000
+    self.timesteps = []
+    self.mean_episode_rewards = []
+    self.best_mean_episode_rewards = []
 
     self.start_time = None
     self.t = 0
@@ -277,13 +280,20 @@ class QLearner(object):
     if (not self.model_initialized) or (random.random() < self.exploration.value(self.t)):
         action = np.random.randint(0, self.num_actions)
     else:
-        # TO-DO: check image output
+        # TO-DO: check image output, WEIRD ABOUT THIS
+        # FOR RAM, (128,) (1,) AND FOR LAUDER (9,) (1,) FOR RECENT_OBS AND ACTION SHAPE
         # Encode recent observation
-        recent_obs = self.replay_buffer.encode_recent_observation()   
+        recent_obs = self.replay_buffer.encode_recent_observation()
+        # print(np.shape(recent_obs))
         action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
-    # print(np.shape(action))
+        # TO-DO: CHECK IF WORKS
+        action = action[0]
+        # print(np.shape(action))
+        # exit()
     # Step one step forward
+    # INPUT FOR ACTION IS INT VALUE
     obs, reward, done, info = self.env.step(action)
+    # exit()
     # Point to the newest observation
     if done:
         obs = self.env.reset()
@@ -364,8 +374,7 @@ class QLearner(object):
           print("actually update")
           self.session.run(self.update_target_fn)
       # exit()
-      
-
+    
     self.t += 1
     # print('self.t', self.t)
 
@@ -392,8 +401,17 @@ class QLearner(object):
 
       sys.stdout.flush()
 
+      # Store variables
+      self.timesteps.append(self.t)
+      self.mean_episode_rewards.append(self.mean_episode_reward)
+      self.best_mean_episode_rewards.append(self.best_mean_episode_reward)
+
+      # TO-DO: it is weird, since every time it is doing dumpying, but every time it opens as new..
+      # Actually if less steps required, we can only store once at the end
       with open(self.rew_file, 'wb') as f:
-        pickle.dump(episode_rewards, f, pickle.HIGHEST_PROTOCOL)
+        store_result = {'timestep': np.array(self.timesteps), 'reward': np.array(episode_rewards), 
+                        'mean_reward': np.array(self.mean_episode_rewards), 'best_reward': np.array(self.best_mean_episode_rewards)}
+        pickle.dump(store_result, f, pickle.HIGHEST_PROTOCOL)
 
 def learn(*args, **kwargs):
   alg = QLearner(*args, **kwargs)

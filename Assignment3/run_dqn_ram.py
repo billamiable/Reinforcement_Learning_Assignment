@@ -6,6 +6,7 @@ import random
 import numpy as np
 import tensorflow as tf
 import tensorflow.contrib.layers as layers
+import time
 
 import dqn
 from dqn_utils import *
@@ -71,7 +72,8 @@ def atari_learn(env,
         learning_freq=4,
         frame_history_len=1,
         target_update_freq=10000,
-        grad_norm_clipping=10
+        grad_norm_clipping=10,
+        rew_file='./pkl/ram_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
     )
     env.close()
 
