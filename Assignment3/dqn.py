@@ -187,7 +187,7 @@ class QLearner(object):
     q_t_target = tf.reduce_sum(q_t * tf.one_hot(indices=self.act_t_ph, depth=self.num_actions, on_value=1.0, off_value=0.0), 1)   
     # Calculate loss
     self.total_error = target - q_t_target
-    self.total_error = tf.reduce_sum(huber_loss(self.total_error))
+    self.total_error = tf.reduce_mean(huber_loss(self.total_error))
     # Produce collections of variables to update separately
     q_func_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='q_func') 
     target_q_func_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='target_q_func_vars') 
