@@ -166,6 +166,9 @@ class QLearner(object):
     # Get Q-function and target network
     q_t = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False)
     q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False)
+    # print(q_t.get_shape())
+    # print(obs_t_float.get_shape())
+    # exit()
     # Max operation
     self.q_t_action = tf.argmax(q_t, axis=1)
     q_tp1_max = tf.reduce_max(q_tp1, 1)
@@ -275,24 +278,26 @@ class QLearner(object):
     
     # Store observation
     ret = self.replay_buffer.store_frame(self.last_obs)
-     
+    # print(np.shape(self.last_obs))
     # TO-DO: check exploration rule and the mechanism here
     if (not self.model_initialized) or (random.random() < self.exploration.value(self.t)):
         action = np.random.randint(0, self.num_actions)
     else:
         # TO-DO: check image output, WEIRD ABOUT THIS
-        # FOR RAM, (128,) (1,) AND FOR LAUDER (9,) (1,) FOR RECENT_OBS AND ACTION SHAPE
+        # RECENT_OBS: FOR RAM (128,) AND FOR LAUDER (9,) AND FOR ATARI (84,84,4)
+        # Action shape (1,)
         # Encode recent observation
         recent_obs = self.replay_buffer.encode_recent_observation()
-        # print(np.shape(recent_obs))
+        print(np.shape(recent_obs))
         action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
         # TO-DO: CHECK IF WORKS
         action = action[0]
-        # print(np.shape(action))
-        # exit()
+        print(np.shape(action))
+        exit()
     # Step one step forward
     # INPUT FOR ACTION IS INT VALUE
     obs, reward, done, info = self.env.step(action)
+    # print(np.shape(obs))
     # exit()
     # Point to the newest observation
     if done:

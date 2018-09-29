@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-with open (os.path.join('./pkl','lander_27-09-2018_10-21-54.pkl'), 'rb') as fo:
+with open (os.path.join('./pkl','atari_28-09-2018_04-23-28.pkl'), 'rb') as fo:
     data = pickle.load(fo)
 # print(data)
 episode_rewards, t, mean_episode_rewards, best_mean_episode_rewards = data['reward'], data['timestep'], data['mean_reward'], data['best_reward']
