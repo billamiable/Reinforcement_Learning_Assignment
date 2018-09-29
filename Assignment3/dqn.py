@@ -175,7 +175,12 @@ class QLearner(object):
     # Specify double Q function difference
     if self.double_q:
         print('using double q learning')
-        q_tp1_max = tf.reduce_max(q_t, 1)
+        # TO-DO: VERY VERY IMPORTANT TO REUSE VAIRABLES
+        q_tp1_target = q_func(obs_tp1_float, self.num_actions, scope='q_func', reuse=True)
+        q_tp1_target_action = tf.argmax(q_tp1_target, axis=1)
+        q_tp1_max = tf.reduce_sum(q_tp1 * tf.one_hot(indices=q_tp1_target_action,
+                                                     depth=self.num_actions, 
+                                                     on_value=1.0, off_value=0.0), axis=1)
     else:
         print('using vanilla q learning')
         q_tp1_max = tf.reduce_max(q_tp1, 1)
@@ -184,7 +189,9 @@ class QLearner(object):
     target = self.rew_t_ph + q_tp1
     # Get Q_fai(si,ai)
     # TO-DO: VERY VERY IMPORTANT! use reduce_sum instead of reduce_max since exist negative value
-    q_t_target = tf.reduce_sum(q_t * tf.one_hot(indices=self.act_t_ph, depth=self.num_actions, on_value=1.0, off_value=0.0), 1)   
+    q_t_target = tf.reduce_sum(q_t * tf.one_hot(indices=self.act_t_ph, 
+                                                depth=self.num_actions, 
+                                                on_value=1.0, off_value=0.0), axis=1)   
     # Calculate loss
     self.total_error = target - q_t_target
     self.total_error = tf.reduce_mean(huber_loss(self.total_error))
