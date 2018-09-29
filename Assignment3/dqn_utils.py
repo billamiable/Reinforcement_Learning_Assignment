@@ -244,6 +244,7 @@ class ReplayBuffer(object):
 
         Returns
         -------
+        # It seems to be why the dimension is different after encoding context
         obs_batch: np.array
             Array of shape
             (batch_size, img_h, img_w, img_c * frame_history_len)
@@ -279,7 +280,8 @@ class ReplayBuffer(object):
     def _encode_observation(self, idx):
         end_idx   = idx + 1 # make noninclusive
         start_idx = end_idx - self.frame_history_len
-        # That is why the result is the same dimension, TO-DO: check image output
+        # TO-DO: check image output
+        # That is why the result is the same dimension, 
         # this checks if we are using low-dimensional observations, such as RAM
         # state, in which case we just directly return the latest RAM.
         if len(self.obs.shape) == 2:
@@ -287,6 +289,8 @@ class ReplayBuffer(object):
         # if there weren't enough frames ever in the buffer for context
         if start_idx < 0 and self.num_in_buffer != self.size:
             start_idx = 0
+        # Next part deals with missing context
+        # self.size = buffer size
         for idx in range(start_idx, end_idx - 1):
             if self.done[idx % self.size]:
                 start_idx = idx + 1
@@ -301,6 +305,7 @@ class ReplayBuffer(object):
         else:
             # this optimization has potential to saves about 30% compute time \o/
             img_h, img_w = self.obs.shape[1], self.obs.shape[2]
+            # Encode nearby frames
             return self.obs[start_idx:end_idx].transpose(1, 2, 0, 3).reshape(img_h, img_w, -1)
 
     def store_frame(self, frame):

@@ -99,7 +99,8 @@ class QLearner(object):
     self.session = session
     self.exploration = exploration
     self.rew_file = str(uuid.uuid4()) + '.pkl' if rew_file is None else rew_file
-
+    self.double_q = double_q
+    
     ###############
     # BUILD MODEL #
     ###############
@@ -171,16 +172,20 @@ class QLearner(object):
     # exit()
     # Max operation
     self.q_t_action = tf.argmax(q_t, axis=1)
-    q_tp1_max = tf.reduce_max(q_tp1, 1)
+    # Specify double Q function difference
+    if self.double_q:
+        print('using double q learning')
+        q_tp1_max = tf.reduce_max(q_t, 1)
+    else:
+        print('using vanilla q learning')
+        q_tp1_max = tf.reduce_max(q_tp1, 1)
     # Get target value
-    # TO-DO: CHECK IF OKAY?
     q_tp1 = gamma * (1.0 - self.done_mask_ph) * q_tp1_max    
     target = self.rew_t_ph + q_tp1
     # Get Q_fai(si,ai)
-    # TO-DO: CHECK HERE!
+    # TO-DO: VERY VERY IMPORTANT! use reduce_sum instead of reduce_max since exist negative value
     q_t_target = tf.reduce_sum(q_t * tf.one_hot(indices=self.act_t_ph, depth=self.num_actions, on_value=1.0, off_value=0.0), 1)   
     # Calculate loss
-    # TO-DO: CHECK HERE!
     self.total_error = target - q_t_target
     self.total_error = tf.reduce_sum(huber_loss(self.total_error))
     # Produce collections of variables to update separately
@@ -279,21 +284,22 @@ class QLearner(object):
     # Store observation
     ret = self.replay_buffer.store_frame(self.last_obs)
     # print(np.shape(self.last_obs))
-    # TO-DO: check exploration rule and the mechanism here
+    
+    # Random.random return [0,1)
+    # For exploration, the value will gradually decrease
     if (not self.model_initialized) or (random.random() < self.exploration.value(self.t)):
         action = np.random.randint(0, self.num_actions)
     else:
-        # TO-DO: check image output, WEIRD ABOUT THIS
+        # TO-DO: figure out context
         # RECENT_OBS: FOR RAM (128,) AND FOR LAUDER (9,) AND FOR ATARI (84,84,4)
         # Action shape (1,)
         # Encode recent observation
         recent_obs = self.replay_buffer.encode_recent_observation()
-        print(np.shape(recent_obs))
+        # print(np.shape(recent_obs))
         action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
-        # TO-DO: CHECK IF WORKS
         action = action[0]
-        print(np.shape(action))
-        exit()
+        # print(np.shape(action))
+        # exit()
     # Step one step forward
     # INPUT FOR ACTION IS INT VALUE
     obs, reward, done, info = self.env.step(action)
@@ -336,6 +342,8 @@ class QLearner(object):
       # the current and next time step. The boolean variable model_initialized
       # indicates whether or not the model has been initialized.
       # Remember that you have to update the target network too (see 3.d)!
+
+      # TO-DO: is it only initialize once when first start
       if not self.model_initialized:
           initialize_interdependent_variables(self.session, tf.global_variables(), {
               self.obs_t_ph: obs_t_batch,

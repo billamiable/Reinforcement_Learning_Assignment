@@ -52,7 +52,7 @@ def atari_learn(env,
         # notice that here t is the number of steps of the wrapped env,
         # which is different from the number of steps in the underlying env
         return get_wrapper_by_name(env, "Monitor").get_total_steps() >= num_timesteps
-
+    # therefore, the exploration gradually decrease
     exploration_schedule = PiecewiseSchedule(
         [
             (0, 1.0),
@@ -61,6 +61,7 @@ def atari_learn(env,
         ], outside_value=0.01
     )
 
+    # TO-DO: Pay attention to arg here, double_q
     dqn.learn(
         env=env,
         q_func=atari_model,
@@ -126,6 +127,7 @@ def main():
     print('random seed = %d' % seed)
     env = get_env(task, seed)
     session = get_session()
+    # OMG, 200M Maximum steps
     atari_learn(env, session, num_timesteps=2e8)
 
 if __name__ == "__main__":
