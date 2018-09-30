@@ -13,7 +13,7 @@ from dqn_utils import *
 from atari_wrappers import *
 
 
-def atari_model(img_in, num_actions, scope, reuse=False):
+def atari_model(img_in, num_actions, scope, reuse=False, dropout=False, keep_prob=1.0):
     # as described in https://storage.googleapis.com/deepmind-data/assets/papers/DeepMindNature14236Paper.pdf
     with tf.variable_scope(scope, reuse=reuse):
         out = img_in
@@ -25,6 +25,8 @@ def atari_model(img_in, num_actions, scope, reuse=False):
         out = layers.flatten(out)
         with tf.variable_scope("action_value"):
             out = layers.fully_connected(out, num_outputs=512,         activation_fn=tf.nn.relu)
+            if dropout:
+                out = layers.dropout(out, keep_prob=keep_prob)
             out = layers.fully_connected(out, num_outputs=num_actions, activation_fn=None)
 
         return out
@@ -79,7 +81,7 @@ def atari_learn(env,
         grad_norm_clipping=10,
         double_q=False,
         rew_file='./pkl/atari_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
-        explore='greedy'
+        explore='bayesian'
     )
     env.close()
 

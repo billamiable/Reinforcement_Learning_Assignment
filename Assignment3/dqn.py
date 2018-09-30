@@ -166,18 +166,28 @@ class QLearner(object):
     ######
 
     # YOUR CODE HERE
+    # For bayesian exploration: Add dropout value to the network 
     # Get Q-function and target network
-    q_t = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False)
-    q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False)
-    # print(q_t.get_shape())
-    # print(obs_t_float.get_shape())
-    # exit()
-    # Max operation
-    self.q_t_action = tf.argmax(q_t, axis=1)
+    if self.explore == 'bayesian':
+        print('Bayesian variables defined!')
+        self.keep_per = tf.placeholder(shape=None,dtype=tf.float32)
+        q_t = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False, 
+                     dropout=True, keep_prob=self.keep_per)
+        q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False, 
+                       dropout=True, keep_prob=self.keep_per)
+    else:
+        q_t = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False)
+        q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False)
+    
     # For boltzmann exploration
-    if self.explore:
+    if self.explore == 'boltzmann':
+        print('Boltzman variables defined!')
         self.Temp = tf.placeholder(shape=None, dtype=tf.float32)
         self.q_dist = tf.nn.softmax(q_t/self.Temp)
+
+    # Max operation
+    self.q_t_action = tf.argmax(q_t, axis=1)
+        
     # Specify double Q function difference
     if self.double_q:
         print('using double q learning')
@@ -190,6 +200,7 @@ class QLearner(object):
     else:
         print('using vanilla q learning')
         q_tp1_max = tf.reduce_max(q_tp1, 1)
+
     # Get target value
     q_tp1 = gamma * (1.0 - self.done_mask_ph) * q_tp1_max    
     target = self.rew_t_ph + q_tp1
@@ -198,9 +209,11 @@ class QLearner(object):
     q_t_target = tf.reduce_sum(q_t * tf.one_hot(indices=self.act_t_ph, 
                                                 depth=self.num_actions, 
                                                 on_value=1.0, off_value=0.0), axis=1)   
+    
     # Calculate loss
     self.total_error = target - q_t_target
     self.total_error = tf.reduce_mean(huber_loss(self.total_error))
+
     # Produce collections of variables to update separately
     q_func_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='q_func') 
     target_q_func_vars = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope='target_q_func_vars') 
@@ -230,7 +243,6 @@ class QLearner(object):
     self.update_target_fn = tf.group(*update_target_fn)
 
     # construct the replay buffer
-    # Here is the trick!
     self.replay_buffer = ReplayBuffer(replay_buffer_size, frame_history_len, lander=lander)
     self.replay_buffer_idx = None
 
@@ -298,7 +310,6 @@ class QLearner(object):
     ret = self.replay_buffer.store_frame(self.last_obs)
     # print(np.shape(self.last_obs))
     
-    # Random.random return [0,1)
     # For exploration, the value will gradually decrease
     if self.explore == 'greedy':
         # print("using greedy exploration!")
@@ -308,9 +319,9 @@ class QLearner(object):
             recent_obs = self.replay_buffer.encode_recent_observation()
             action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
             action = action[0]
-    # e-greedy
     if self.explore == 'e-greedy':
         # print("using e-greedy exploration!")
+        # Random.random return [0,1)
         if (not self.model_initialized) or (random.random() < self.exploration.value(self.t)):
             action = np.random.randint(0, self.num_actions)
         else:
@@ -335,8 +346,21 @@ class QLearner(object):
             # action = np.random.choice(q_d[0], p=q_d[0])
             # action = np.argmax(q_d[0] == action)
             action = np.random.choice(self.num_actions, p=q_d[0])
-            # print(action)
-            # exit()
+    if self.explore == 'bayesian':
+        # print("using bayesian exploration!")
+        if (not self.model_initialized):
+            action = np.random.randint(0, self.num_actions)
+        else:
+            recent_obs = self.replay_buffer.encode_recent_observation()
+            keep_per = (1.0 - self.exploration.value(self.t)) + 0.1
+            # Deal with larger than 1.0 case
+            keep_per = 1.0 if (keep_per)>1.0 else keep_per
+            action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs], 
+                                                                  self.keep_per: keep_per})
+            action = action[0]
+            print(action)
+            exit()
+    
     # Step one step forward
     # INPUT FOR ACTION IS INT VALUE
     obs, reward, done, info = self.env.step(action)
