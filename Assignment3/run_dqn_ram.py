@@ -73,7 +73,7 @@ def atari_learn(env,
         frame_history_len=1,
         target_update_freq=10000,
         grad_norm_clipping=10,
-        rew_file='./pkl/ram_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
+        rew_file='./pkl/ram_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl'
     )
     env.close()
 

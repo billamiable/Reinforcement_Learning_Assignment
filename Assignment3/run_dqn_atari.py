@@ -79,6 +79,7 @@ def atari_learn(env,
         grad_norm_clipping=10,
         double_q=True,
         rew_file='./pkl/atari_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
+        explore='boltzmann'
     )
     env.close()
 

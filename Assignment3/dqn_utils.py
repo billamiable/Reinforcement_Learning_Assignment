@@ -107,6 +107,7 @@ class LinearSchedule(object):
         fraction  = min(float(t) / self.schedule_timesteps, 1.0)
         return self.initial_p + fraction * (self.final_p - self.initial_p)
 
+# This could be used!
 def compute_exponential_averages(variables, decay):
     """Given a list of tensorflow scalar variables
     create ops corresponding to their exponential

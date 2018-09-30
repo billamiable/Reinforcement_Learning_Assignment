@@ -32,7 +32,8 @@ class QLearner(object):
     grad_norm_clipping=10,
     rew_file=None,
     double_q=True,
-    lander=False):
+    lander=False,
+    explore='e-greedy'):
     """Run Deep Q-learning algorithm.
 
     You can specify your own convnet using q_func.
@@ -100,6 +101,7 @@ class QLearner(object):
     self.exploration = exploration
     self.rew_file = str(uuid.uuid4()) + '.pkl' if rew_file is None else rew_file
     self.double_q = double_q
+    self.explore = explore
     
     ###############
     # BUILD MODEL #
@@ -172,6 +174,10 @@ class QLearner(object):
     # exit()
     # Max operation
     self.q_t_action = tf.argmax(q_t, axis=1)
+    # For boltzmann exploration
+    if self.explore:
+        self.Temp = tf.placeholder(shape=None, dtype=tf.float32)
+        self.q_dist = tf.nn.softmax(q_t/self.Temp)
     # Specify double Q function difference
     if self.double_q:
         print('using double q learning')
@@ -294,19 +300,35 @@ class QLearner(object):
     
     # Random.random return [0,1)
     # For exploration, the value will gradually decrease
-    if (not self.model_initialized) or (random.random() < self.exploration.value(self.t)):
-        action = np.random.randint(0, self.num_actions)
-    else:
-        # TO-DO: figure out context
-        # RECENT_OBS: FOR RAM (128,) AND FOR LAUDER (9,) AND FOR ATARI (84,84,4)
-        # Action shape (1,)
-        # Encode recent observation
-        recent_obs = self.replay_buffer.encode_recent_observation()
-        # print(np.shape(recent_obs))
-        action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
-        action = action[0]
-        # print(np.shape(action))
-        # exit()
+    # e-greedy
+    if self.explore == 'e-greedy':
+        print("using e-greedy exploration!")
+        if (not self.model_initialized) or (random.random() < self.exploration.value(self.t)):
+            action = np.random.randint(0, self.num_actions)
+        else:
+            # Understanding: context have at least two frames to encode velocity info
+            # RECENT_OBS: FOR RAM (128,) AND FOR LAUDER (9,) AND FOR ATARI (84,84,4)
+            # Action shape (1,)
+            # Encode recent observation
+            recent_obs = self.replay_buffer.encode_recent_observation()
+            # print(np.shape(recent_obs))
+            action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
+            action = action[0]
+            # print(np.shape(action))
+            # exit()
+    if self.explore == 'boltzmann':
+        print("using boltzmann exploration!")
+        if (not self.model_initialized):
+            action = np.random.randint(0, self.num_actions)
+        else:
+            recent_obs = self.replay_buffer.encode_recent_observation()
+            q_d = self.session.run(self.q_dist, feed_dict={self.obs_t_ph: [recent_obs], 
+                                                           self.Temp: self.exploration.value(self.t)})
+            # action = np.random.choice(q_d[0], p=q_d[0])
+            # action = np.argmax(q_d[0] == action)
+            action = np.random.choice(self.num_actions, p=q_d[0])
+            print(action)
+            exit()
     # Step one step forward
     # INPUT FOR ACTION IS INT VALUE
     obs, reward, done, info = self.env.step(action)
