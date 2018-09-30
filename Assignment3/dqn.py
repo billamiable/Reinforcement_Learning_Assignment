@@ -300,6 +300,14 @@ class QLearner(object):
     
     # Random.random return [0,1)
     # For exploration, the value will gradually decrease
+    if self.explore == 'greedy':
+        # print("using greedy exploration!")
+        if (not self.model_initialized):
+            action = np.random.randint(0, self.num_actions)
+        else:
+            recent_obs = self.replay_buffer.encode_recent_observation()
+            action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
+            action = action[0]
     # e-greedy
     if self.explore == 'e-greedy':
         # print("using e-greedy exploration!")
