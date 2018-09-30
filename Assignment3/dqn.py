@@ -302,7 +302,7 @@ class QLearner(object):
     # For exploration, the value will gradually decrease
     # e-greedy
     if self.explore == 'e-greedy':
-        print("using e-greedy exploration!")
+        # print("using e-greedy exploration!")
         if (not self.model_initialized) or (random.random() < self.exploration.value(self.t)):
             action = np.random.randint(0, self.num_actions)
         else:
@@ -317,7 +317,7 @@ class QLearner(object):
             # print(np.shape(action))
             # exit()
     if self.explore == 'boltzmann':
-        print("using boltzmann exploration!")
+        # print("using boltzmann exploration!")
         if (not self.model_initialized):
             action = np.random.randint(0, self.num_actions)
         else:
@@ -327,8 +327,8 @@ class QLearner(object):
             # action = np.random.choice(q_d[0], p=q_d[0])
             # action = np.argmax(q_d[0] == action)
             action = np.random.choice(self.num_actions, p=q_d[0])
-            print(action)
-            exit()
+            # print(action)
+            # exit()
     # Step one step forward
     # INPUT FOR ACTION IS INT VALUE
     obs, reward, done, info = self.env.step(action)
