@@ -35,7 +35,8 @@ def atari_learn(env,
                 session,
                 num_timesteps,
                 double_q,
-                explore):
+                explore,
+                env_name):
     # This is just a rough estimate
     num_iterations = float(num_timesteps) / 4.0
 
@@ -82,7 +83,7 @@ def atari_learn(env,
         target_update_freq=10000,
         grad_norm_clipping=10,
         double_q=double_q,
-        rew_file='./pkl/atari_'+time.strftime("%d-%m-%Y_%H-%M-%S")+'.pkl',
+        rew_file='./pkl/'+env_name+'_'+time.strftime("%d-%m-%Y_%H-%M-%S")+'.pkl',
         explore=explore
     )
     env.close()
@@ -112,7 +113,7 @@ def get_session():
     return session
 
 def get_env(task, seed, env_name):
-    print(env_name)
+    # print(env_name)
     env = gym.make(env_name)
 
     set_global_seeds(seed)
@@ -134,7 +135,7 @@ def main():
     args = parser.parse_args()
     # Get Atari games.
     task = gym.make(args.env_name)
-    print('using env ', args.env_name)
+    print('using env', args.env_name)
 
     # Run training
     seed = random.randint(0, 9999)
@@ -142,7 +143,8 @@ def main():
     env = get_env(task, seed, args.env_name)
     session = get_session()
     # OMG, 200M Maximum steps
-    atari_learn(env, session, num_timesteps=2e8, double_q=args.double_q, explore=args.explore)
+    atari_learn(env, session, num_timesteps=2e8, double_q=args.double_q, 
+                explore=args.explore, env_name=args.env_name)
 
 if __name__ == "__main__":
     main()
