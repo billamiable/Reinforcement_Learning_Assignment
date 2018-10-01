@@ -82,7 +82,7 @@ def atari_learn(env,
         target_update_freq=10000,
         grad_norm_clipping=10,
         double_q=double_q,
-        rew_file='./pkl/atari_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
+        rew_file='./pkl/atari_'+time.strftime("%d-%m-%Y_%H-%M-%S")+'.pkl',
         explore=explore
     )
     env.close()
@@ -112,7 +112,8 @@ def get_session():
     return session
 
 def get_env(task, seed, env_name):
-    env = gym.make('PongNoFrameskip-v4')
+    print(env_name)
+    env = gym.make(env_name)
 
     set_global_seeds(seed)
     env.seed(seed)
@@ -133,6 +134,7 @@ def main():
     args = parser.parse_args()
     # Get Atari games.
     task = gym.make(args.env_name)
+    print('using env ', args.env_name)
 
     # Run training
     seed = random.randint(0, 9999)
