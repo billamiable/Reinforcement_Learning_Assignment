@@ -111,7 +111,7 @@ def get_session():
     print("AVAILABLE GPUS: ", get_available_gpus())
     return session
 
-def get_env(task, seed):
+def get_env(task, seed, env_name):
     env = gym.make('PongNoFrameskip-v4')
 
     set_global_seeds(seed)
@@ -127,16 +127,17 @@ def get_env(task, seed):
 def main():
     import argparse
     parser = argparse.ArgumentParser()
+    parser.add_argument('env_name', type=str, default='PongNoFrameskip-v4')
     parser.add_argument('--double_q', action='store_true')
     parser.add_argument('--explore', type=str, default='e-greedy')
     args = parser.parse_args()
     # Get Atari games.
-    task = gym.make('PongNoFrameskip-v4')
+    task = gym.make(args.env_name)
 
     # Run training
     seed = random.randint(0, 9999)
     print('random seed = %d' % seed)
-    env = get_env(task, seed)
+    env = get_env(task, seed, args.env_name)
     session = get_session()
     # OMG, 200M Maximum steps
     atari_learn(env, session, num_timesteps=2e8, double_q=args.double_q, explore=args.explore)
