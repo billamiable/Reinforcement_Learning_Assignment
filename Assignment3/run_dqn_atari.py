@@ -33,7 +33,9 @@ def atari_model(img_in, num_actions, scope, reuse=False, dropout=False, keep_pro
 
 def atari_learn(env,
                 session,
-                num_timesteps):
+                num_timesteps,
+                double_q,
+                explore):
     # This is just a rough estimate
     num_iterations = float(num_timesteps) / 4.0
 
@@ -79,9 +81,9 @@ def atari_learn(env,
         frame_history_len=4,
         target_update_freq=10000,
         grad_norm_clipping=10,
-        double_q=False,
+        double_q=double_q,
         rew_file='./pkl/atari_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
-        explore='bayesian'
+        explore=explore
     )
     env.close()
 
@@ -123,6 +125,11 @@ def get_env(task, seed):
     return env
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--double_q', action='store_true')
+    parser.add_argument('--explore', type=str, default='e-greedy')
+    args = parser.parse_args()
     # Get Atari games.
     task = gym.make('PongNoFrameskip-v4')
 
@@ -132,7 +139,7 @@ def main():
     env = get_env(task, seed)
     session = get_session()
     # OMG, 200M Maximum steps
-    atari_learn(env, session, num_timesteps=2e8)
+    atari_learn(env, session, num_timesteps=2e8, double_q=args.double_q, explore=args.explore)
 
 if __name__ == "__main__":
     main()
