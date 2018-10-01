@@ -168,16 +168,17 @@ class QLearner(object):
     # YOUR CODE HERE
     # For bayesian exploration: Add dropout value to the network 
     # Get Q-function and target network
+    self.keep_per = tf.placeholder(shape=None,dtype=tf.float32)
     if self.explore == 'bayesian':
         print('Bayesian variables defined!')
-        self.keep_per = tf.placeholder(shape=None,dtype=tf.float32)
-        q_t = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False, 
-                     dropout=True, keep_prob=self.keep_per)
-        q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False, 
-                       dropout=True, keep_prob=self.keep_per)
+        dropout = True
     else:
-        q_t = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False)
-        q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False)
+        dropout = False
+    q_t   = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False, 
+                       dropout=dropout, keep_prob=self.keep_per)
+    q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False, 
+                       dropout=dropout, keep_prob=self.keep_per)
+
     
     # For boltzmann exploration
     if self.explore == 'boltzmann':
@@ -317,7 +318,8 @@ class QLearner(object):
             action = np.random.randint(0, self.num_actions)
         else:
             recent_obs = self.replay_buffer.encode_recent_observation()
-            action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
+            action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs],
+                                                                  self.keep_per: 1.0})
             action = action[0]
     if self.explore == 'e-greedy':
         # print("using e-greedy exploration!")
@@ -331,7 +333,8 @@ class QLearner(object):
             # Encode recent observation
             recent_obs = self.replay_buffer.encode_recent_observation()
             # print(np.shape(recent_obs))
-            action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs]})
+            action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs],
+                                                                  self.keep_per: 1.0})
             action = action[0]
             # print(np.shape(action))
             # exit()
@@ -342,10 +345,13 @@ class QLearner(object):
         else:
             recent_obs = self.replay_buffer.encode_recent_observation()
             q_d = self.session.run(self.q_dist, feed_dict={self.obs_t_ph: [recent_obs], 
-                                                           self.Temp: self.exploration.value(self.t)})
+                                                           self.Temp: self.exploration.value(self.t),
+                                                           self.keep_per: 1.0})
             # action = np.random.choice(q_d[0], p=q_d[0])
             # action = np.argmax(q_d[0] == action)
             action = np.random.choice(self.num_actions, p=q_d[0])
+            # print(action)
+            # exit()
     if self.explore == 'bayesian':
         # print("using bayesian exploration!")
         if (not self.model_initialized):
@@ -354,12 +360,13 @@ class QLearner(object):
             recent_obs = self.replay_buffer.encode_recent_observation()
             keep_per = (1.0 - self.exploration.value(self.t)) + 0.1
             # Deal with larger than 1.0 case
-            keep_per = 1.0 if (keep_per)>1.0 else keep_per
+            keep_per = 1.0 if keep_per>1.0 else keep_per
+            # print(keep_per)
             action = self.session.run(self.q_t_action, feed_dict={self.obs_t_ph: [recent_obs], 
                                                                   self.keep_per: keep_per})
             action = action[0]
-            print(action)
-            exit()
+            # print(action)
+            # exit()
     
     # Step one step forward
     # INPUT FOR ACTION IS INT VALUE
@@ -434,7 +441,8 @@ class QLearner(object):
           self.rew_t_ph: rew_batch,
           self.obs_tp1_ph: obs_tp1_batch,
           self.done_mask_ph: done_mask,
-          self.learning_rate: self.optimizer_spec.lr_schedule.value(self.t)})
+          self.learning_rate: self.optimizer_spec.lr_schedule.value(self.t),
+          self.keep_per: 1.0})
       # print('error', error)
       # exit()
       # 3.d: periodically update the target network by calling
