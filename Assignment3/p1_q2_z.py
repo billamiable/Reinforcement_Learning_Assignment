@@ -25,7 +25,7 @@ ax.legend()
 plt.ticklabel_format(style='sci', axis='x', scilimits=(0,0))
 plt.ylabel("Episode Rewards", fontsize=15)
 plt.xlabel("Number of Timesteps", fontsize=15, labelpad=4)
-plt.title ("Vanilla and Double Q Learning Performance for Pong", fontsize=20)
+plt.title ("Vanilla and Double Q Learning Performance for Zaxxon", fontsize=20)
 plt.legend(loc='lower right')
 plt.show()
 

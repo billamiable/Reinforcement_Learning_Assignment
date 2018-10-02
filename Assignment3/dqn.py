@@ -103,6 +103,8 @@ class QLearner(object):
     self.double_q = double_q
     self.explore = explore
     
+    print('exploration strategy', explore)
+    
     ###############
     # BUILD MODEL #
     ###############
