@@ -5,11 +5,11 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Basic Q Learning
-with open (os.path.join('./pkl','ZaxxonNoFrameskip-v4_02-10-2018_05-08-06_vanilla.pkl'), 'rb') as fb:
+with open (os.path.join('./pkl','ZaxxonNoFrameskip-v4_02-10-2018_05-08-06.pkl'), 'rb') as fb:
     bas = pickle.load(fb)
 bas_r, bas_t, bas_mean_r, bas_best_mean_r = bas['reward'], bas['timestep'], bas['mean_reward'], bas['best_reward']
 # Double Q Learning
-with open (os.path.join('./pkl','ZaxxonNoFrameskip-v4_03-10-2018_14-34-11_double.pkl'), 'rb') as fd:
+with open (os.path.join('./pkl','AsterixNoFrameskip-v4_03-10-2018_01-23-19.pkl'), 'rb') as fd:
     db = pickle.load(fd)
 db_r,  db_t,  db_mean_r,  db_best_mean_r  = db['reward'],  db['timestep'],  db['mean_reward'],  db['best_reward']
 

@@ -195,6 +195,7 @@ class QLearner(object):
     if self.double_q:
         print('using double q learning')
         # TO-DO: VERY VERY IMPORTANT TO REUSE VAIRABLES
+        # TO-DO: DO WE NEED TO SET GRADIENT NOT UPDATE
         q_tp1_target = q_func(obs_tp1_float, self.num_actions, scope='q_func', reuse=True)
         q_tp1_target_action = tf.argmax(q_tp1_target, axis=1)
         q_tp1_max = tf.reduce_sum(q_tp1 * tf.one_hot(indices=q_tp1_target_action,
