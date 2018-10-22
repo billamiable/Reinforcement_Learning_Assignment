@@ -1,0 +1,69 @@
+digraph G {
+    graph [rankdir=TB, clusterrank="local"];
+    subgraph cluster_G {
+
+        graph [style="filled,rounded",fillcolor="#80808018", label=""];
+        model_based_policy [label="model_based_policy", style="filled", fillcolor="#ffffffb2", fontcolor="#000000", group="0"];
+        subgraph cluster_model_based_policy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy"];
+            model_based_policy__ModelBasedPolicy [label="ModelBasedPolicy\n(model_based_policy.py:7)", style="filled", fillcolor="#feccccb2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy____init__ [label="__init__\n(model_based_policy.py:9)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy___dynamics_func [label="_dynamics_func\n(model_based_policy.py:48)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy___setup_action_selection [label="_setup_action_selection\n(model_based_policy.py:96)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy___setup_graphX [label="_setup_graph\n(model_based_policy.py:129)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy___setup_placeholders [label="_setup_placeholders\n(model_based_policy.py:29)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy___setup_training [label="_setup_training\n(model_based_policy.py:72)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy__get_action [label="get_action\n(model_based_policy.py:182)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy__predict [label="predict\n(model_based_policy.py:162)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+        subgraph cluster_model_based_policy__ModelBasedPolicy {
+
+            graph [style="filled,rounded",fillcolor="#80808018", label="model_based_policy.ModelBasedPolicy"];
+            model_based_policy__ModelBasedPolicy__train_step [label="train_step\n(model_based_policy.py:149)", style="filled", fillcolor="#ff9999b2", fontcolor="#000000", group="0"];
+        }
+    }
+        model_based_policy -> model_based_policy__ModelBasedPolicy [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy__get_action [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy___setup_graphX [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy____init__ [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy___setup_action_selection [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy___setup_training [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy___setup_placeholders [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy__train_step [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy___dynamics_func [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy -> model_based_policy__ModelBasedPolicy__predict [style="dashed", color="#838b8b"];
+        model_based_policy__ModelBasedPolicy____init__ -> model_based_policy__ModelBasedPolicy___setup_graphX [style="solid", color="#000000"];
+    }

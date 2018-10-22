@@ -1,0 +1,900 @@
+========== pass 1, file 'model_based_policy.py' ==========
+Scopes now: {'model_based_policy': <Scope: module >, 'model_based_policy.ModelBasedPolicy': <Scope: class ModelBasedPolicy>, 'model_based_policy.ModelBasedPolicy.__init__': <Scope: function __init__>, 'model_based_policy.ModelBasedPolicy._setup_placeholders': <Scope: function _setup_placeholders>, 'model_based_policy.ModelBasedPolicy._dynamics_func': <Scope: function _dynamics_func>, 'model_based_policy.ModelBasedPolicy._setup_training': <Scope: function _setup_training>, 'model_based_policy.ModelBasedPolicy._setup_action_selection': <Scope: function _setup_action_selection>, 'model_based_policy.ModelBasedPolicy._setup_graph': <Scope: function _setup_graph>, 'model_based_policy.ModelBasedPolicy.train_step': <Scope: function train_step>, 'model_based_policy.ModelBasedPolicy.predict': <Scope: function predict>, 'model_based_policy.ModelBasedPolicy.get_action': <Scope: function get_action>}
+Module
+Import ['tensorflow as tf']
+Set tf in <Scope: module > to <Node module:tensorflow>
+Use from <Node module:model_based_policy> to Import <Node import:tf>
+New edge added for Use from <Node module:model_based_policy> to Import <Node import:tf>
+Import ['numpy as np']
+Set np in <Scope: module > to <Node module:numpy>
+Use from <Node module:model_based_policy> to Import <Node import:np>
+New edge added for Use from <Node module:model_based_policy> to Import <Node import:np>
+Import ['utils']
+Set utils in <Scope: module > to <Node module:utils>
+Use from <Node module:model_based_policy> to Import <Node module:utils>
+New edge added for Use from <Node module:model_based_policy> to Import <Node module:utils>
+ClassDef ModelBasedPolicy
+Def from <Node module:model_based_policy> to Class <Node class:model_based_policy.ModelBasedPolicy>
+Set ModelBasedPolicy in <Scope: module > to <Node class:model_based_policy.ModelBasedPolicy>
+Name object in context <class '_ast.Load'>
+Get object in <Scope: class ModelBasedPolicy>: no Node value (or name not in scope)
+Use from <Node class:model_based_policy.ModelBasedPolicy> to Name <Node ???:*.object>
+New edge added for Use from <Node class:model_based_policy.ModelBasedPolicy> to Name <Node ???:*.object>
+FunctionDef __init__
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy.__init__>
+Set __init__ in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy.__init__>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Assign ['self._cost_fn'] ['env.cost_fn']
+Attribute cost_fn of env in context <class '_ast.Load'>
+Resolve env.cost_fn in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr cost_fn of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^.cost_fn> (target obj <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^> known but target attr cost_fn not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^.cost_fn> (target obj <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^> known but target attr cost_fn not resolved; maybe fwd ref or unanalyzed import)
+Attribute _cost_fn of self in context <class '_ast.Store'>
+Resolve self._cost_fn in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _cost_fn of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _cost_fn on self to <Node attribute:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^.cost_fn>
+Assign ['self._state_dim'] [<_ast.Subscript object at 0x1104617b8>]
+Attribute shape of env.observation_space in context <class '_ast.Load'>
+Resolve env.observation_space.shape in context <class '_ast.Load'>
+Resolve env.observation_space in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr observation_space of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Unresolved, returning attr shape of unknown
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.shape> (target obj env.observation_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.shape> (target obj env.observation_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute _state_dim of self in context <class '_ast.Store'>
+Resolve self._state_dim in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_dim of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _state_dim on self to <Node ???:*.shape>
+Assign ['self._action_dim'] [<_ast.Subscript object at 0x1104619b0>]
+Attribute shape of env.action_space in context <class '_ast.Load'>
+Resolve env.action_space.shape in context <class '_ast.Load'>
+Resolve env.action_space in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr action_space of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Unresolved, returning attr shape of unknown
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.shape> (target obj env.action_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute _action_dim of self in context <class '_ast.Store'>
+Resolve self._action_dim in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_dim of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _action_dim on self to <Node ???:*.shape>
+Assign ['self._action_space_low'] ['env.action_space.low']
+Attribute low of env.action_space in context <class '_ast.Load'>
+Resolve env.action_space.low in context <class '_ast.Load'>
+Resolve env.action_space in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr action_space of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Unresolved, returning attr low of unknown
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.low> (target obj env.action_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.low> (target obj env.action_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute _action_space_low of self in context <class '_ast.Store'>
+Resolve self._action_space_low in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_space_low of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _action_space_low on self to <Node ???:*.low>
+Assign ['self._action_space_high'] ['env.action_space.high']
+Attribute high of env.action_space in context <class '_ast.Load'>
+Resolve env.action_space.high in context <class '_ast.Load'>
+Resolve env.action_space in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr action_space of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Unresolved, returning attr high of unknown
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.high> (target obj env.action_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.high> (target obj env.action_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute _action_space_high of self in context <class '_ast.Store'>
+Resolve self._action_space_high in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_space_high of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _action_space_high on self to <Node ???:*.high>
+Assign ['self._init_dataset'] ['init_dataset']
+Name init_dataset in context <class '_ast.Load'>
+Get init_dataset in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Attribute _init_dataset of self in context <class '_ast.Store'>
+Resolve self._init_dataset in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _init_dataset of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _init_dataset on self to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Assign ['self._horizon'] ['horizon']
+Name horizon in context <class '_ast.Load'>
+Get horizon in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Attribute _horizon of self in context <class '_ast.Store'>
+Resolve self._horizon in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _horizon of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _horizon on self to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Assign ['self._num_random_action_selection'] ['num_random_action_selection']
+Name num_random_action_selection in context <class '_ast.Load'>
+Get num_random_action_selection in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Attribute _num_random_action_selection of self in context <class '_ast.Store'>
+Resolve self._num_random_action_selection in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _num_random_action_selection of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _num_random_action_selection on self to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Assign ['self._nn_layers'] ['nn_layers']
+Name nn_layers in context <class '_ast.Load'>
+Get nn_layers in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Attribute _nn_layers of self in context <class '_ast.Store'>
+Resolve self._nn_layers in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _nn_layers of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _nn_layers on self to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Assign ['self._learning_rate'] [<_ast.Num object at 0x11046d208>]
+Attribute _learning_rate of self in context <class '_ast.Store'>
+Assign ['self._sess', 'self._state_ph', 'self._action_ph', 'self._next_state_ph', 'self._next_state_pred', 'self._loss', 'self._optimizer', 'self._best_action'] [<_ast.Call object at 0x11046d630>]
+Call self._setup_graph
+Attribute _setup_graph of self in context <class '_ast.Load'>
+Resolve self._setup_graph in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _setup_graph of <Node class:model_based_policy.ModelBasedPolicy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph> (target obj <Node class:model_based_policy.ModelBasedPolicy> known but target attr _setup_graph not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph> (target obj <Node class:model_based_policy.ModelBasedPolicy> known but target attr _setup_graph not resolved; maybe fwd ref or unanalyzed import)
+Attribute _sess of self in context <class '_ast.Store'>
+Resolve self._sess in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _sess of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _sess on self to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _state_ph of self in context <class '_ast.Store'>
+Resolve self._state_ph in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_ph of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _state_ph on self to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _action_ph of self in context <class '_ast.Store'>
+Resolve self._action_ph in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_ph of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _action_ph on self to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _next_state_ph of self in context <class '_ast.Store'>
+Resolve self._next_state_ph in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _next_state_ph of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _next_state_ph on self to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _next_state_pred of self in context <class '_ast.Store'>
+Resolve self._next_state_pred in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _next_state_pred of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _next_state_pred on self to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _loss of self in context <class '_ast.Store'>
+Resolve self._loss in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _loss of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _loss on self to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _optimizer of self in context <class '_ast.Store'>
+Resolve self._optimizer in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _optimizer of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _optimizer on self to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _best_action of self in context <class '_ast.Store'>
+Resolve self._best_action in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _best_action of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _best_action on self to <Node attribute:model_based_policy.ModelBasedPolicy._setup_graph>
+FunctionDef _setup_placeholders
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders>
+Set _setup_placeholders in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _setup_placeholders>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.NotImplementedError>
+Name state_ph in context <class '_ast.Load'>
+Get state_ph in <Scope: function _setup_placeholders>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.state_ph>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.state_ph>
+Name action_ph in context <class '_ast.Load'>
+Get action_ph in <Scope: function _setup_placeholders>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.action_ph>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.action_ph>
+Name next_state_ph in context <class '_ast.Load'>
+Get next_state_ph in <Scope: function _setup_placeholders>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.next_state_ph>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.next_state_ph>
+FunctionDef _dynamics_func
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy._dynamics_func>
+Set _dynamics_func in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._dynamics_func>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _dynamics_func>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._dynamics_func> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._dynamics_func> to Name <Node ???:*.NotImplementedError>
+Name next_state_pred in context <class '_ast.Load'>
+Get next_state_pred in <Scope: function _dynamics_func>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._dynamics_func> to Name <Node ???:*.next_state_pred>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._dynamics_func> to Name <Node ???:*.next_state_pred>
+FunctionDef _setup_training
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy._setup_training>
+Set _setup_training in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._setup_training>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _setup_training>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.NotImplementedError>
+Name loss in context <class '_ast.Load'>
+Get loss in <Scope: function _setup_training>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.loss>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.loss>
+Name optimizer in context <class '_ast.Load'>
+Get optimizer in <Scope: function _setup_training>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.optimizer>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.optimizer>
+FunctionDef _setup_action_selection
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection>
+Set _setup_action_selection in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _setup_action_selection>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection> to Name <Node ???:*.NotImplementedError>
+Name best_action in context <class '_ast.Load'>
+Get best_action in <Scope: function _setup_action_selection>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection> to Name <Node ???:*.best_action>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection> to Name <Node ???:*.best_action>
+FunctionDef _setup_graph
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Set _setup_graph in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Assign ['sess'] [<_ast.Call object at 0x110460358>]
+Call tf.Session
+Attribute Session of tf in context <class '_ast.Load'>
+Resolve tf.Session in context <class '_ast.Load'>
+Get tf in <Scope: function _setup_graph>, found in <Scope: module >, value <Node module:tensorflow>
+Resolved to attr Session of <Node module:tensorflow>
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.Session> (target obj <Node module:tensorflow> known but target attr Session not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.Session> (target obj <Node module:tensorflow> known but target attr Session not resolved; maybe fwd ref or unanalyzed import)
+Name sess in context <class '_ast.Store'>
+Set sess in <Scope: function _setup_graph> to <Node attribute:tensorflow.Session>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.NotImplementedError>
+Assign ['best_action'] [<_ast.NameConstant object at 0x1104604e0>]
+Name best_action in context <class '_ast.Store'>
+Set best_action in <Scope: function _setup_graph>: value None is not a Node
+Call sess.run
+Call tf.global_variables_initializer
+Attribute global_variables_initializer of tf in context <class '_ast.Load'>
+Resolve tf.global_variables_initializer in context <class '_ast.Load'>
+Get tf in <Scope: function _setup_graph>, found in <Scope: module >, value <Node module:tensorflow>
+Resolved to attr global_variables_initializer of <Node module:tensorflow>
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.global_variables_initializer> (target obj <Node module:tensorflow> known but target attr global_variables_initializer not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.global_variables_initializer> (target obj <Node module:tensorflow> known but target attr global_variables_initializer not resolved; maybe fwd ref or unanalyzed import)
+Attribute run of sess in context <class '_ast.Load'>
+Resolve sess.run in context <class '_ast.Load'>
+Get sess in <Scope: function _setup_graph>, found in <Scope: function _setup_graph>, value <Node attribute:tensorflow.Session>
+Resolved to attr run of <Node attribute:tensorflow.Session>
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.Session.run> (target obj <Node attribute:tensorflow.Session> known but target attr run not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.Session.run> (target obj <Node attribute:tensorflow.Session> known but target attr run not resolved; maybe fwd ref or unanalyzed import)
+Name sess in context <class '_ast.Load'>
+Get sess in <Scope: function _setup_graph>, found in <Scope: function _setup_graph>, value <Node attribute:tensorflow.Session>
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node attribute:tensorflow.Session>
+Name state_ph in context <class '_ast.Load'>
+Get state_ph in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.state_ph>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.state_ph>
+Name action_ph in context <class '_ast.Load'>
+Get action_ph in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.action_ph>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.action_ph>
+Name next_state_ph in context <class '_ast.Load'>
+Get next_state_ph in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.next_state_ph>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.next_state_ph>
+Name next_state_pred in context <class '_ast.Load'>
+Get next_state_pred in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.next_state_pred>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.next_state_pred>
+Name loss in context <class '_ast.Load'>
+Get loss in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.loss>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.loss>
+Name optimizer in context <class '_ast.Load'>
+Get optimizer in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.optimizer>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.optimizer>
+Name best_action in context <class '_ast.Load'>
+Get best_action in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.best_action>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.best_action>
+FunctionDef train_step
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy.train_step>
+Set train_step in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy.train_step>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function train_step>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.train_step> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.train_step> to Name <Node ???:*.NotImplementedError>
+Name loss in context <class '_ast.Load'>
+Get loss in <Scope: function train_step>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.train_step> to Name <Node ???:*.loss>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.train_step> to Name <Node ???:*.loss>
+FunctionDef predict
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy.predict>
+Set predict in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy.predict>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Call np.shape
+Name state in context <class '_ast.Load'>
+Get state in <Scope: function predict>, found in <Scope: function predict>, value <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function predict>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Attribute _state_dim of self in context <class '_ast.Load'>
+Resolve self._state_dim in context <class '_ast.Load'>
+Get self in <Scope: function predict>, found in <Scope: function predict>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _state_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+Call np.shape
+Name action in context <class '_ast.Load'>
+Get action in <Scope: function predict>, found in <Scope: function predict>, value <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function predict>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node module:numpy> resolves <Node ???:*.shape>; removing wildcard
+Attribute _action_dim of self in context <class '_ast.Load'>
+Resolve self._action_dim in context <class '_ast.Load'>
+Get self in <Scope: function predict>, found in <Scope: function predict>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _action_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function predict>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ???:*.NotImplementedError>
+Call np.shape
+Name next_state_pred in context <class '_ast.Load'>
+Get next_state_pred in <Scope: function predict>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ???:*.next_state_pred>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ???:*.next_state_pred>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function predict>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node module:numpy> resolves <Node ???:*.shape>; removing wildcard
+Attribute _state_dim of self in context <class '_ast.Load'>
+Resolve self._state_dim in context <class '_ast.Load'>
+Get self in <Scope: function predict>, found in <Scope: function predict>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _state_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+Name next_state_pred in context <class '_ast.Load'>
+Get next_state_pred in <Scope: function predict>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ???:*.next_state_pred>
+FunctionDef get_action
+Def from <Node class:model_based_policy.ModelBasedPolicy> to Function <Node method:model_based_policy.ModelBasedPolicy.get_action>
+Set get_action in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy.get_action>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Call np.shape
+Name state in context <class '_ast.Load'>
+Get state in <Scope: function get_action>, found in <Scope: function get_action>, value <Node ---:model_based_policy.ModelBasedPolicy.get_action.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ---:model_based_policy.ModelBasedPolicy.get_action.^^^argument^^^>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ---:model_based_policy.ModelBasedPolicy.get_action.^^^argument^^^>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function get_action>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Attribute _state_dim of self in context <class '_ast.Load'>
+Resolve self._state_dim in context <class '_ast.Load'>
+Get self in <Scope: function get_action>, found in <Scope: function get_action>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _state_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ???:*.shape>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function get_action>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ???:*.NotImplementedError>
+Call np.shape
+Name best_action in context <class '_ast.Load'>
+Get best_action in <Scope: function get_action>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ???:*.best_action>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ???:*.best_action>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function get_action>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node module:numpy> resolves <Node ???:*.shape>; removing wildcard
+Attribute _action_dim of self in context <class '_ast.Load'>
+Resolve self._action_dim in context <class '_ast.Load'>
+Get self in <Scope: function get_action>, found in <Scope: function get_action>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _action_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ???:*.shape>
+Name best_action in context <class '_ast.Load'>
+Get best_action in <Scope: function get_action>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ???:*.best_action>
+Resolving base classes
+Get object in <Scope: module >: no Node value (or name not in scope)
+All base classes (non-recursive, local level only): {<Node class:model_based_policy.ModelBasedPolicy>: []}
+Resolving method resolution order (MRO) for all analyzed classes
+MRO: analyzing class <Node class:model_based_policy.ModelBasedPolicy>
+MRO: C3 linearizing <Node class:model_based_policy.ModelBasedPolicy>
+MRO: C3 linearized <Node class:model_based_policy.ModelBasedPolicy>, result [<Node class:model_based_policy.ModelBasedPolicy>]
+Method resolution order (MRO) for all analyzed classes: {<Node class:model_based_policy.ModelBasedPolicy>: [<Node class:model_based_policy.ModelBasedPolicy>]}
+========== pass 2, file 'model_based_policy.py' ==========
+Scopes now: {'model_based_policy': <Scope: module >, 'model_based_policy.ModelBasedPolicy': <Scope: class ModelBasedPolicy>, 'model_based_policy.ModelBasedPolicy.__init__': <Scope: function __init__>, 'model_based_policy.ModelBasedPolicy._setup_placeholders': <Scope: function _setup_placeholders>, 'model_based_policy.ModelBasedPolicy._dynamics_func': <Scope: function _dynamics_func>, 'model_based_policy.ModelBasedPolicy._setup_training': <Scope: function _setup_training>, 'model_based_policy.ModelBasedPolicy._setup_action_selection': <Scope: function _setup_action_selection>, 'model_based_policy.ModelBasedPolicy._setup_graph': <Scope: function _setup_graph>, 'model_based_policy.ModelBasedPolicy.train_step': <Scope: function train_step>, 'model_based_policy.ModelBasedPolicy.predict': <Scope: function predict>, 'model_based_policy.ModelBasedPolicy.get_action': <Scope: function get_action>}
+Module
+Import ['tensorflow as tf']
+Set tf in <Scope: module > to <Node module:tensorflow>
+Use from <Node module:model_based_policy> to Import <Node import:tf>
+Import ['numpy as np']
+Set np in <Scope: module > to <Node module:numpy>
+Use from <Node module:model_based_policy> to Import <Node import:np>
+Import ['utils']
+Set utils in <Scope: module > to <Node module:utils>
+Use from <Node module:model_based_policy> to Import <Node module:utils>
+ClassDef ModelBasedPolicy
+Set ModelBasedPolicy in <Scope: module > to <Node class:model_based_policy.ModelBasedPolicy>
+Name object in context <class '_ast.Load'>
+Get object in <Scope: class ModelBasedPolicy>: no Node value (or name not in scope)
+Use from <Node class:model_based_policy.ModelBasedPolicy> to Name <Node ???:*.object>
+FunctionDef __init__
+Set __init__ in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy.__init__>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Assign ['self._cost_fn'] ['env.cost_fn']
+Attribute cost_fn of env in context <class '_ast.Load'>
+Resolve env.cost_fn in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr cost_fn of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^.cost_fn> (target obj <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^> known but target attr cost_fn not resolved; maybe fwd ref or unanalyzed import)
+Attribute _cost_fn of self in context <class '_ast.Store'>
+Resolve self._cost_fn in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _cost_fn of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _cost_fn on self to <Node attribute:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^.cost_fn>
+Assign ['self._state_dim'] [<_ast.Subscript object at 0x110467ac8>]
+Attribute shape of env.observation_space in context <class '_ast.Load'>
+Resolve env.observation_space.shape in context <class '_ast.Load'>
+Resolve env.observation_space in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr observation_space of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Unresolved, returning attr shape of unknown
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.shape> (target obj env.observation_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute _state_dim of self in context <class '_ast.Store'>
+Resolve self._state_dim in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_dim of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _state_dim on self to <Node ???:*.shape>
+Assign ['self._action_dim'] [<_ast.Subscript object at 0x110474710>]
+Attribute shape of env.action_space in context <class '_ast.Load'>
+Resolve env.action_space.shape in context <class '_ast.Load'>
+Resolve env.action_space in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr action_space of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Unresolved, returning attr shape of unknown
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.shape> (target obj env.action_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute _action_dim of self in context <class '_ast.Store'>
+Resolve self._action_dim in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_dim of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _action_dim on self to <Node ???:*.shape>
+Assign ['self._action_space_low'] ['env.action_space.low']
+Attribute low of env.action_space in context <class '_ast.Load'>
+Resolve env.action_space.low in context <class '_ast.Load'>
+Resolve env.action_space in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr action_space of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Unresolved, returning attr low of unknown
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.low> (target obj env.action_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute _action_space_low of self in context <class '_ast.Store'>
+Resolve self._action_space_low in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_space_low of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _action_space_low on self to <Node ???:*.low>
+Assign ['self._action_space_high'] ['env.action_space.high']
+Attribute high of env.action_space in context <class '_ast.Load'>
+Resolve env.action_space.high in context <class '_ast.Load'>
+Resolve env.action_space in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Resolved to attr action_space of <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Unresolved, returning attr high of unknown
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ???:*.high> (target obj env.action_space not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute _action_space_high of self in context <class '_ast.Store'>
+Resolve self._action_space_high in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_space_high of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _action_space_high on self to <Node ???:*.high>
+Assign ['self._init_dataset'] ['init_dataset']
+Name init_dataset in context <class '_ast.Load'>
+Get init_dataset in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Attribute _init_dataset of self in context <class '_ast.Store'>
+Resolve self._init_dataset in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _init_dataset of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _init_dataset on self to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Assign ['self._horizon'] ['horizon']
+Name horizon in context <class '_ast.Load'>
+Get horizon in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Attribute _horizon of self in context <class '_ast.Store'>
+Resolve self._horizon in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _horizon of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _horizon on self to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Assign ['self._num_random_action_selection'] ['num_random_action_selection']
+Name num_random_action_selection in context <class '_ast.Load'>
+Get num_random_action_selection in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Attribute _num_random_action_selection of self in context <class '_ast.Store'>
+Resolve self._num_random_action_selection in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _num_random_action_selection of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _num_random_action_selection on self to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Assign ['self._nn_layers'] ['nn_layers']
+Name nn_layers in context <class '_ast.Load'>
+Get nn_layers in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to Name <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Attribute _nn_layers of self in context <class '_ast.Store'>
+Resolve self._nn_layers in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _nn_layers of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _nn_layers on self to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^>
+Assign ['self._learning_rate'] [<_ast.Num object at 0x11047a438>]
+Attribute _learning_rate of self in context <class '_ast.Store'>
+Assign ['self._sess', 'self._state_ph', 'self._action_ph', 'self._next_state_ph', 'self._next_state_pred', 'self._loss', 'self._optimizer', 'self._best_action'] [<_ast.Call object at 0x11047a860>]
+Call self._setup_graph
+Attribute _setup_graph of self in context <class '_ast.Load'>
+Resolve self._setup_graph in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _setup_graph of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _setup_graph on self returns <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _sess of self in context <class '_ast.Store'>
+Resolve self._sess in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _sess of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _sess on self to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _state_ph of self in context <class '_ast.Store'>
+Resolve self._state_ph in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_ph of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _state_ph on self to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _action_ph of self in context <class '_ast.Store'>
+Resolve self._action_ph in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_ph of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _action_ph on self to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _next_state_ph of self in context <class '_ast.Store'>
+Resolve self._next_state_ph in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _next_state_ph of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _next_state_ph on self to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _next_state_pred of self in context <class '_ast.Store'>
+Resolve self._next_state_pred in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _next_state_pred of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _next_state_pred on self to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _loss of self in context <class '_ast.Store'>
+Resolve self._loss in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _loss of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _loss on self to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _optimizer of self in context <class '_ast.Store'>
+Resolve self._optimizer in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _optimizer of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _optimizer on self to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Attribute _best_action of self in context <class '_ast.Store'>
+Resolve self._best_action in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _best_action of <Node class:model_based_policy.ModelBasedPolicy>
+setattr _best_action on self to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+FunctionDef _setup_placeholders
+Set _setup_placeholders in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _setup_placeholders>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.NotImplementedError>
+Name state_ph in context <class '_ast.Load'>
+Get state_ph in <Scope: function _setup_placeholders>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.state_ph>
+Name action_ph in context <class '_ast.Load'>
+Get action_ph in <Scope: function _setup_placeholders>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.action_ph>
+Name next_state_ph in context <class '_ast.Load'>
+Get next_state_ph in <Scope: function _setup_placeholders>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_placeholders> to Name <Node ???:*.next_state_ph>
+FunctionDef _dynamics_func
+Set _dynamics_func in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._dynamics_func>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _dynamics_func>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._dynamics_func> to Name <Node ???:*.NotImplementedError>
+Name next_state_pred in context <class '_ast.Load'>
+Get next_state_pred in <Scope: function _dynamics_func>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._dynamics_func> to Name <Node ???:*.next_state_pred>
+FunctionDef _setup_training
+Set _setup_training in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._setup_training>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _setup_training>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.NotImplementedError>
+Name loss in context <class '_ast.Load'>
+Get loss in <Scope: function _setup_training>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.loss>
+Name optimizer in context <class '_ast.Load'>
+Get optimizer in <Scope: function _setup_training>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_training> to Name <Node ???:*.optimizer>
+FunctionDef _setup_action_selection
+Set _setup_action_selection in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _setup_action_selection>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection> to Name <Node ???:*.NotImplementedError>
+Name best_action in context <class '_ast.Load'>
+Get best_action in <Scope: function _setup_action_selection>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_action_selection> to Name <Node ???:*.best_action>
+FunctionDef _setup_graph
+Set _setup_graph in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy._setup_graph>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Assign ['sess'] [<_ast.Call object at 0x110473550>]
+Call tf.Session
+Attribute Session of tf in context <class '_ast.Load'>
+Resolve tf.Session in context <class '_ast.Load'>
+Get tf in <Scope: function _setup_graph>, found in <Scope: module >, value <Node module:tensorflow>
+Resolved to attr Session of <Node module:tensorflow>
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.Session> (target obj <Node module:tensorflow> known but target attr Session not resolved; maybe fwd ref or unanalyzed import)
+Name sess in context <class '_ast.Store'>
+Set sess in <Scope: function _setup_graph> to <Node attribute:tensorflow.Session>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.NotImplementedError>
+Assign ['best_action'] [<_ast.NameConstant object at 0x1104736d8>]
+Name best_action in context <class '_ast.Store'>
+Set best_action in <Scope: function _setup_graph>: value None is not a Node
+Call sess.run
+Call tf.global_variables_initializer
+Attribute global_variables_initializer of tf in context <class '_ast.Load'>
+Resolve tf.global_variables_initializer in context <class '_ast.Load'>
+Get tf in <Scope: function _setup_graph>, found in <Scope: module >, value <Node module:tensorflow>
+Resolved to attr global_variables_initializer of <Node module:tensorflow>
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.global_variables_initializer> (target obj <Node module:tensorflow> known but target attr global_variables_initializer not resolved; maybe fwd ref or unanalyzed import)
+Attribute run of sess in context <class '_ast.Load'>
+Resolve sess.run in context <class '_ast.Load'>
+Get sess in <Scope: function _setup_graph>, found in <Scope: function _setup_graph>, value <Node attribute:tensorflow.Session>
+Resolved to attr run of <Node attribute:tensorflow.Session>
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.Session.run> (target obj <Node attribute:tensorflow.Session> known but target attr run not resolved; maybe fwd ref or unanalyzed import)
+Name sess in context <class '_ast.Load'>
+Get sess in <Scope: function _setup_graph>, found in <Scope: function _setup_graph>, value <Node attribute:tensorflow.Session>
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node attribute:tensorflow.Session>
+Name state_ph in context <class '_ast.Load'>
+Get state_ph in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.state_ph>
+Name action_ph in context <class '_ast.Load'>
+Get action_ph in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.action_ph>
+Name next_state_ph in context <class '_ast.Load'>
+Get next_state_ph in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.next_state_ph>
+Name next_state_pred in context <class '_ast.Load'>
+Get next_state_pred in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.next_state_pred>
+Name loss in context <class '_ast.Load'>
+Get loss in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.loss>
+Name optimizer in context <class '_ast.Load'>
+Get optimizer in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.optimizer>
+Name best_action in context <class '_ast.Load'>
+Get best_action in <Scope: function _setup_graph>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to Name <Node ???:*.best_action>
+FunctionDef train_step
+Set train_step in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy.train_step>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function train_step>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.train_step> to Name <Node ???:*.NotImplementedError>
+Name loss in context <class '_ast.Load'>
+Get loss in <Scope: function train_step>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.train_step> to Name <Node ???:*.loss>
+FunctionDef predict
+Set predict in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy.predict>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Call np.shape
+Name state in context <class '_ast.Load'>
+Get state in <Scope: function predict>, found in <Scope: function predict>, value <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function predict>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node module:numpy> resolves <Node ???:*.shape>; removing wildcard
+Attribute _state_dim of self in context <class '_ast.Load'>
+Resolve self._state_dim in context <class '_ast.Load'>
+Get self in <Scope: function predict>, found in <Scope: function predict>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _state_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+Call np.shape
+Name action in context <class '_ast.Load'>
+Get action in <Scope: function predict>, found in <Scope: function predict>, value <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function predict>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node module:numpy> resolves <Node ???:*.shape>; removing wildcard
+Attribute _action_dim of self in context <class '_ast.Load'>
+Resolve self._action_dim in context <class '_ast.Load'>
+Get self in <Scope: function predict>, found in <Scope: function predict>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _action_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function predict>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ???:*.NotImplementedError>
+Call np.shape
+Name next_state_pred in context <class '_ast.Load'>
+Get next_state_pred in <Scope: function predict>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ???:*.next_state_pred>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function predict>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node module:numpy> resolves <Node ???:*.shape>; removing wildcard
+Attribute _state_dim of self in context <class '_ast.Load'>
+Resolve self._state_dim in context <class '_ast.Load'>
+Get self in <Scope: function predict>, found in <Scope: function predict>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _state_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ???:*.shape>
+Name next_state_pred in context <class '_ast.Load'>
+Get next_state_pred in <Scope: function predict>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.predict> to Name <Node ???:*.next_state_pred>
+FunctionDef get_action
+Set get_action in <Scope: class ModelBasedPolicy> to <Node method:model_based_policy.ModelBasedPolicy.get_action>
+Method def: setting self name "self" to <Node class:model_based_policy.ModelBasedPolicy>
+Call np.shape
+Name state in context <class '_ast.Load'>
+Get state in <Scope: function get_action>, found in <Scope: function get_action>, value <Node ---:model_based_policy.ModelBasedPolicy.get_action.^^^argument^^^>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ---:model_based_policy.ModelBasedPolicy.get_action.^^^argument^^^>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function get_action>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node module:numpy> resolves <Node ???:*.shape>; removing wildcard
+Attribute _state_dim of self in context <class '_ast.Load'>
+Resolve self._state_dim in context <class '_ast.Load'>
+Get self in <Scope: function get_action>, found in <Scope: function get_action>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _state_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _state_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ???:*.shape>
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function get_action>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ???:*.NotImplementedError>
+Call np.shape
+Name best_action in context <class '_ast.Load'>
+Get best_action in <Scope: function get_action>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ???:*.best_action>
+Attribute shape of np in context <class '_ast.Load'>
+Resolve np.shape in context <class '_ast.Load'>
+Get np in <Scope: function get_action>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr shape of <Node module:numpy>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node attribute:numpy.shape> (target obj <Node module:numpy> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node module:numpy> resolves <Node ???:*.shape>; removing wildcard
+Attribute _action_dim of self in context <class '_ast.Load'>
+Resolve self._action_dim in context <class '_ast.Load'>
+Get self in <Scope: function get_action>, found in <Scope: function get_action>, value <Node class:model_based_policy.ModelBasedPolicy>
+Resolved to attr _action_dim of <Node class:model_based_policy.ModelBasedPolicy>
+getattr _action_dim on self returns <Node ???:*.shape>
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ???:*.shape>
+New edge added for Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ???:*.shape>
+Name best_action in context <class '_ast.Load'>
+Get best_action in <Scope: function get_action>: no Node value (or name not in scope)
+Use from <Node method:model_based_policy.ModelBasedPolicy.get_action> to Name <Node ???:*.best_action>
+Use from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:numpy.shape> resolves <Node ???:*.shape>; removing wildcard
+Expanding unknowns: new uses edge from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:numpy.shape>
+Expanding unknowns: new uses edge from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape>
+Expanding unknowns: new uses edge from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node attribute:numpy.shape>
+Contracting non-existent from <Node module:model_based_policy> to <Node module:utils> as <Node ---:*.utils>
+Contracting non-existent from <Node module:model_based_policy> to <Node import:np> as <Node ---:*.np>
+Contracting non-existent from <Node module:model_based_policy> to <Node import:tf> as <Node ---:*.tf>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:numpy.shape> as <Node ???:*.shape>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node ---:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy.__init__> to <Node attribute:model_based_policy.ModelBasedPolicy.__init__.^^^argument^^^.cost_fn> as <Node ---:*.cost_fn>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.Session> as <Node ---:*.Session>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.Session.run> as <Node ---:*.run>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy._setup_graph> to <Node attribute:tensorflow.global_variables_initializer> as <Node ---:*.global_variables_initializer>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node attribute:numpy.shape> as <Node ???:*.shape>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy.predict> to <Node ---:model_based_policy.ModelBasedPolicy.predict.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node attribute:numpy.shape> as <Node ???:*.shape>
+Contracting non-existent from <Node method:model_based_policy.ModelBasedPolicy.get_action> to <Node ---:model_based_policy.ModelBasedPolicy.get_action.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Looking at model_based_policy
+Coloring model_based_policy from file 'model_based_policy.py'
+Looking at ModelBasedPolicy
+Coloring ModelBasedPolicy from file 'model_based_policy.py'
+New namespace model_based_policy, old was 
+Looking at __init__
+Coloring __init__ from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+Looking at _dynamics_func
+Coloring _dynamics_func from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+Looking at _setup_action_selection
+Coloring _setup_action_selection from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+Looking at _setup_graph
+Coloring _setup_graph from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+Looking at _setup_placeholders
+Coloring _setup_placeholders from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+Looking at _setup_training
+Coloring _setup_training from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+Looking at get_action
+Coloring get_action from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+Looking at predict
+Coloring predict from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+Looking at train_step
+Coloring train_step from file 'model_based_policy.py'
+New namespace model_based_policy.ModelBasedPolicy, old was 
+<class 'pyan.writers.DotWriter'> running
+Start subgraph 
+Write node model_based_policy
+Start subgraph model_based_policy
+Write node ModelBasedPolicy\n(model_based_policy.py:7)
+Finish subgraph model_based_policy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node __init__\n(model_based_policy.py:9)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node _dynamics_func\n(model_based_policy.py:48)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node _setup_action_selection\n(model_based_policy.py:96)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node _setup_graph\n(model_based_policy.py:129)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node _setup_placeholders\n(model_based_policy.py:29)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node _setup_training\n(model_based_policy.py:72)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node get_action\n(model_based_policy.py:182)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node predict\n(model_based_policy.py:162)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Start subgraph model_based_policy.ModelBasedPolicy
+Write node train_step\n(model_based_policy.py:149)
+Finish subgraph model_based_policy.ModelBasedPolicy
+Finish subgraph 

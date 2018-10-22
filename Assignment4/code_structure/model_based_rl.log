@@ -1,0 +1,1949 @@
+========== pass 1, file 'model_based_rl.py' ==========
+Scopes now: {'model_based_rl': <Scope: module >, 'model_based_rl.ModelBasedRL': <Scope: class ModelBasedRL>, 'model_based_rl.ModelBasedRL.__init__': <Scope: function __init__>, 'model_based_rl.ModelBasedRL._gather_rollouts': <Scope: function _gather_rollouts>, 'model_based_rl.ModelBasedRL._train_policy': <Scope: function _train_policy>, 'model_based_rl.ModelBasedRL._log': <Scope: function _log>, 'model_based_rl.ModelBasedRL.run_q1': <Scope: function run_q1>, 'model_based_rl.ModelBasedRL.run_q2': <Scope: function run_q2>, 'model_based_rl.ModelBasedRL.run_q3': <Scope: function run_q3>}
+Module
+Import ['os']
+Set os in <Scope: module > to <Node module:os>
+Use from <Node module:model_based_rl> to Import <Node module:os>
+New edge added for Use from <Node module:model_based_rl> to Import <Node module:os>
+Import ['numpy as np']
+Set np in <Scope: module > to <Node module:numpy>
+Use from <Node module:model_based_rl> to Import <Node import:np>
+New edge added for Use from <Node module:model_based_rl> to Import <Node import:np>
+Import ['matplotlib.pyplot as plt']
+Set plt in <Scope: module > to <Node module:matplotlib.pyplot>
+Use from <Node module:model_based_rl> to Import <Node import:plt>
+New edge added for Use from <Node module:model_based_rl> to Import <Node import:plt>
+ImportFrom: from model_based_policy import ['ModelBasedPolicy']
+Use from <Node module:model_based_rl> to ImportFrom <Node module:model_based_policy>
+New edge added for Use from <Node module:model_based_rl> to ImportFrom <Node module:model_based_policy>
+Set ModelBasedPolicy in <Scope: module > to <Node import:model_based_policy.ModelBasedPolicy>
+From setting name ModelBasedPolicy to <Node import:model_based_policy.ModelBasedPolicy>
+Import ['utils']
+Set utils in <Scope: module > to <Node module:utils>
+Use from <Node module:model_based_rl> to Import <Node module:utils>
+New edge added for Use from <Node module:model_based_rl> to Import <Node module:utils>
+ImportFrom: from logger import ['logger']
+Use from <Node module:model_based_rl> to ImportFrom <Node module:logger>
+New edge added for Use from <Node module:model_based_rl> to ImportFrom <Node module:logger>
+Set logger in <Scope: module > to <Node import:logger.logger>
+From setting name logger to <Node import:logger.logger>
+ImportFrom: from timer import ['timeit']
+Use from <Node module:model_based_rl> to ImportFrom <Node module:timer>
+New edge added for Use from <Node module:model_based_rl> to ImportFrom <Node module:timer>
+Set timeit in <Scope: module > to <Node import:timer.timeit>
+From setting name timeit to <Node import:timer.timeit>
+ClassDef ModelBasedRL
+Def from <Node module:model_based_rl> to Class <Node class:model_based_rl.ModelBasedRL>
+Set ModelBasedRL in <Scope: module > to <Node class:model_based_rl.ModelBasedRL>
+Name object in context <class '_ast.Load'>
+Get object in <Scope: class ModelBasedRL>: no Node value (or name not in scope)
+Use from <Node class:model_based_rl.ModelBasedRL> to Name <Node ???:*.object>
+New edge added for Use from <Node class:model_based_rl.ModelBasedRL> to Name <Node ???:*.object>
+FunctionDef __init__
+Def from <Node class:model_based_rl.ModelBasedRL> to Function <Node method:model_based_rl.ModelBasedRL.__init__>
+Set __init__ in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL.__init__>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Assign ['self._env'] ['env']
+Name env in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _env of self in context <class '_ast.Store'>
+Resolve self._env in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _env of <Node class:model_based_rl.ModelBasedRL>
+setattr _env on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._max_rollout_length'] ['max_rollout_length']
+Name max_rollout_length in context <class '_ast.Load'>
+Get max_rollout_length in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _max_rollout_length of self in context <class '_ast.Store'>
+Resolve self._max_rollout_length in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _max_rollout_length of <Node class:model_based_rl.ModelBasedRL>
+setattr _max_rollout_length on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._num_onpolicy_iters'] ['num_onplicy_iters']
+Name num_onplicy_iters in context <class '_ast.Load'>
+Get num_onplicy_iters in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _num_onpolicy_iters of self in context <class '_ast.Store'>
+Resolve self._num_onpolicy_iters in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _num_onpolicy_iters of <Node class:model_based_rl.ModelBasedRL>
+setattr _num_onpolicy_iters on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._num_onpolicy_rollouts'] ['num_onpolicy_rollouts']
+Name num_onpolicy_rollouts in context <class '_ast.Load'>
+Get num_onpolicy_rollouts in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _num_onpolicy_rollouts of self in context <class '_ast.Store'>
+Resolve self._num_onpolicy_rollouts in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _num_onpolicy_rollouts of <Node class:model_based_rl.ModelBasedRL>
+setattr _num_onpolicy_rollouts on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._training_epochs'] ['training_epochs']
+Name training_epochs in context <class '_ast.Load'>
+Get training_epochs in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _training_epochs of self in context <class '_ast.Store'>
+Resolve self._training_epochs in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _training_epochs of <Node class:model_based_rl.ModelBasedRL>
+setattr _training_epochs on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._training_batch_size'] ['training_batch_size']
+Name training_batch_size in context <class '_ast.Load'>
+Get training_batch_size in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _training_batch_size of self in context <class '_ast.Store'>
+Resolve self._training_batch_size in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _training_batch_size of <Node class:model_based_rl.ModelBasedRL>
+setattr _training_batch_size on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._render'] ['render']
+Name render in context <class '_ast.Load'>
+Get render in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _render of self in context <class '_ast.Store'>
+Resolve self._render in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _render of <Node class:model_based_rl.ModelBasedRL>
+setattr _render on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function __init__>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Assign ['self._random_dataset'] [<_ast.Call object at 0x1079b57f0>]
+Call self._gather_rollouts
+Call utils.RandomPolicy
+Name env in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute RandomPolicy of utils in context <class '_ast.Load'>
+Resolve utils.RandomPolicy in context <class '_ast.Load'>
+Get utils in <Scope: function __init__>, found in <Scope: module >, value <Node module:utils>
+Resolved to attr RandomPolicy of <Node module:utils>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:utils.RandomPolicy> (target obj <Node module:utils> known but target attr RandomPolicy not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:utils.RandomPolicy> (target obj <Node module:utils> known but target attr RandomPolicy not resolved; maybe fwd ref or unanalyzed import)
+Name num_init_random_rollouts in context <class '_ast.Load'>
+Get num_init_random_rollouts in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _gather_rollouts of self in context <class '_ast.Load'>
+Resolve self._gather_rollouts in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _gather_rollouts of <Node class:model_based_rl.ModelBasedRL>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts> (target obj <Node class:model_based_rl.ModelBasedRL> known but target attr _gather_rollouts not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts> (target obj <Node class:model_based_rl.ModelBasedRL> known but target attr _gather_rollouts not resolved; maybe fwd ref or unanalyzed import)
+Attribute _random_dataset of self in context <class '_ast.Store'>
+Resolve self._random_dataset in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+setattr _random_dataset on self to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function __init__>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Assign ['self._policy'] [<_ast.Call object at 0x1079b5b70>]
+Call ModelBasedPolicy
+Name env in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _random_dataset of self in context <class '_ast.Load'>
+Resolve self._random_dataset in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+getattr _random_dataset on self returns <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts>
+Name mpc_horizon in context <class '_ast.Load'>
+Get mpc_horizon in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Name num_random_action_selection in context <class '_ast.Load'>
+Get num_random_action_selection in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Name ModelBasedPolicy in context <class '_ast.Load'>
+Get ModelBasedPolicy in <Scope: function __init__>, found in <Scope: module >, value <Node import:model_based_policy.ModelBasedPolicy>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node import:model_based_policy.ModelBasedPolicy>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node import:model_based_policy.ModelBasedPolicy>
+Attribute _policy of self in context <class '_ast.Store'>
+Resolve self._policy in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _policy of <Node class:model_based_rl.ModelBasedRL>
+setattr _policy on self to <Node import:model_based_policy.ModelBasedPolicy>
+Call timeit.reset
+Attribute reset of timeit in context <class '_ast.Load'>
+Resolve timeit.reset in context <class '_ast.Load'>
+Get timeit in <Scope: function __init__>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr reset of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:timer.timeit.reset> (target obj <Node import:timer.timeit> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:timer.timeit.reset> (target obj <Node import:timer.timeit> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function __init__>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef _gather_rollouts
+Def from <Node class:model_based_rl.ModelBasedRL> to Function <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Set _gather_rollouts in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Assign ['dataset'] [<_ast.Call object at 0x1079bb160>]
+Call utils.Dataset
+Attribute Dataset of utils in context <class '_ast.Load'>
+Resolve utils.Dataset in context <class '_ast.Load'>
+Get utils in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node module:utils>
+Resolved to attr Dataset of <Node module:utils>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:utils.Dataset> (target obj <Node module:utils> known but target attr Dataset not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:utils.Dataset> (target obj <Node module:utils> known but target attr Dataset not resolved; maybe fwd ref or unanalyzed import)
+Name dataset in context <class '_ast.Store'>
+Set dataset in <Scope: function _gather_rollouts> to <Node attribute:utils.Dataset>
+For-loop
+Call range
+Name num_rollouts in context <class '_ast.Load'>
+Get num_rollouts in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+Name range in context <class '_ast.Load'>
+Get range in <Scope: function _gather_rollouts>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ???:*.range>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ???:*.range>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function _gather_rollouts> to <Node ???:*.range>
+Assign ['state'] [<_ast.Call object at 0x1079bb390>]
+Call self._env.reset
+Attribute reset of self._env in context <class '_ast.Load'>
+Resolve self._env.reset in context <class '_ast.Load'>
+Resolve self._env in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _env of <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr reset of <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+Name state in context <class '_ast.Store'>
+Set state in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Assign ['done'] [<_ast.NameConstant object at 0x1079bb4e0>]
+Name done in context <class '_ast.Store'>
+Set done in <Scope: function _gather_rollouts>: value None is not a Node
+Assign ['t'] [<_ast.Num object at 0x1079bb588>]
+Name t in context <class '_ast.Store'>
+Set t in <Scope: function _gather_rollouts>: value None is not a Node
+Name done in context <class '_ast.Load'>
+Get done in <Scope: function _gather_rollouts>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ???:*.done>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ???:*.done>
+Attribute _render of self in context <class '_ast.Load'>
+Resolve self._render in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _render of <Node class:model_based_rl.ModelBasedRL>
+getattr _render on self returns <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+Call self._env.render
+Attribute render of self._env in context <class '_ast.Load'>
+Resolve self._env.render in context <class '_ast.Load'>
+Resolve self._env in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _env of <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr render of <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.render> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr render not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.render> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr render not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+Assign ['action'] [<_ast.Call object at 0x1079bbbe0>]
+Call policy.get_action
+Name state in context <class '_ast.Load'>
+Get state in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Attribute get_action of policy in context <class '_ast.Load'>
+Resolve policy.get_action in context <class '_ast.Load'>
+Get policy in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+Resolved to attr get_action of <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action> (target obj <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^> known but target attr get_action not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action> (target obj <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^> known but target attr get_action not resolved; maybe fwd ref or unanalyzed import)
+Name action in context <class '_ast.Store'>
+Set action in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+Assign ['next_state', 'reward', 'done', '_'] [<_ast.Call object at 0x1079bf080>]
+Call self._env.step
+Name action in context <class '_ast.Load'>
+Get action in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Attribute step of self._env in context <class '_ast.Load'>
+Resolve self._env.step in context <class '_ast.Load'>
+Resolve self._env in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _env of <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr step of <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr step not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr step not resolved; maybe fwd ref or unanalyzed import)
+Name next_state in context <class '_ast.Store'>
+Set next_state in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name reward in context <class '_ast.Store'>
+Set reward in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name done in context <class '_ast.Store'>
+Set done in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+Assign ['done'] [<_ast.BoolOp object at 0x1079bf320>]
+Name done in context <class '_ast.Load'>
+Get done in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name t in context <class '_ast.Load'>
+Get t in <Scope: function _gather_rollouts>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ???:*.t>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ???:*.t>
+Attribute _max_rollout_length of self in context <class '_ast.Load'>
+Resolve self._max_rollout_length in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _max_rollout_length of <Node class:model_based_rl.ModelBasedRL>
+getattr _max_rollout_length on self returns <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Name done in context <class '_ast.Store'>
+Set done in <Scope: function _gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Call dataset.add
+Name state in context <class '_ast.Load'>
+Get state in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Name action in context <class '_ast.Load'>
+Get action in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Name next_state in context <class '_ast.Load'>
+Get next_state in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name reward in context <class '_ast.Load'>
+Get reward in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name done in context <class '_ast.Load'>
+Get done in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute add of dataset in context <class '_ast.Load'>
+Resolve dataset.add in context <class '_ast.Load'>
+Get dataset in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:utils.Dataset>
+Resolved to attr add of <Node attribute:utils.Dataset>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:utils.Dataset.add> (target obj <Node attribute:utils.Dataset> known but target attr add not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:utils.Dataset.add> (target obj <Node attribute:utils.Dataset> known but target attr add not resolved; maybe fwd ref or unanalyzed import)
+Assign ['state'] ['next_state']
+Name next_state in context <class '_ast.Load'>
+Get next_state in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name state in context <class '_ast.Store'>
+Set state in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+AugAssign ['t'] <class '_ast.Add'> [<_ast.Num object at 0x1079bf7b8>]
+Name t in context <class '_ast.Store'>
+Set t in <Scope: function _gather_rollouts>: value None is not a Node
+Name dataset in context <class '_ast.Load'>
+Get dataset in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:utils.Dataset>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:utils.Dataset>
+FunctionDef _train_policy
+Def from <Node class:model_based_rl.ModelBasedRL> to Function <Node method:model_based_rl.ModelBasedRL._train_policy>
+Set _train_policy in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL._train_policy>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _train_policy>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+Assign ['losses'] []
+Name losses in context <class '_ast.Store'>
+Set losses in <Scope: function _train_policy>: value None is not a Node
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _train_policy>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to Name <Node ???:*.NotImplementedError>
+Call logger.record_tabular
+Name losses in context <class '_ast.Load'>
+Get losses in <Scope: function _train_policy>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to Name <Node ???:*.losses>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to Name <Node ???:*.losses>
+Attribute record_tabular of logger in context <class '_ast.Load'>
+Resolve logger.record_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function _train_policy>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr record_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call logger.record_tabular
+Name losses in context <class '_ast.Load'>
+Get losses in <Scope: function _train_policy>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to Name <Node ???:*.losses>
+Attribute record_tabular of logger in context <class '_ast.Load'>
+Resolve logger.record_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function _train_policy>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr record_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _train_policy>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef _log
+Def from <Node class:model_based_rl.ModelBasedRL> to Function <Node method:model_based_rl.ModelBasedRL._log>
+Set _log in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL._log>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _log>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+Call dataset.log
+Attribute log of dataset in context <class '_ast.Load'>
+Resolve dataset.log in context <class '_ast.Load'>
+Get dataset in <Scope: function _log>, found in <Scope: function _log>, value <Node ---:model_based_rl.ModelBasedRL._log.^^^argument^^^>
+Resolved to attr log of <Node ---:model_based_rl.ModelBasedRL._log.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:model_based_rl.ModelBasedRL._log.^^^argument^^^.log> (target obj <Node ---:model_based_rl.ModelBasedRL._log.^^^argument^^^> known but target attr log not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:model_based_rl.ModelBasedRL._log.^^^argument^^^.log> (target obj <Node ---:model_based_rl.ModelBasedRL._log.^^^argument^^^> known but target attr log not resolved; maybe fwd ref or unanalyzed import)
+Call logger.dump_tabular
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function _log>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Attribute dump_tabular of logger in context <class '_ast.Load'>
+Resolve logger.dump_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function _log>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr dump_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.dump_tabular> (target obj <Node import:logger.logger> known but target attr dump_tabular not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.dump_tabular> (target obj <Node import:logger.logger> known but target attr dump_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call logger.debug
+Attribute debug of logger in context <class '_ast.Load'>
+Resolve logger.debug in context <class '_ast.Load'>
+Get logger in <Scope: function _log>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr debug of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.debug> (target obj <Node import:logger.logger> known but target attr debug not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.debug> (target obj <Node import:logger.logger> known but target attr debug not resolved; maybe fwd ref or unanalyzed import)
+For-loop
+Call <_ast.Call object at 0x1079c1828>.split
+Attribute split of <_ast.Call object at 0x1079c1828> in context <class '_ast.Load'>
+Resolve <_ast.Call object at 0x1079c1828>.split in context <class '_ast.Load'>
+Resolving str() of timeit
+Resolve timeit.__str__ in context <class '_ast.Load'>
+Get timeit in <Scope: function _log>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr __str__ of <Node import:timer.timeit>
+Resolve str() of timeit: returning attr node None
+Unresolved function call as obj, returning attr split of unknown
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node ???:*.split> (target obj <_ast.Call object at 0x1079c1828> not resolved; maybe fwd ref, function argument, or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node ???:*.split> (target obj <_ast.Call object at 0x1079c1828> not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Name line in context <class '_ast.Store'>
+Set line in <Scope: function _log> to <Node ???:*.split>
+Call logger.debug
+Name line in context <class '_ast.Load'>
+Get line in <Scope: function _log>, found in <Scope: function _log>, value <Node ???:*.split>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to Name <Node ???:*.split>
+Attribute debug of logger in context <class '_ast.Load'>
+Resolve logger.debug in context <class '_ast.Load'>
+Get logger in <Scope: function _log>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr debug of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.debug> (target obj <Node import:logger.logger> known but target attr debug not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.reset
+Attribute reset of timeit in context <class '_ast.Load'>
+Resolve timeit.reset in context <class '_ast.Load'>
+Get timeit in <Scope: function _log>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr reset of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.reset> (target obj <Node import:timer.timeit> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.reset> (target obj <Node import:timer.timeit> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _log>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef run_q1
+Def from <Node class:model_based_rl.ModelBasedRL> to Function <Node method:model_based_rl.ModelBasedRL.run_q1>
+Set run_q1 in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL.run_q1>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q1>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q1>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+For-loop
+Call enumerate
+Call self._random_dataset.rollout_iterator
+Attribute rollout_iterator of self._random_dataset in context <class '_ast.Load'>
+Resolve self._random_dataset.rollout_iterator in context <class '_ast.Load'>
+Resolve self._random_dataset in context <class '_ast.Load'>
+Get self in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr rollout_iterator of <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.rollout_iterator> (target obj <Node method:model_based_rl.ModelBasedRL._gather_rollouts> known but target attr rollout_iterator not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.rollout_iterator> (target obj <Node method:model_based_rl.ModelBasedRL._gather_rollouts> known but target attr rollout_iterator not resolved; maybe fwd ref or unanalyzed import)
+Name enumerate in context <class '_ast.Load'>
+Get enumerate in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Name r_num in context <class '_ast.Store'>
+Set r_num in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name states in context <class '_ast.Store'>
+Set states in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name actions in context <class '_ast.Store'>
+Set actions in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function run_q1> to <Node ???:*.enumerate>
+Assign ['pred_states'] []
+Name pred_states in context <class '_ast.Store'>
+Set pred_states in <Scope: function run_q1>: value None is not a Node
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.NotImplementedError>
+Assign ['states'] [<_ast.Call object at 0x1079c64e0>]
+Call np.asarray
+Name states in context <class '_ast.Load'>
+Get states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute asarray of np in context <class '_ast.Load'>
+Resolve np.asarray in context <class '_ast.Load'>
+Get np in <Scope: function run_q1>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr asarray of <Node module:numpy>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray> (target obj <Node module:numpy> known but target attr asarray not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray> (target obj <Node module:numpy> known but target attr asarray not resolved; maybe fwd ref or unanalyzed import)
+Name states in context <class '_ast.Store'>
+Set states in <Scope: function run_q1> to <Node attribute:numpy.asarray>
+Assign ['pred_states'] [<_ast.Call object at 0x1079c6630>]
+Call np.asarray
+Name pred_states in context <class '_ast.Load'>
+Get pred_states in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.pred_states>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.pred_states>
+Attribute asarray of np in context <class '_ast.Load'>
+Resolve np.asarray in context <class '_ast.Load'>
+Get np in <Scope: function run_q1>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr asarray of <Node module:numpy>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray> (target obj <Node module:numpy> known but target attr asarray not resolved; maybe fwd ref or unanalyzed import)
+Name pred_states in context <class '_ast.Store'>
+Set pred_states in <Scope: function run_q1> to <Node attribute:numpy.asarray>
+Assign ['state_dim'] [<_ast.Subscript object at 0x1079c6780>]
+Attribute shape of states in context <class '_ast.Load'>
+Resolve states.shape in context <class '_ast.Load'>
+Get states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray>
+Resolved to attr shape of <Node attribute:numpy.asarray>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.shape> (target obj <Node attribute:numpy.asarray> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.shape> (target obj <Node attribute:numpy.asarray> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Name state_dim in context <class '_ast.Store'>
+Set state_dim in <Scope: function run_q1> to <Node attribute:numpy.asarray.shape>
+Assign ['rows'] [<_ast.Call object at 0x1079c6908>]
+Call int
+Call np.sqrt
+Name state_dim in context <class '_ast.Load'>
+Get state_dim in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray.shape>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node attribute:numpy.asarray.shape>
+Attribute sqrt of np in context <class '_ast.Load'>
+Resolve np.sqrt in context <class '_ast.Load'>
+Get np in <Scope: function run_q1>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr sqrt of <Node module:numpy>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.sqrt> (target obj <Node module:numpy> known but target attr sqrt not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.sqrt> (target obj <Node module:numpy> known but target attr sqrt not resolved; maybe fwd ref or unanalyzed import)
+Name int in context <class '_ast.Load'>
+Get int in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name rows in context <class '_ast.Store'>
+Set rows in <Scope: function run_q1> to <Node ???:*.int>
+Assign ['cols'] [<_ast.BinOp object at 0x1079c6ac8>]
+Name state_dim in context <class '_ast.Load'>
+Get state_dim in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray.shape>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node attribute:numpy.asarray.shape>
+Name rows in context <class '_ast.Load'>
+Get rows in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name cols in context <class '_ast.Store'>
+Set cols in <Scope: function run_q1> to <Node ???:*.int>
+Assign ['f', 'axes'] [<_ast.Call object at 0x1079c6c50>]
+Call plt.subplots
+Name rows in context <class '_ast.Load'>
+Get rows in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name cols in context <class '_ast.Load'>
+Get cols in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name cols in context <class '_ast.Load'>
+Get cols in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name rows in context <class '_ast.Load'>
+Get rows in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Attribute subplots of plt in context <class '_ast.Load'>
+Resolve plt.subplots in context <class '_ast.Load'>
+Get plt in <Scope: function run_q1>, found in <Scope: module >, value <Node module:matplotlib.pyplot>
+Resolved to attr subplots of <Node module:matplotlib.pyplot>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots> (target obj <Node module:matplotlib.pyplot> known but target attr subplots not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots> (target obj <Node module:matplotlib.pyplot> known but target attr subplots not resolved; maybe fwd ref or unanalyzed import)
+Name f in context <class '_ast.Store'>
+Set f in <Scope: function run_q1> to <Node attribute:matplotlib.pyplot.subplots>
+Name axes in context <class '_ast.Store'>
+Set axes in <Scope: function run_q1> to <Node attribute:matplotlib.pyplot.subplots>
+Call f.suptitle
+Attribute suptitle of f in context <class '_ast.Load'>
+Resolve f.suptitle in context <class '_ast.Load'>
+Get f in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:matplotlib.pyplot.subplots>
+Resolved to attr suptitle of <Node attribute:matplotlib.pyplot.subplots>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.suptitle> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr suptitle not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.suptitle> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr suptitle not resolved; maybe fwd ref or unanalyzed import)
+For-loop
+Call enumerate
+Call zip
+Call axes.ravel
+Attribute ravel of axes in context <class '_ast.Load'>
+Resolve axes.ravel in context <class '_ast.Load'>
+Get axes in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:matplotlib.pyplot.subplots>
+Resolved to attr ravel of <Node attribute:matplotlib.pyplot.subplots>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.ravel> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr ravel not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.ravel> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr ravel not resolved; maybe fwd ref or unanalyzed import)
+Attribute T of states in context <class '_ast.Load'>
+Resolve states.T in context <class '_ast.Load'>
+Get states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray>
+Resolved to attr T of <Node attribute:numpy.asarray>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.T> (target obj <Node attribute:numpy.asarray> known but target attr T not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.T> (target obj <Node attribute:numpy.asarray> known but target attr T not resolved; maybe fwd ref or unanalyzed import)
+Attribute T of pred_states in context <class '_ast.Load'>
+Resolve pred_states.T in context <class '_ast.Load'>
+Get pred_states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray>
+Resolved to attr T of <Node attribute:numpy.asarray>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.T> (target obj <Node attribute:numpy.asarray> known but target attr T not resolved; maybe fwd ref or unanalyzed import)
+Name zip in context <class '_ast.Load'>
+Get zip in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.zip>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.zip>
+Name enumerate in context <class '_ast.Load'>
+Get enumerate in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Name i in context <class '_ast.Store'>
+Set i in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name ax in context <class '_ast.Store'>
+Set ax in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name state_i in context <class '_ast.Store'>
+Set state_i in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name pred_state_i in context <class '_ast.Store'>
+Set pred_state_i in <Scope: function run_q1> to <Node ???:*.enumerate>
+Call ax.set_title
+Call <_ast.Str object at 0x1079c95c0>.format
+Name i in context <class '_ast.Load'>
+Get i in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute format of <_ast.Str object at 0x1079c95c0> in context <class '_ast.Load'>
+Resolve <_ast.Str object at 0x1079c95c0>.format in context <class '_ast.Load'>
+Resolved to attr format of <Node class:Str>
+getattr format on <_ast.Str object at 0x1079c95c0> returns <Node attribute:Str.format>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:Str.format>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:Str.format>
+Attribute set_title of ax in context <class '_ast.Load'>
+Resolve ax.set_title in context <class '_ast.Load'>
+Get ax in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Resolved to attr set_title of <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.set_title> (target obj ax not resolved; maybe fwd ref, function argument, or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.set_title> (target obj ax not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Call ax.plot
+Name state_i in context <class '_ast.Load'>
+Get state_i in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute plot of ax in context <class '_ast.Load'>
+Resolve ax.plot in context <class '_ast.Load'>
+Get ax in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Resolved to attr plot of <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.plot> (target obj ax not resolved; maybe fwd ref, function argument, or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.plot> (target obj ax not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Call ax.plot
+Name pred_state_i in context <class '_ast.Load'>
+Get pred_state_i in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute plot of ax in context <class '_ast.Load'>
+Resolve ax.plot in context <class '_ast.Load'>
+Get ax in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Resolved to attr plot of <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.plot> (target obj ax not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Call plt.tight_layout
+Attribute tight_layout of plt in context <class '_ast.Load'>
+Resolve plt.tight_layout in context <class '_ast.Load'>
+Get plt in <Scope: function run_q1>, found in <Scope: module >, value <Node module:matplotlib.pyplot>
+Resolved to attr tight_layout of <Node module:matplotlib.pyplot>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.tight_layout> (target obj <Node module:matplotlib.pyplot> known but target attr tight_layout not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.tight_layout> (target obj <Node module:matplotlib.pyplot> known but target attr tight_layout not resolved; maybe fwd ref or unanalyzed import)
+Call plt.subplots_adjust
+Attribute subplots_adjust of plt in context <class '_ast.Load'>
+Resolve plt.subplots_adjust in context <class '_ast.Load'>
+Get plt in <Scope: function run_q1>, found in <Scope: module >, value <Node module:matplotlib.pyplot>
+Resolved to attr subplots_adjust of <Node module:matplotlib.pyplot>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots_adjust> (target obj <Node module:matplotlib.pyplot> known but target attr subplots_adjust not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots_adjust> (target obj <Node module:matplotlib.pyplot> known but target attr subplots_adjust not resolved; maybe fwd ref or unanalyzed import)
+Call f.savefig
+Call os.path.join
+Attribute dir of logger in context <class '_ast.Load'>
+Resolve logger.dir in context <class '_ast.Load'>
+Get logger in <Scope: function run_q1>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr dir of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.dir> (target obj <Node import:logger.logger> known but target attr dir not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.dir> (target obj <Node import:logger.logger> known but target attr dir not resolved; maybe fwd ref or unanalyzed import)
+Call <_ast.Str object at 0x1079c9e10>.format
+Name r_num in context <class '_ast.Load'>
+Get r_num in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute format of <_ast.Str object at 0x1079c9e10> in context <class '_ast.Load'>
+Resolve <_ast.Str object at 0x1079c9e10>.format in context <class '_ast.Load'>
+Resolved to attr format of <Node class:Str>
+getattr format on <_ast.Str object at 0x1079c9e10> returns <Node attribute:Str.format>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:Str.format>
+Attribute join of os.path in context <class '_ast.Load'>
+Resolve os.path.join in context <class '_ast.Load'>
+Resolve os.path in context <class '_ast.Load'>
+Get os in <Scope: function run_q1>, found in <Scope: module >, value <Node module:os>
+Resolved to attr path of <Node module:os>
+Unresolved, returning attr join of unknown
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.join> (target obj os.path not resolved; maybe fwd ref, function argument, or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.join> (target obj os.path not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute savefig of f in context <class '_ast.Load'>
+Resolve f.savefig in context <class '_ast.Load'>
+Get f in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:matplotlib.pyplot.subplots>
+Resolved to attr savefig of <Node attribute:matplotlib.pyplot.subplots>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.savefig> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr savefig not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.savefig> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr savefig not resolved; maybe fwd ref or unanalyzed import)
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q1>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef run_q2
+Def from <Node class:model_based_rl.ModelBasedRL> to Function <Node method:model_based_rl.ModelBasedRL.run_q2>
+Set run_q2 in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL.run_q2>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q2>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Call self._log
+Attribute _random_dataset of self in context <class '_ast.Load'>
+Resolve self._random_dataset in context <class '_ast.Load'>
+Get self in <Scope: function run_q2>, found in <Scope: function run_q2>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+getattr _random_dataset on self returns <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Attribute _log of self in context <class '_ast.Load'>
+Resolve self._log in context <class '_ast.Load'>
+Get self in <Scope: function run_q2>, found in <Scope: function run_q2>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _log of <Node class:model_based_rl.ModelBasedRL>
+getattr _log on self returns <Node method:model_based_rl.ModelBasedRL._log>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node method:model_based_rl.ModelBasedRL._log>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node method:model_based_rl.ModelBasedRL._log>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q2>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q2>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q2>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q2>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q2>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Call self._log
+Name eval_dataset in context <class '_ast.Load'>
+Get eval_dataset in <Scope: function run_q2>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to Name <Node ???:*.eval_dataset>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to Name <Node ???:*.eval_dataset>
+Attribute _log of self in context <class '_ast.Load'>
+Resolve self._log in context <class '_ast.Load'>
+Get self in <Scope: function run_q2>, found in <Scope: function run_q2>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _log of <Node class:model_based_rl.ModelBasedRL>
+getattr _log on self returns <Node method:model_based_rl.ModelBasedRL._log>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node method:model_based_rl.ModelBasedRL._log>
+FunctionDef run_q3
+Def from <Node class:model_based_rl.ModelBasedRL> to Function <Node method:model_based_rl.ModelBasedRL.run_q3>
+Set run_q3 in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL.run_q3>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Assign ['dataset'] ['self._random_dataset']
+Attribute _random_dataset of self in context <class '_ast.Load'>
+Resolve self._random_dataset in context <class '_ast.Load'>
+Get self in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+getattr _random_dataset on self returns <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Name dataset in context <class '_ast.Store'>
+Set dataset in <Scope: function run_q3> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Assign ['itr'] [<_ast.UnaryOp object at 0x1079ccba8>]
+Name itr in context <class '_ast.Store'>
+Set itr in <Scope: function run_q3>: value None is not a Node
+Call logger.info
+Call <_ast.Str object at 0x1079ccd68>.format
+Name itr in context <class '_ast.Load'>
+Get itr in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.itr>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.itr>
+Attribute format of <_ast.Str object at 0x1079ccd68> in context <class '_ast.Load'>
+Resolve <_ast.Str object at 0x1079ccd68>.format in context <class '_ast.Load'>
+Resolved to attr format of <Node class:Str>
+getattr format on <_ast.Str object at 0x1079ccd68> returns <Node attribute:Str.format>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:Str.format>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:Str.format>
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Call logger.record_tabular
+Name itr in context <class '_ast.Load'>
+Get itr in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.itr>
+Attribute record_tabular of logger in context <class '_ast.Load'>
+Resolve logger.record_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr record_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call self._log
+Name dataset in context <class '_ast.Load'>
+Get dataset in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Attribute _log of self in context <class '_ast.Load'>
+Resolve self._log in context <class '_ast.Load'>
+Get self in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _log of <Node class:model_based_rl.ModelBasedRL>
+getattr _log on self returns <Node method:model_based_rl.ModelBasedRL._log>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node method:model_based_rl.ModelBasedRL._log>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node method:model_based_rl.ModelBasedRL._log>
+For-loop
+Call range
+Attribute _num_onpolicy_iters of self in context <class '_ast.Load'>
+Resolve self._num_onpolicy_iters in context <class '_ast.Load'>
+Get self in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _num_onpolicy_iters of <Node class:model_based_rl.ModelBasedRL>
+getattr _num_onpolicy_iters on self returns <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Name range in context <class '_ast.Load'>
+Get range in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+Name itr in context <class '_ast.Store'>
+Set itr in <Scope: function run_q3> to <Node ???:*.range>
+Call logger.info
+Call <_ast.Str object at 0x1079ce390>.format
+Name itr in context <class '_ast.Load'>
+Get itr in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node ???:*.range>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+Attribute format of <_ast.Str object at 0x1079ce390> in context <class '_ast.Load'>
+Resolve <_ast.Str object at 0x1079ce390>.format in context <class '_ast.Load'>
+Resolved to attr format of <Node class:Str>
+getattr format on <_ast.Str object at 0x1079ce390> returns <Node attribute:Str.format>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:Str.format>
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Call logger.record_tabular
+Name itr in context <class '_ast.Load'>
+Get itr in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node ???:*.range>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+Attribute record_tabular of logger in context <class '_ast.Load'>
+Resolve logger.record_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr record_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.NotImplementedError>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.NotImplementedError>
+Call self._log
+Name new_dataset in context <class '_ast.Load'>
+Get new_dataset in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.new_dataset>
+New edge added for Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.new_dataset>
+Attribute _log of self in context <class '_ast.Load'>
+Resolve self._log in context <class '_ast.Load'>
+Get self in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _log of <Node class:model_based_rl.ModelBasedRL>
+getattr _log on self returns <Node method:model_based_rl.ModelBasedRL._log>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node method:model_based_rl.ModelBasedRL._log>
+Resolving base classes
+Get object in <Scope: module >: no Node value (or name not in scope)
+All base classes (non-recursive, local level only): {<Node class:model_based_rl.ModelBasedRL>: []}
+Resolving method resolution order (MRO) for all analyzed classes
+MRO: analyzing class <Node class:model_based_rl.ModelBasedRL>
+MRO: C3 linearizing <Node class:model_based_rl.ModelBasedRL>
+MRO: C3 linearized <Node class:model_based_rl.ModelBasedRL>, result [<Node class:model_based_rl.ModelBasedRL>]
+Method resolution order (MRO) for all analyzed classes: {<Node class:model_based_rl.ModelBasedRL>: [<Node class:model_based_rl.ModelBasedRL>]}
+========== pass 2, file 'model_based_rl.py' ==========
+Scopes now: {'model_based_rl': <Scope: module >, 'model_based_rl.ModelBasedRL': <Scope: class ModelBasedRL>, 'model_based_rl.ModelBasedRL.__init__': <Scope: function __init__>, 'model_based_rl.ModelBasedRL._gather_rollouts': <Scope: function _gather_rollouts>, 'model_based_rl.ModelBasedRL._train_policy': <Scope: function _train_policy>, 'model_based_rl.ModelBasedRL._log': <Scope: function _log>, 'model_based_rl.ModelBasedRL.run_q1': <Scope: function run_q1>, 'model_based_rl.ModelBasedRL.run_q2': <Scope: function run_q2>, 'model_based_rl.ModelBasedRL.run_q3': <Scope: function run_q3>}
+Module
+Import ['os']
+Set os in <Scope: module > to <Node module:os>
+Use from <Node module:model_based_rl> to Import <Node module:os>
+Import ['numpy as np']
+Set np in <Scope: module > to <Node module:numpy>
+Use from <Node module:model_based_rl> to Import <Node import:np>
+Import ['matplotlib.pyplot as plt']
+Set plt in <Scope: module > to <Node module:matplotlib.pyplot>
+Use from <Node module:model_based_rl> to Import <Node import:plt>
+ImportFrom: from model_based_policy import ['ModelBasedPolicy']
+Use from <Node module:model_based_rl> to ImportFrom <Node module:model_based_policy>
+Set ModelBasedPolicy in <Scope: module > to <Node import:model_based_policy.ModelBasedPolicy>
+From setting name ModelBasedPolicy to <Node import:model_based_policy.ModelBasedPolicy>
+Import ['utils']
+Set utils in <Scope: module > to <Node module:utils>
+Use from <Node module:model_based_rl> to Import <Node module:utils>
+ImportFrom: from logger import ['logger']
+Use from <Node module:model_based_rl> to ImportFrom <Node module:logger>
+Set logger in <Scope: module > to <Node import:logger.logger>
+From setting name logger to <Node import:logger.logger>
+ImportFrom: from timer import ['timeit']
+Use from <Node module:model_based_rl> to ImportFrom <Node module:timer>
+Set timeit in <Scope: module > to <Node import:timer.timeit>
+From setting name timeit to <Node import:timer.timeit>
+ClassDef ModelBasedRL
+Set ModelBasedRL in <Scope: module > to <Node class:model_based_rl.ModelBasedRL>
+Name object in context <class '_ast.Load'>
+Get object in <Scope: class ModelBasedRL>: no Node value (or name not in scope)
+Use from <Node class:model_based_rl.ModelBasedRL> to Name <Node ???:*.object>
+FunctionDef __init__
+Set __init__ in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL.__init__>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Assign ['self._env'] ['env']
+Name env in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _env of self in context <class '_ast.Store'>
+Resolve self._env in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _env of <Node class:model_based_rl.ModelBasedRL>
+setattr _env on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._max_rollout_length'] ['max_rollout_length']
+Name max_rollout_length in context <class '_ast.Load'>
+Get max_rollout_length in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _max_rollout_length of self in context <class '_ast.Store'>
+Resolve self._max_rollout_length in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _max_rollout_length of <Node class:model_based_rl.ModelBasedRL>
+setattr _max_rollout_length on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._num_onpolicy_iters'] ['num_onplicy_iters']
+Name num_onplicy_iters in context <class '_ast.Load'>
+Get num_onplicy_iters in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _num_onpolicy_iters of self in context <class '_ast.Store'>
+Resolve self._num_onpolicy_iters in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _num_onpolicy_iters of <Node class:model_based_rl.ModelBasedRL>
+setattr _num_onpolicy_iters on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._num_onpolicy_rollouts'] ['num_onpolicy_rollouts']
+Name num_onpolicy_rollouts in context <class '_ast.Load'>
+Get num_onpolicy_rollouts in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _num_onpolicy_rollouts of self in context <class '_ast.Store'>
+Resolve self._num_onpolicy_rollouts in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _num_onpolicy_rollouts of <Node class:model_based_rl.ModelBasedRL>
+setattr _num_onpolicy_rollouts on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._training_epochs'] ['training_epochs']
+Name training_epochs in context <class '_ast.Load'>
+Get training_epochs in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _training_epochs of self in context <class '_ast.Store'>
+Resolve self._training_epochs in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _training_epochs of <Node class:model_based_rl.ModelBasedRL>
+setattr _training_epochs on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._training_batch_size'] ['training_batch_size']
+Name training_batch_size in context <class '_ast.Load'>
+Get training_batch_size in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _training_batch_size of self in context <class '_ast.Store'>
+Resolve self._training_batch_size in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _training_batch_size of <Node class:model_based_rl.ModelBasedRL>
+setattr _training_batch_size on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Assign ['self._render'] ['render']
+Name render in context <class '_ast.Load'>
+Get render in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _render of self in context <class '_ast.Store'>
+Resolve self._render in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _render of <Node class:model_based_rl.ModelBasedRL>
+setattr _render on self to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function __init__>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Assign ['self._random_dataset'] [<_ast.Call object at 0x1079e30b8>]
+Call self._gather_rollouts
+Call utils.RandomPolicy
+Name env in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute RandomPolicy of utils in context <class '_ast.Load'>
+Resolve utils.RandomPolicy in context <class '_ast.Load'>
+Get utils in <Scope: function __init__>, found in <Scope: module >, value <Node module:utils>
+Resolved to attr RandomPolicy of <Node module:utils>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:utils.RandomPolicy> (target obj <Node module:utils> known but target attr RandomPolicy not resolved; maybe fwd ref or unanalyzed import)
+Name num_init_random_rollouts in context <class '_ast.Load'>
+Get num_init_random_rollouts in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _gather_rollouts of self in context <class '_ast.Load'>
+Resolve self._gather_rollouts in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _gather_rollouts of <Node class:model_based_rl.ModelBasedRL>
+getattr _gather_rollouts on self returns <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Attribute _random_dataset of self in context <class '_ast.Store'>
+Resolve self._random_dataset in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+setattr _random_dataset on self to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function __init__>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Assign ['self._policy'] [<_ast.Call object at 0x1079e3438>]
+Call ModelBasedPolicy
+Name env in context <class '_ast.Load'>
+Get env in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _random_dataset of self in context <class '_ast.Load'>
+Resolve self._random_dataset in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+getattr _random_dataset on self returns <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Name mpc_horizon in context <class '_ast.Load'>
+Get mpc_horizon in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Name num_random_action_selection in context <class '_ast.Load'>
+Get num_random_action_selection in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Name ModelBasedPolicy in context <class '_ast.Load'>
+Get ModelBasedPolicy in <Scope: function __init__>, found in <Scope: module >, value <Node import:model_based_policy.ModelBasedPolicy>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to Name <Node import:model_based_policy.ModelBasedPolicy>
+Attribute _policy of self in context <class '_ast.Store'>
+Resolve self._policy in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _policy of <Node class:model_based_rl.ModelBasedRL>
+setattr _policy on self to <Node import:model_based_policy.ModelBasedPolicy>
+Call timeit.reset
+Attribute reset of timeit in context <class '_ast.Load'>
+Resolve timeit.reset in context <class '_ast.Load'>
+Get timeit in <Scope: function __init__>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr reset of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:timer.timeit.reset> (target obj <Node import:timer.timeit> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function __init__>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef _gather_rollouts
+Set _gather_rollouts in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Assign ['dataset'] [<_ast.Call object at 0x1079e39b0>]
+Call utils.Dataset
+Attribute Dataset of utils in context <class '_ast.Load'>
+Resolve utils.Dataset in context <class '_ast.Load'>
+Get utils in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node module:utils>
+Resolved to attr Dataset of <Node module:utils>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:utils.Dataset> (target obj <Node module:utils> known but target attr Dataset not resolved; maybe fwd ref or unanalyzed import)
+Name dataset in context <class '_ast.Store'>
+Set dataset in <Scope: function _gather_rollouts> to <Node attribute:utils.Dataset>
+For-loop
+Call range
+Name num_rollouts in context <class '_ast.Load'>
+Get num_rollouts in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+Name range in context <class '_ast.Load'>
+Get range in <Scope: function _gather_rollouts>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ???:*.range>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function _gather_rollouts> to <Node ???:*.range>
+Assign ['state'] [<_ast.Call object at 0x1079e3be0>]
+Call self._env.reset
+Attribute reset of self._env in context <class '_ast.Load'>
+Resolve self._env.reset in context <class '_ast.Load'>
+Resolve self._env in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _env of <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr reset of <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+Name state in context <class '_ast.Store'>
+Set state in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Assign ['done'] [<_ast.NameConstant object at 0x1079e3d30>]
+Name done in context <class '_ast.Store'>
+Set done in <Scope: function _gather_rollouts>: value None is not a Node
+Assign ['t'] [<_ast.Num object at 0x1079e3dd8>]
+Name t in context <class '_ast.Store'>
+Set t in <Scope: function _gather_rollouts>: value None is not a Node
+Name done in context <class '_ast.Load'>
+Get done in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute _render of self in context <class '_ast.Load'>
+Resolve self._render in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _render of <Node class:model_based_rl.ModelBasedRL>
+getattr _render on self returns <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+Call self._env.render
+Attribute render of self._env in context <class '_ast.Load'>
+Resolve self._env.render in context <class '_ast.Load'>
+Resolve self._env in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _env of <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr render of <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.render> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr render not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+Assign ['action'] [<_ast.Call object at 0x1079e6470>]
+Call policy.get_action
+Name state in context <class '_ast.Load'>
+Get state in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Attribute get_action of policy in context <class '_ast.Load'>
+Resolve policy.get_action in context <class '_ast.Load'>
+Get policy in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+Resolved to attr get_action of <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action> (target obj <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^> known but target attr get_action not resolved; maybe fwd ref or unanalyzed import)
+Name action in context <class '_ast.Store'>
+Set action in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+Assign ['next_state', 'reward', 'done', '_'] [<_ast.Call object at 0x1079e68d0>]
+Call self._env.step
+Name action in context <class '_ast.Load'>
+Get action in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Attribute step of self._env in context <class '_ast.Load'>
+Resolve self._env.step in context <class '_ast.Load'>
+Resolve self._env in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _env of <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr step of <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step> (target obj <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> known but target attr step not resolved; maybe fwd ref or unanalyzed import)
+Name next_state in context <class '_ast.Store'>
+Set next_state in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name reward in context <class '_ast.Store'>
+Set reward in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name done in context <class '_ast.Store'>
+Set done in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _gather_rollouts>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+Assign ['done'] [<_ast.BoolOp object at 0x1079e6b70>]
+Name done in context <class '_ast.Load'>
+Get done in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name t in context <class '_ast.Load'>
+Get t in <Scope: function _gather_rollouts>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ???:*.t>
+Attribute _max_rollout_length of self in context <class '_ast.Load'>
+Resolve self._max_rollout_length in context <class '_ast.Load'>
+Get self in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _max_rollout_length of <Node class:model_based_rl.ModelBasedRL>
+getattr _max_rollout_length on self returns <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Name done in context <class '_ast.Store'>
+Set done in <Scope: function _gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Call dataset.add
+Name state in context <class '_ast.Load'>
+Get state in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset>
+Name action in context <class '_ast.Load'>
+Get action in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action>
+Name next_state in context <class '_ast.Load'>
+Get next_state in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name reward in context <class '_ast.Load'>
+Get reward in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name done in context <class '_ast.Load'>
+Get done in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Attribute add of dataset in context <class '_ast.Load'>
+Resolve dataset.add in context <class '_ast.Load'>
+Get dataset in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:utils.Dataset>
+Resolved to attr add of <Node attribute:utils.Dataset>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:utils.Dataset.add> (target obj <Node attribute:utils.Dataset> known but target attr add not resolved; maybe fwd ref or unanalyzed import)
+Assign ['state'] ['next_state']
+Name next_state in context <class '_ast.Load'>
+Get next_state in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+Name state in context <class '_ast.Store'>
+Set state in <Scope: function _gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step>
+AugAssign ['t'] <class '_ast.Add'> [<_ast.Num object at 0x1079e6fd0>]
+Name t in context <class '_ast.Store'>
+Set t in <Scope: function _gather_rollouts>: value None is not a Node
+Name dataset in context <class '_ast.Load'>
+Get dataset in <Scope: function _gather_rollouts>, found in <Scope: function _gather_rollouts>, value <Node attribute:utils.Dataset>
+Use from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to Name <Node attribute:utils.Dataset>
+FunctionDef _train_policy
+Set _train_policy in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL._train_policy>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _train_policy>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+Assign ['losses'] []
+Name losses in context <class '_ast.Store'>
+Set losses in <Scope: function _train_policy>: value None is not a Node
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function _train_policy>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to Name <Node ???:*.NotImplementedError>
+Call logger.record_tabular
+Name losses in context <class '_ast.Load'>
+Get losses in <Scope: function _train_policy>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to Name <Node ???:*.losses>
+Attribute record_tabular of logger in context <class '_ast.Load'>
+Resolve logger.record_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function _train_policy>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr record_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call logger.record_tabular
+Name losses in context <class '_ast.Load'>
+Get losses in <Scope: function _train_policy>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to Name <Node ???:*.losses>
+Attribute record_tabular of logger in context <class '_ast.Load'>
+Resolve logger.record_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function _train_policy>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr record_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _train_policy>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef _log
+Set _log in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL._log>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Call timeit.stop
+Attribute stop of timeit in context <class '_ast.Load'>
+Resolve timeit.stop in context <class '_ast.Load'>
+Get timeit in <Scope: function _log>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr stop of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.stop> (target obj <Node import:timer.timeit> known but target attr stop not resolved; maybe fwd ref or unanalyzed import)
+Call dataset.log
+Attribute log of dataset in context <class '_ast.Load'>
+Resolve dataset.log in context <class '_ast.Load'>
+Get dataset in <Scope: function _log>, found in <Scope: function _log>, value <Node ---:model_based_rl.ModelBasedRL._log.^^^argument^^^>
+Resolved to attr log of <Node ---:model_based_rl.ModelBasedRL._log.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:model_based_rl.ModelBasedRL._log.^^^argument^^^.log> (target obj <Node ---:model_based_rl.ModelBasedRL._log.^^^argument^^^> known but target attr log not resolved; maybe fwd ref or unanalyzed import)
+Call logger.dump_tabular
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function _log>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Attribute dump_tabular of logger in context <class '_ast.Load'>
+Resolve logger.dump_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function _log>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr dump_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.dump_tabular> (target obj <Node import:logger.logger> known but target attr dump_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call logger.debug
+Attribute debug of logger in context <class '_ast.Load'>
+Resolve logger.debug in context <class '_ast.Load'>
+Get logger in <Scope: function _log>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr debug of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.debug> (target obj <Node import:logger.logger> known but target attr debug not resolved; maybe fwd ref or unanalyzed import)
+For-loop
+Call <_ast.Call object at 0x107a10e48>.split
+Attribute split of <_ast.Call object at 0x107a10e48> in context <class '_ast.Load'>
+Resolve <_ast.Call object at 0x107a10e48>.split in context <class '_ast.Load'>
+Resolving str() of timeit
+Resolve timeit.__str__ in context <class '_ast.Load'>
+Get timeit in <Scope: function _log>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr __str__ of <Node import:timer.timeit>
+Resolve str() of timeit: returning attr node None
+Unresolved function call as obj, returning attr split of unknown
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node ???:*.split> (target obj <_ast.Call object at 0x107a10e48> not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Name line in context <class '_ast.Store'>
+Set line in <Scope: function _log> to <Node ???:*.split>
+Call logger.debug
+Name line in context <class '_ast.Load'>
+Get line in <Scope: function _log>, found in <Scope: function _log>, value <Node ???:*.split>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to Name <Node ???:*.split>
+Attribute debug of logger in context <class '_ast.Load'>
+Resolve logger.debug in context <class '_ast.Load'>
+Get logger in <Scope: function _log>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr debug of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.debug> (target obj <Node import:logger.logger> known but target attr debug not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.reset
+Attribute reset of timeit in context <class '_ast.Load'>
+Resolve timeit.reset in context <class '_ast.Load'>
+Get timeit in <Scope: function _log>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr reset of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.reset> (target obj <Node import:timer.timeit> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+Call timeit.start
+Attribute start of timeit in context <class '_ast.Load'>
+Resolve timeit.start in context <class '_ast.Load'>
+Get timeit in <Scope: function _log>, found in <Scope: module >, value <Node import:timer.timeit>
+Resolved to attr start of <Node import:timer.timeit>
+Use from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.start> (target obj <Node import:timer.timeit> known but target attr start not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef run_q1
+Set run_q1 in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL.run_q1>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q1>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q1>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+For-loop
+Call enumerate
+Call self._random_dataset.rollout_iterator
+Attribute rollout_iterator of self._random_dataset in context <class '_ast.Load'>
+Resolve self._random_dataset.rollout_iterator in context <class '_ast.Load'>
+Resolve self._random_dataset in context <class '_ast.Load'>
+Get self in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr rollout_iterator of <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.rollout_iterator> (target obj <Node method:model_based_rl.ModelBasedRL._gather_rollouts> known but target attr rollout_iterator not resolved; maybe fwd ref or unanalyzed import)
+Name enumerate in context <class '_ast.Load'>
+Get enumerate in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Name r_num in context <class '_ast.Store'>
+Set r_num in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name states in context <class '_ast.Store'>
+Set states in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name actions in context <class '_ast.Store'>
+Set actions in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name _ in context <class '_ast.Store'>
+Set _ in <Scope: function run_q1> to <Node ???:*.enumerate>
+Assign ['pred_states'] []
+Name pred_states in context <class '_ast.Store'>
+Set pred_states in <Scope: function run_q1>: value None is not a Node
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.NotImplementedError>
+Assign ['states'] [<_ast.Call object at 0x107a19b00>]
+Call np.asarray
+Name states in context <class '_ast.Load'>
+Get states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute asarray of np in context <class '_ast.Load'>
+Resolve np.asarray in context <class '_ast.Load'>
+Get np in <Scope: function run_q1>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr asarray of <Node module:numpy>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray> (target obj <Node module:numpy> known but target attr asarray not resolved; maybe fwd ref or unanalyzed import)
+Name states in context <class '_ast.Store'>
+Set states in <Scope: function run_q1> to <Node attribute:numpy.asarray>
+Assign ['pred_states'] [<_ast.Call object at 0x107a19c50>]
+Call np.asarray
+Name pred_states in context <class '_ast.Load'>
+Get pred_states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node attribute:numpy.asarray>
+Attribute asarray of np in context <class '_ast.Load'>
+Resolve np.asarray in context <class '_ast.Load'>
+Get np in <Scope: function run_q1>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr asarray of <Node module:numpy>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray> (target obj <Node module:numpy> known but target attr asarray not resolved; maybe fwd ref or unanalyzed import)
+Name pred_states in context <class '_ast.Store'>
+Set pred_states in <Scope: function run_q1> to <Node attribute:numpy.asarray>
+Assign ['state_dim'] [<_ast.Subscript object at 0x107a19da0>]
+Attribute shape of states in context <class '_ast.Load'>
+Resolve states.shape in context <class '_ast.Load'>
+Get states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray>
+Resolved to attr shape of <Node attribute:numpy.asarray>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.shape> (target obj <Node attribute:numpy.asarray> known but target attr shape not resolved; maybe fwd ref or unanalyzed import)
+Name state_dim in context <class '_ast.Store'>
+Set state_dim in <Scope: function run_q1> to <Node attribute:numpy.asarray.shape>
+Assign ['rows'] [<_ast.Call object at 0x107a19f28>]
+Call int
+Call np.sqrt
+Name state_dim in context <class '_ast.Load'>
+Get state_dim in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray.shape>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node attribute:numpy.asarray.shape>
+Attribute sqrt of np in context <class '_ast.Load'>
+Resolve np.sqrt in context <class '_ast.Load'>
+Get np in <Scope: function run_q1>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr sqrt of <Node module:numpy>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.sqrt> (target obj <Node module:numpy> known but target attr sqrt not resolved; maybe fwd ref or unanalyzed import)
+Name int in context <class '_ast.Load'>
+Get int in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name rows in context <class '_ast.Store'>
+Set rows in <Scope: function run_q1> to <Node ???:*.int>
+Assign ['cols'] [<_ast.BinOp object at 0x1079ee128>]
+Name state_dim in context <class '_ast.Load'>
+Get state_dim in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray.shape>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node attribute:numpy.asarray.shape>
+Name rows in context <class '_ast.Load'>
+Get rows in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name cols in context <class '_ast.Store'>
+Set cols in <Scope: function run_q1> to <Node ???:*.int>
+Assign ['f', 'axes'] [<_ast.Call object at 0x1079ee2b0>]
+Call plt.subplots
+Name rows in context <class '_ast.Load'>
+Get rows in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name cols in context <class '_ast.Load'>
+Get cols in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name cols in context <class '_ast.Load'>
+Get cols in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Name rows in context <class '_ast.Load'>
+Get rows in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.int>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.int>
+Attribute subplots of plt in context <class '_ast.Load'>
+Resolve plt.subplots in context <class '_ast.Load'>
+Get plt in <Scope: function run_q1>, found in <Scope: module >, value <Node module:matplotlib.pyplot>
+Resolved to attr subplots of <Node module:matplotlib.pyplot>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots> (target obj <Node module:matplotlib.pyplot> known but target attr subplots not resolved; maybe fwd ref or unanalyzed import)
+Name f in context <class '_ast.Store'>
+Set f in <Scope: function run_q1> to <Node attribute:matplotlib.pyplot.subplots>
+Name axes in context <class '_ast.Store'>
+Set axes in <Scope: function run_q1> to <Node attribute:matplotlib.pyplot.subplots>
+Call f.suptitle
+Attribute suptitle of f in context <class '_ast.Load'>
+Resolve f.suptitle in context <class '_ast.Load'>
+Get f in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:matplotlib.pyplot.subplots>
+Resolved to attr suptitle of <Node attribute:matplotlib.pyplot.subplots>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.suptitle> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr suptitle not resolved; maybe fwd ref or unanalyzed import)
+For-loop
+Call enumerate
+Call zip
+Call axes.ravel
+Attribute ravel of axes in context <class '_ast.Load'>
+Resolve axes.ravel in context <class '_ast.Load'>
+Get axes in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:matplotlib.pyplot.subplots>
+Resolved to attr ravel of <Node attribute:matplotlib.pyplot.subplots>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.ravel> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr ravel not resolved; maybe fwd ref or unanalyzed import)
+Attribute T of states in context <class '_ast.Load'>
+Resolve states.T in context <class '_ast.Load'>
+Get states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray>
+Resolved to attr T of <Node attribute:numpy.asarray>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.T> (target obj <Node attribute:numpy.asarray> known but target attr T not resolved; maybe fwd ref or unanalyzed import)
+Attribute T of pred_states in context <class '_ast.Load'>
+Resolve pred_states.T in context <class '_ast.Load'>
+Get pred_states in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:numpy.asarray>
+Resolved to attr T of <Node attribute:numpy.asarray>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.T> (target obj <Node attribute:numpy.asarray> known but target attr T not resolved; maybe fwd ref or unanalyzed import)
+Name zip in context <class '_ast.Load'>
+Get zip in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.zip>
+Name enumerate in context <class '_ast.Load'>
+Get enumerate in <Scope: function run_q1>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Name i in context <class '_ast.Store'>
+Set i in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name ax in context <class '_ast.Store'>
+Set ax in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name state_i in context <class '_ast.Store'>
+Set state_i in <Scope: function run_q1> to <Node ???:*.enumerate>
+Name pred_state_i in context <class '_ast.Store'>
+Set pred_state_i in <Scope: function run_q1> to <Node ???:*.enumerate>
+Call ax.set_title
+Call <_ast.Str object at 0x1079eebe0>.format
+Name i in context <class '_ast.Load'>
+Get i in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute format of <_ast.Str object at 0x1079eebe0> in context <class '_ast.Load'>
+Resolve <_ast.Str object at 0x1079eebe0>.format in context <class '_ast.Load'>
+Resolved to attr format of <Node class:Str>
+getattr format on <_ast.Str object at 0x1079eebe0> returns <Node attribute:Str.format>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:Str.format>
+Attribute set_title of ax in context <class '_ast.Load'>
+Resolve ax.set_title in context <class '_ast.Load'>
+Get ax in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Resolved to attr set_title of <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.set_title> (target obj ax not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Call ax.plot
+Name state_i in context <class '_ast.Load'>
+Get state_i in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute plot of ax in context <class '_ast.Load'>
+Resolve ax.plot in context <class '_ast.Load'>
+Get ax in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Resolved to attr plot of <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.plot> (target obj ax not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Call ax.plot
+Name pred_state_i in context <class '_ast.Load'>
+Get pred_state_i in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute plot of ax in context <class '_ast.Load'>
+Resolve ax.plot in context <class '_ast.Load'>
+Get ax in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Resolved to attr plot of <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.plot> (target obj ax not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Call plt.tight_layout
+Attribute tight_layout of plt in context <class '_ast.Load'>
+Resolve plt.tight_layout in context <class '_ast.Load'>
+Get plt in <Scope: function run_q1>, found in <Scope: module >, value <Node module:matplotlib.pyplot>
+Resolved to attr tight_layout of <Node module:matplotlib.pyplot>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.tight_layout> (target obj <Node module:matplotlib.pyplot> known but target attr tight_layout not resolved; maybe fwd ref or unanalyzed import)
+Call plt.subplots_adjust
+Attribute subplots_adjust of plt in context <class '_ast.Load'>
+Resolve plt.subplots_adjust in context <class '_ast.Load'>
+Get plt in <Scope: function run_q1>, found in <Scope: module >, value <Node module:matplotlib.pyplot>
+Resolved to attr subplots_adjust of <Node module:matplotlib.pyplot>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots_adjust> (target obj <Node module:matplotlib.pyplot> known but target attr subplots_adjust not resolved; maybe fwd ref or unanalyzed import)
+Call f.savefig
+Call os.path.join
+Attribute dir of logger in context <class '_ast.Load'>
+Resolve logger.dir in context <class '_ast.Load'>
+Get logger in <Scope: function run_q1>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr dir of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.dir> (target obj <Node import:logger.logger> known but target attr dir not resolved; maybe fwd ref or unanalyzed import)
+Call <_ast.Str object at 0x1079ec470>.format
+Name r_num in context <class '_ast.Load'>
+Get r_num in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node ???:*.enumerate>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to Name <Node ???:*.enumerate>
+Attribute format of <_ast.Str object at 0x1079ec470> in context <class '_ast.Load'>
+Resolve <_ast.Str object at 0x1079ec470>.format in context <class '_ast.Load'>
+Resolved to attr format of <Node class:Str>
+getattr format on <_ast.Str object at 0x1079ec470> returns <Node attribute:Str.format>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:Str.format>
+Attribute join of os.path in context <class '_ast.Load'>
+Resolve os.path.join in context <class '_ast.Load'>
+Resolve os.path in context <class '_ast.Load'>
+Get os in <Scope: function run_q1>, found in <Scope: module >, value <Node module:os>
+Resolved to attr path of <Node module:os>
+Unresolved, returning attr join of unknown
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node ???:*.join> (target obj os.path not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute savefig of f in context <class '_ast.Load'>
+Resolve f.savefig in context <class '_ast.Load'>
+Get f in <Scope: function run_q1>, found in <Scope: function run_q1>, value <Node attribute:matplotlib.pyplot.subplots>
+Resolved to attr savefig of <Node attribute:matplotlib.pyplot.subplots>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.savefig> (target obj <Node attribute:matplotlib.pyplot.subplots> known but target attr savefig not resolved; maybe fwd ref or unanalyzed import)
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q1>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef run_q2
+Set run_q2 in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL.run_q2>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q2>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Call self._log
+Attribute _random_dataset of self in context <class '_ast.Load'>
+Resolve self._random_dataset in context <class '_ast.Load'>
+Get self in <Scope: function run_q2>, found in <Scope: function run_q2>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+getattr _random_dataset on self returns <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Attribute _log of self in context <class '_ast.Load'>
+Resolve self._log in context <class '_ast.Load'>
+Get self in <Scope: function run_q2>, found in <Scope: function run_q2>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _log of <Node class:model_based_rl.ModelBasedRL>
+getattr _log on self returns <Node method:model_based_rl.ModelBasedRL._log>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node method:model_based_rl.ModelBasedRL._log>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q2>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q2>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q2>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q2>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q2>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Call self._log
+Name eval_dataset in context <class '_ast.Load'>
+Get eval_dataset in <Scope: function run_q2>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to Name <Node ???:*.eval_dataset>
+Attribute _log of self in context <class '_ast.Load'>
+Resolve self._log in context <class '_ast.Load'>
+Get self in <Scope: function run_q2>, found in <Scope: function run_q2>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _log of <Node class:model_based_rl.ModelBasedRL>
+getattr _log on self returns <Node method:model_based_rl.ModelBasedRL._log>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node method:model_based_rl.ModelBasedRL._log>
+FunctionDef run_q3
+Set run_q3 in <Scope: class ModelBasedRL> to <Node method:model_based_rl.ModelBasedRL.run_q3>
+Method def: setting self name "self" to <Node class:model_based_rl.ModelBasedRL>
+Assign ['dataset'] ['self._random_dataset']
+Attribute _random_dataset of self in context <class '_ast.Load'>
+Resolve self._random_dataset in context <class '_ast.Load'>
+Get self in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _random_dataset of <Node class:model_based_rl.ModelBasedRL>
+getattr _random_dataset on self returns <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Name dataset in context <class '_ast.Store'>
+Set dataset in <Scope: function run_q3> to <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Assign ['itr'] [<_ast.UnaryOp object at 0x1079f1208>]
+Name itr in context <class '_ast.Store'>
+Set itr in <Scope: function run_q3>: value None is not a Node
+Call logger.info
+Call <_ast.Str object at 0x1079f13c8>.format
+Name itr in context <class '_ast.Load'>
+Get itr in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node ???:*.range>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+Attribute format of <_ast.Str object at 0x1079f13c8> in context <class '_ast.Load'>
+Resolve <_ast.Str object at 0x1079f13c8>.format in context <class '_ast.Load'>
+Resolved to attr format of <Node class:Str>
+getattr format on <_ast.Str object at 0x1079f13c8> returns <Node attribute:Str.format>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:Str.format>
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Call logger.record_tabular
+Name itr in context <class '_ast.Load'>
+Get itr in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node ???:*.range>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+Attribute record_tabular of logger in context <class '_ast.Load'>
+Resolve logger.record_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr record_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call self._log
+Name dataset in context <class '_ast.Load'>
+Get dataset in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node method:model_based_rl.ModelBasedRL._gather_rollouts>
+Attribute _log of self in context <class '_ast.Load'>
+Resolve self._log in context <class '_ast.Load'>
+Get self in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _log of <Node class:model_based_rl.ModelBasedRL>
+getattr _log on self returns <Node method:model_based_rl.ModelBasedRL._log>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node method:model_based_rl.ModelBasedRL._log>
+For-loop
+Call range
+Attribute _num_onpolicy_iters of self in context <class '_ast.Load'>
+Resolve self._num_onpolicy_iters in context <class '_ast.Load'>
+Get self in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _num_onpolicy_iters of <Node class:model_based_rl.ModelBasedRL>
+getattr _num_onpolicy_iters on self returns <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^>
+Name range in context <class '_ast.Load'>
+Get range in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+Name itr in context <class '_ast.Store'>
+Set itr in <Scope: function run_q3> to <Node ???:*.range>
+Call logger.info
+Call <_ast.Str object at 0x1079f19b0>.format
+Name itr in context <class '_ast.Load'>
+Get itr in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node ???:*.range>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+Attribute format of <_ast.Str object at 0x1079f19b0> in context <class '_ast.Load'>
+Resolve <_ast.Str object at 0x1079f19b0>.format in context <class '_ast.Load'>
+Resolved to attr format of <Node class:Str>
+getattr format on <_ast.Str object at 0x1079f19b0> returns <Node attribute:Str.format>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:Str.format>
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Call logger.record_tabular
+Name itr in context <class '_ast.Load'>
+Get itr in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node ???:*.range>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.range>
+Attribute record_tabular of logger in context <class '_ast.Load'>
+Resolve logger.record_tabular in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr record_tabular of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.record_tabular> (target obj <Node import:logger.logger> known but target attr record_tabular not resolved; maybe fwd ref or unanalyzed import)
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.NotImplementedError>
+Call logger.info
+Attribute info of logger in context <class '_ast.Load'>
+Resolve logger.info in context <class '_ast.Load'>
+Get logger in <Scope: function run_q3>, found in <Scope: module >, value <Node import:logger.logger>
+Resolved to attr info of <Node import:logger.logger>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> (target obj <Node import:logger.logger> known but target attr info not resolved; maybe fwd ref or unanalyzed import)
+Name NotImplementedError in context <class '_ast.Load'>
+Get NotImplementedError in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.NotImplementedError>
+Call self._log
+Name new_dataset in context <class '_ast.Load'>
+Get new_dataset in <Scope: function run_q3>: no Node value (or name not in scope)
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to Name <Node ???:*.new_dataset>
+Attribute _log of self in context <class '_ast.Load'>
+Resolve self._log in context <class '_ast.Load'>
+Get self in <Scope: function run_q3>, found in <Scope: function run_q3>, value <Node class:model_based_rl.ModelBasedRL>
+Resolved to attr _log of <Node class:model_based_rl.ModelBasedRL>
+getattr _log on self returns <Node method:model_based_rl.ModelBasedRL._log>
+Use from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node method:model_based_rl.ModelBasedRL._log>
+Contracting non-existent from <Node module:model_based_rl> to <Node import:np> as <Node ---:*.np>
+Contracting non-existent from <Node module:model_based_rl> to <Node import:plt> as <Node ---:*.plt>
+Contracting non-existent from <Node module:model_based_rl> to <Node module:utils> as <Node ---:*.utils>
+Contracting non-existent from <Node module:model_based_rl> to <Node module:logger> as <Node ---:*.logger>
+Contracting non-existent from <Node module:model_based_rl> to <Node module:model_based_policy> as <Node ---:*.model_based_policy>
+Contracting non-existent from <Node module:model_based_rl> to <Node module:timer> as <Node ---:*.timer>
+Contracting non-existent from <Node module:model_based_rl> to <Node module:os> as <Node ---:*.os>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:timer.timeit.reset> as <Node ---:*.reset>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:utils.RandomPolicy> as <Node ---:*.RandomPolicy>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:timer.timeit.start> as <Node ---:*.start>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node import:model_based_policy.ModelBasedPolicy> as <Node ---:*.ModelBasedPolicy>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.__init__> to <Node attribute:logger.logger.info> as <Node ---:*.info>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:utils.Dataset.add> as <Node ---:*.add>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.step> as <Node ---:*.step>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.reset> as <Node ---:*.reset>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.stop> as <Node ---:*.stop>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:timer.timeit.start> as <Node ---:*.start>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^.get_action> as <Node ---:*.get_action>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:model_based_rl.ModelBasedRL.__init__.^^^argument^^^.render> as <Node ---:*.render>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node attribute:utils.Dataset> as <Node ---:*.Dataset>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._gather_rollouts> to <Node ---:model_based_rl.ModelBasedRL._gather_rollouts.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:logger.logger.record_tabular> as <Node ---:*.record_tabular>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:timer.timeit.start> as <Node ---:*.start>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._train_policy> to <Node attribute:timer.timeit.stop> as <Node ---:*.stop>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.reset> as <Node ---:*.reset>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.start> as <Node ---:*.start>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.dump_tabular> as <Node ---:*.dump_tabular>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:model_based_rl.ModelBasedRL._log.^^^argument^^^.log> as <Node ---:*.log>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.debug> as <Node ---:*.debug>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:timer.timeit.stop> as <Node ---:*.stop>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL._log> to <Node attribute:logger.logger.info> as <Node ---:*.info>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.sqrt> as <Node ---:*.sqrt>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots> as <Node ---:*.subplots>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.tight_layout> as <Node ---:*.tight_layout>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.ravel> as <Node ---:*.ravel>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.T> as <Node ---:*.T>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:Str.format> as <Node ---:*.format>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots_adjust> as <Node ---:*.subplots_adjust>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.savefig> as <Node ---:*.savefig>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.dir> as <Node ---:*.dir>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:model_based_rl.ModelBasedRL._gather_rollouts.rollout_iterator> as <Node ---:*.rollout_iterator>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray> as <Node ---:*.asarray>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:matplotlib.pyplot.subplots.suptitle> as <Node ---:*.suptitle>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:logger.logger.info> as <Node ---:*.info>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q1> to <Node attribute:numpy.asarray.shape> as <Node ---:*.shape>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q2> to <Node attribute:logger.logger.info> as <Node ---:*.info>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:Str.format> as <Node ---:*.format>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.record_tabular> as <Node ---:*.record_tabular>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node ---:model_based_rl.ModelBasedRL.__init__.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:model_based_rl.ModelBasedRL.run_q3> to <Node attribute:logger.logger.info> as <Node ---:*.info>
+Looking at model_based_rl
+Coloring model_based_rl from file 'model_based_rl.py'
+Looking at ModelBasedRL
+Coloring ModelBasedRL from file 'model_based_rl.py'
+New namespace model_based_rl, old was 
+Looking at __init__
+Coloring __init__ from file 'model_based_rl.py'
+New namespace model_based_rl.ModelBasedRL, old was 
+Looking at _gather_rollouts
+Coloring _gather_rollouts from file 'model_based_rl.py'
+New namespace model_based_rl.ModelBasedRL, old was 
+Looking at _log
+Coloring _log from file 'model_based_rl.py'
+New namespace model_based_rl.ModelBasedRL, old was 
+Looking at _train_policy
+Coloring _train_policy from file 'model_based_rl.py'
+New namespace model_based_rl.ModelBasedRL, old was 
+Looking at run_q1
+Coloring run_q1 from file 'model_based_rl.py'
+New namespace model_based_rl.ModelBasedRL, old was 
+Looking at run_q2
+Coloring run_q2 from file 'model_based_rl.py'
+New namespace model_based_rl.ModelBasedRL, old was 
+Looking at run_q3
+Coloring run_q3 from file 'model_based_rl.py'
+New namespace model_based_rl.ModelBasedRL, old was 
+<class 'pyan.writers.DotWriter'> running
+Start subgraph 
+Write node model_based_rl
+Start subgraph model_based_rl
+Write node ModelBasedRL\n(model_based_rl.py:12)
+Finish subgraph model_based_rl
+Start subgraph model_based_rl.ModelBasedRL
+Write node __init__\n(model_based_rl.py:14)
+Finish subgraph model_based_rl.ModelBasedRL
+Start subgraph model_based_rl.ModelBasedRL
+Write node _gather_rollouts\n(model_based_rl.py:47)
+Finish subgraph model_based_rl.ModelBasedRL
+Start subgraph model_based_rl.ModelBasedRL
+Write node _log\n(model_based_rl.py:95)
+Finish subgraph model_based_rl.ModelBasedRL
+Start subgraph model_based_rl.ModelBasedRL
+Write node _train_policy\n(model_based_rl.py:73)
+Finish subgraph model_based_rl.ModelBasedRL
+Start subgraph model_based_rl.ModelBasedRL
+Write node run_q1\n(model_based_rl.py:105)
+Finish subgraph model_based_rl.ModelBasedRL
+Start subgraph model_based_rl.ModelBasedRL
+Write node run_q2\n(model_based_rl.py:148)
+Finish subgraph model_based_rl.ModelBasedRL
+Start subgraph model_based_rl.ModelBasedRL
+Write node run_q3\n(model_based_rl.py:168)
+Finish subgraph model_based_rl.ModelBasedRL
+Finish subgraph 
