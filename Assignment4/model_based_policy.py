@@ -146,7 +146,7 @@ class ModelBasedPolicy(object):
         ### PROBLEM 2
         ### YOUR CODE HERE
         # raise NotImplementedError
-        self.costs = np.zeros(self._num_random_action_selection)
+        costs = np.zeros(self._num_random_action_selection)
         # Alternative way
         # self.state_ph_batch = tf.ones([self._num_random_action_selection, 1]) * state_ph[0]
         if 0:
