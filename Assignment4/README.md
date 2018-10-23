@@ -15,7 +15,7 @@ Obtain the code from https://github.com/berkeleydeeprlcourse/homework/tree/maste
 ```rubypip install -r requirements.txt
 ```
 
-See the [HW3 PDF](http://rail.eecs.berkeley.edu/deeprlcourse/static/homeworks/hw4.pdf) for further instructions.
+See the [HW4 PDF](http://rail.eecs.berkeley.edu/deeprlcourse/static/homeworks/hw4.pdf) for further instructions.
 
 The starter code was provided by OpenAI.
 
