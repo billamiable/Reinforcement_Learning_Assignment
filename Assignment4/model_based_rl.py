@@ -141,6 +141,7 @@ class ModelBasedRL(object):
             (iii) After predicting the future states, we have provided plotting code that plots the actual vs
                   predicted states and saves these to the experiment's folder. You do not need to modify this code.
         """
+        print('q1 yeah!')
         logger.info('Training policy....')
         ### PROBLEM 1
         ### YOUR CODE HERE

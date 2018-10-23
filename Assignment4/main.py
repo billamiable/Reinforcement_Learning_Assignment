@@ -6,6 +6,8 @@ from half_cheetah_env import HalfCheetahEnv
 from logger import logger
 from model_based_rl import ModelBasedRL
 
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument('question', type=str, choices=('q1, q2, q3'))
 parser.add_argument('--exp_name', type=str, default=None)
