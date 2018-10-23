@@ -203,7 +203,6 @@ class ModelBasedPolicy(object):
 
         ### PROBLEM 2
         ### YOUR CODE HERE
-        # TO-DO: check if correct, whether to do duplicate outside or inside, but essentially the same
         best_action = self._setup_action_selection(state_ph)
 
         sess.run(tf.global_variables_initializer())
