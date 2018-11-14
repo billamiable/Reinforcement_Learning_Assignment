@@ -1,0 +1,936 @@
+========== pass 1, file 'point_mass_observed.py' ==========
+Scopes now: {'point_mass_observed': <Scope: module >, 'point_mass_observed.ObservedPointEnv': <Scope: class ObservedPointEnv>, 'point_mass_observed.ObservedPointEnv.__init__': <Scope: function __init__>, 'point_mass_observed.ObservedPointEnv.reset_task': <Scope: function reset_task>, 'point_mass_observed.ObservedPointEnv.reset': <Scope: function reset>, 'point_mass_observed.ObservedPointEnv._get_obs': <Scope: function _get_obs>, 'point_mass_observed.ObservedPointEnv.step': <Scope: function step>, 'point_mass_observed.ObservedPointEnv.viewer_setup': <Scope: function viewer_setup>, 'point_mass_observed.ObservedPointEnv.render': <Scope: function render>, 'point_mass_observed.ObservedPointEnv.seed': <Scope: function seed>}
+Module
+Import ['numpy as np']
+Set np in <Scope: module > to <Node module:numpy>
+Use from <Node module:point_mass_observed> to Import <Node import:np>
+New edge added for Use from <Node module:point_mass_observed> to Import <Node import:np>
+ImportFrom: from gym import ['spaces']
+Use from <Node module:point_mass_observed> to ImportFrom <Node module:gym>
+New edge added for Use from <Node module:point_mass_observed> to ImportFrom <Node module:gym>
+Set spaces in <Scope: module > to <Node import:gym.spaces>
+From setting name spaces to <Node import:gym.spaces>
+ImportFrom: from gym import ['Env']
+Use from <Node module:point_mass_observed> to ImportFrom <Node module:gym>
+Set Env in <Scope: module > to <Node import:gym.Env>
+From setting name Env to <Node import:gym.Env>
+ClassDef ObservedPointEnv
+Def from <Node module:point_mass_observed> to Class <Node class:point_mass_observed.ObservedPointEnv>
+Set ObservedPointEnv in <Scope: module > to <Node class:point_mass_observed.ObservedPointEnv>
+Name Env in context <class '_ast.Load'>
+Get Env in <Scope: class ObservedPointEnv>, found in <Scope: module >, value <Node import:gym.Env>
+Use from <Node class:point_mass_observed.ObservedPointEnv> to Name <Node import:gym.Env>
+New edge added for Use from <Node class:point_mass_observed.ObservedPointEnv> to Name <Node import:gym.Env>
+FunctionDef __init__
+Def from <Node class:point_mass_observed.ObservedPointEnv> to Function <Node method:point_mass_observed.ObservedPointEnv.__init__>
+Set __init__ in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.__init__>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Assign ['self.tasks'] [<_ast.Subscript object at 0x101da46d8>]
+Name num_tasks in context <class '_ast.Load'>
+Get num_tasks in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to Name <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to Name <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Attribute tasks of self in context <class '_ast.Store'>
+Resolve self.tasks in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr tasks of <Node class:point_mass_observed.ObservedPointEnv>
+setattr tasks on self to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Assign ['self.task_idx'] [<_ast.UnaryOp object at 0x101da4940>]
+Attribute task_idx of self in context <class '_ast.Store'>
+Call self.reset_task
+Attribute reset_task of self in context <class '_ast.Load'>
+Resolve self.reset_task in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr reset_task of <Node class:point_mass_observed.ObservedPointEnv>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:point_mass_observed.ObservedPointEnv.reset_task> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr reset_task not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:point_mass_observed.ObservedPointEnv.reset_task> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr reset_task not resolved; maybe fwd ref or unanalyzed import)
+Call self.reset
+Attribute reset of self in context <class '_ast.Load'>
+Resolve self.reset in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr reset of <Node class:point_mass_observed.ObservedPointEnv>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:point_mass_observed.ObservedPointEnv.reset> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:point_mass_observed.ObservedPointEnv.reset> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr reset not resolved; maybe fwd ref or unanalyzed import)
+Assign ['self.observation_space'] [<_ast.Call object at 0x101da4c18>]
+Call spaces.Box
+Attribute inf of np in context <class '_ast.Load'>
+Resolve np.inf in context <class '_ast.Load'>
+Get np in <Scope: function __init__>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr inf of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.inf> (target obj <Node module:numpy> known but target attr inf not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.inf> (target obj <Node module:numpy> known but target attr inf not resolved; maybe fwd ref or unanalyzed import)
+Attribute inf of np in context <class '_ast.Load'>
+Resolve np.inf in context <class '_ast.Load'>
+Get np in <Scope: function __init__>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr inf of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.inf> (target obj <Node module:numpy> known but target attr inf not resolved; maybe fwd ref or unanalyzed import)
+Attribute Box of spaces in context <class '_ast.Load'>
+Resolve spaces.Box in context <class '_ast.Load'>
+Get spaces in <Scope: function __init__>, found in <Scope: module >, value <Node import:gym.spaces>
+Resolved to attr Box of <Node import:gym.spaces>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:gym.spaces.Box> (target obj <Node import:gym.spaces> known but target attr Box not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:gym.spaces.Box> (target obj <Node import:gym.spaces> known but target attr Box not resolved; maybe fwd ref or unanalyzed import)
+Attribute observation_space of self in context <class '_ast.Store'>
+Resolve self.observation_space in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr observation_space of <Node class:point_mass_observed.ObservedPointEnv>
+setattr observation_space on self to <Node attribute:gym.spaces.Box>
+Assign ['arr'] [<_ast.Call object at 0x101da4f60>]
+Call np.zeros
+Attribute zeros of np in context <class '_ast.Load'>
+Resolve np.zeros in context <class '_ast.Load'>
+Get np in <Scope: function __init__>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr zeros of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.zeros> (target obj <Node module:numpy> known but target attr zeros not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.zeros> (target obj <Node module:numpy> known but target attr zeros not resolved; maybe fwd ref or unanalyzed import)
+Name arr in context <class '_ast.Store'>
+Set arr in <Scope: function __init__> to <Node attribute:numpy.zeros>
+Assign [<_ast.Subscript object at 0x101d910b8>] [<_ast.Num object at 0x101d911d0>]
+Name arr in context <class '_ast.Load'>
+Get arr in <Scope: function __init__>, found in <Scope: function __init__>, value <Node attribute:numpy.zeros>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to Name <Node attribute:numpy.zeros>
+Attribute task_idx of self in context <class '_ast.Load'>
+Resolve self.task_idx in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:point_mass_observed.ObservedPointEnv.task_idx> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr task_idx not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:point_mass_observed.ObservedPointEnv.task_idx> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr task_idx not resolved; maybe fwd ref or unanalyzed import)
+Assign ['self.observation_space'] [<_ast.Call object at 0x101d912b0>]
+Call np.concatenate
+Attribute observation_space of self in context <class '_ast.Load'>
+Resolve self.observation_space in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr observation_space of <Node class:point_mass_observed.ObservedPointEnv>
+getattr observation_space on self returns <Node attribute:gym.spaces.Box>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:gym.spaces.Box>
+Name arr in context <class '_ast.Load'>
+Get arr in <Scope: function __init__>, found in <Scope: function __init__>, value <Node attribute:numpy.zeros>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to Name <Node attribute:numpy.zeros>
+Attribute concatenate of np in context <class '_ast.Load'>
+Resolve np.concatenate in context <class '_ast.Load'>
+Get np in <Scope: function __init__>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr concatenate of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.concatenate> (target obj <Node module:numpy> known but target attr concatenate not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.concatenate> (target obj <Node module:numpy> known but target attr concatenate not resolved; maybe fwd ref or unanalyzed import)
+Attribute observation_space of self in context <class '_ast.Store'>
+Resolve self.observation_space in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr observation_space of <Node class:point_mass_observed.ObservedPointEnv>
+setattr observation_space on self to <Node attribute:numpy.concatenate>
+Assign ['self.action_space'] [<_ast.Call object at 0x101d91550>]
+Call spaces.Box
+Attribute Box of spaces in context <class '_ast.Load'>
+Resolve spaces.Box in context <class '_ast.Load'>
+Get spaces in <Scope: function __init__>, found in <Scope: module >, value <Node import:gym.spaces>
+Resolved to attr Box of <Node import:gym.spaces>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:gym.spaces.Box> (target obj <Node import:gym.spaces> known but target attr Box not resolved; maybe fwd ref or unanalyzed import)
+Attribute action_space of self in context <class '_ast.Store'>
+Resolve self.action_space in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr action_space of <Node class:point_mass_observed.ObservedPointEnv>
+setattr action_space on self to <Node attribute:gym.spaces.Box>
+FunctionDef reset_task
+Def from <Node class:point_mass_observed.ObservedPointEnv> to Function <Node method:point_mass_observed.ObservedPointEnv.reset_task>
+Set reset_task in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.reset_task>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Name is_evaluation in context <class '_ast.Load'>
+Get is_evaluation in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node ---:point_mass_observed.ObservedPointEnv.reset_task.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ---:point_mass_observed.ObservedPointEnv.reset_task.^^^argument^^^>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ---:point_mass_observed.ObservedPointEnv.reset_task.^^^argument^^^>
+Assign ['self.task_idx'] [<_ast.BinOp object at 0x101d91a20>]
+Attribute task_idx of self in context <class '_ast.Load'>
+Resolve self.task_idx in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node attribute:point_mass_observed.ObservedPointEnv.task_idx> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr task_idx not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node attribute:point_mass_observed.ObservedPointEnv.task_idx> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr task_idx not resolved; maybe fwd ref or unanalyzed import)
+Call len
+Attribute tasks of self in context <class '_ast.Load'>
+Resolve self.tasks in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr tasks of <Node class:point_mass_observed.ObservedPointEnv>
+getattr tasks on self returns <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Name len in context <class '_ast.Load'>
+Get len in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.len>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.len>
+Attribute task_idx of self in context <class '_ast.Store'>
+Resolve self.task_idx in context <class '_ast.Store'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+setattr task_idx on self to <Node ???:*.len>
+Assign ['self.task_idx'] [<_ast.Call object at 0x101d91cc0>]
+Call np.random.randint
+Call len
+Attribute tasks of self in context <class '_ast.Load'>
+Resolve self.tasks in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr tasks of <Node class:point_mass_observed.ObservedPointEnv>
+getattr tasks on self returns <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Name len in context <class '_ast.Load'>
+Get len in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.len>
+Attribute randint of np.random in context <class '_ast.Load'>
+Resolve np.random.randint in context <class '_ast.Load'>
+Resolve np.random in context <class '_ast.Load'>
+Get np in <Scope: function reset_task>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr random of <Node module:numpy>
+Unresolved, returning attr randint of unknown
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint> (target obj np.random not resolved; maybe fwd ref, function argument, or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint> (target obj np.random not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute task_idx of self in context <class '_ast.Store'>
+Resolve self.task_idx in context <class '_ast.Store'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+setattr task_idx on self to <Node ???:*.randint>
+Assign ['self._task'] [<_ast.Subscript object at 0x101d91f28>]
+Attribute tasks of self in context <class '_ast.Load'>
+Resolve self.tasks in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr tasks of <Node class:point_mass_observed.ObservedPointEnv>
+getattr tasks on self returns <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Attribute task_idx of self in context <class '_ast.Load'>
+Resolve self.task_idx in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+getattr task_idx on self returns <Node ???:*.randint>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint>
+Attribute _task of self in context <class '_ast.Store'>
+Resolve self._task in context <class '_ast.Store'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _task of <Node class:point_mass_observed.ObservedPointEnv>
+setattr _task on self to <Node ???:*.randint>
+Call print
+Attribute _task of self in context <class '_ast.Load'>
+Resolve self._task in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _task of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _task on self returns <Node ???:*.randint>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint>
+Name print in context <class '_ast.Load'>
+Get print in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.print>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.print>
+Call exit
+Name exit in context <class '_ast.Load'>
+Get exit in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.exit>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.exit>
+Assign ['goals'] [<_ast.List object at 0x101d86320>, <_ast.List object at 0x101d86438>, <_ast.List object at 0x101d86518>, <_ast.List object at 0x101d865f8>]
+Name goals in context <class '_ast.Store'>
+Set goals in <Scope: function reset_task>: value None is not a Node
+Assign ['self._goal'] [<_ast.BinOp object at 0x101d86748>]
+Call np.array
+Name goals in context <class '_ast.Load'>
+Get goals in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.goals>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.goals>
+Attribute task_idx of self in context <class '_ast.Load'>
+Resolve self.task_idx in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+getattr task_idx on self returns <Node ???:*.randint>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint>
+Attribute array of np in context <class '_ast.Load'>
+Resolve np.array in context <class '_ast.Load'>
+Get np in <Scope: function reset_task>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr array of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node attribute:numpy.array> (target obj <Node module:numpy> known but target attr array not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node attribute:numpy.array> (target obj <Node module:numpy> known but target attr array not resolved; maybe fwd ref or unanalyzed import)
+Attribute _goal of self in context <class '_ast.Store'>
+Resolve self._goal in context <class '_ast.Store'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _goal of <Node class:point_mass_observed.ObservedPointEnv>
+setattr _goal on self to <Node attribute:numpy.array>
+FunctionDef reset
+Def from <Node class:point_mass_observed.ObservedPointEnv> to Function <Node method:point_mass_observed.ObservedPointEnv.reset>
+Set reset in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.reset>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Assign ['self._state'] [<_ast.Call object at 0x101d86ac8>]
+Call np.array
+Attribute float32 of np in context <class '_ast.Load'>
+Resolve np.float32 in context <class '_ast.Load'>
+Get np in <Scope: function reset>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr float32 of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:numpy.float32> (target obj <Node module:numpy> known but target attr float32 not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:numpy.float32> (target obj <Node module:numpy> known but target attr float32 not resolved; maybe fwd ref or unanalyzed import)
+Attribute array of np in context <class '_ast.Load'>
+Resolve np.array in context <class '_ast.Load'>
+Get np in <Scope: function reset>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr array of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:numpy.array> (target obj <Node module:numpy> known but target attr array not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:numpy.array> (target obj <Node module:numpy> known but target attr array not resolved; maybe fwd ref or unanalyzed import)
+Attribute _state of self in context <class '_ast.Store'>
+Resolve self._state in context <class '_ast.Store'>
+Get self in <Scope: function reset>, found in <Scope: function reset>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+setattr _state on self to <Node attribute:numpy.array>
+Call self._get_obs
+Attribute _get_obs of self in context <class '_ast.Load'>
+Resolve self._get_obs in context <class '_ast.Load'>
+Get self in <Scope: function reset>, found in <Scope: function reset>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _get_obs of <Node class:point_mass_observed.ObservedPointEnv>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:point_mass_observed.ObservedPointEnv._get_obs> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr _get_obs not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:point_mass_observed.ObservedPointEnv._get_obs> (target obj <Node class:point_mass_observed.ObservedPointEnv> known but target attr _get_obs not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef _get_obs
+Def from <Node class:point_mass_observed.ObservedPointEnv> to Function <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Set _get_obs in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Call np.copy
+Attribute _state of self in context <class '_ast.Load'>
+Resolve self._state in context <class '_ast.Load'>
+Get self in <Scope: function _get_obs>, found in <Scope: function _get_obs>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _state on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv._get_obs> to <Node attribute:numpy.array>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv._get_obs> to <Node attribute:numpy.array>
+Attribute copy of np in context <class '_ast.Load'>
+Resolve np.copy in context <class '_ast.Load'>
+Get np in <Scope: function _get_obs>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr copy of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv._get_obs> to <Node attribute:numpy.copy> (target obj <Node module:numpy> known but target attr copy not resolved; maybe fwd ref or unanalyzed import)
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv._get_obs> to <Node attribute:numpy.copy> (target obj <Node module:numpy> known but target attr copy not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef step
+Def from <Node class:point_mass_observed.ObservedPointEnv> to Function <Node method:point_mass_observed.ObservedPointEnv.step>
+Set step in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.step>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Assign ['x', 'y'] ['self._state']
+Attribute _state of self in context <class '_ast.Load'>
+Resolve self._state in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _state on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+Name x in context <class '_ast.Store'>
+Set x in <Scope: function step> to <Node attribute:numpy.array>
+Name y in context <class '_ast.Store'>
+Set y in <Scope: function step> to <Node attribute:numpy.array>
+AugAssign ['x'] <class '_ast.Sub'> [<_ast.Subscript object at 0x101d8a278>]
+Attribute _goal of self in context <class '_ast.Load'>
+Resolve self._goal in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _goal of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _goal on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+Name x in context <class '_ast.Store'>
+Set x in <Scope: function step> to <Node attribute:numpy.array>
+AugAssign ['y'] <class '_ast.Sub'> [<_ast.Subscript object at 0x101d8a400>]
+Attribute _goal of self in context <class '_ast.Load'>
+Resolve self._goal in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _goal of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _goal on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+Name y in context <class '_ast.Store'>
+Set y in <Scope: function step> to <Node attribute:numpy.array>
+Assign ['reward'] [<_ast.UnaryOp object at 0x101d8a588>]
+Name x in context <class '_ast.Load'>
+Get x in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name y in context <class '_ast.Load'>
+Get y in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name reward in context <class '_ast.Store'>
+Set reward in <Scope: function step> to <Node attribute:numpy.array>
+Assign ['done'] [<_ast.BoolOp object at 0x101d8a828>]
+Call abs
+Name x in context <class '_ast.Load'>
+Get x in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name abs in context <class '_ast.Load'>
+Get abs in <Scope: function step>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.abs>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.abs>
+Call abs
+Name y in context <class '_ast.Load'>
+Get y in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name abs in context <class '_ast.Load'>
+Get abs in <Scope: function step>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.abs>
+Name done in context <class '_ast.Store'>
+Set done in <Scope: function step> to <Node ???:*.abs>
+Assign ['self._state'] [<_ast.BinOp object at 0x101d8ab70>]
+Attribute _state of self in context <class '_ast.Load'>
+Resolve self._state in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _state on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+Name action in context <class '_ast.Load'>
+Get action in <Scope: function step>, found in <Scope: function step>, value <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Attribute _state of self in context <class '_ast.Store'>
+Resolve self._state in context <class '_ast.Store'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+setattr _state on self to <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Assign ['ob'] [<_ast.Call object at 0x101d8acc0>]
+Call self._get_obs
+Attribute _get_obs of self in context <class '_ast.Load'>
+Resolve self._get_obs in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _get_obs of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _get_obs on self returns <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Name ob in context <class '_ast.Store'>
+Set ob in <Scope: function step> to <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Name ob in context <class '_ast.Load'>
+Get ob in <Scope: function step>, found in <Scope: function step>, value <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Name reward in context <class '_ast.Load'>
+Get reward in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name done in context <class '_ast.Load'>
+Get done in <Scope: function step>, found in <Scope: function step>, value <Node ???:*.abs>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.abs>
+Call dict
+Name dict in context <class '_ast.Load'>
+Get dict in <Scope: function step>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.dict>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.dict>
+FunctionDef viewer_setup
+Def from <Node class:point_mass_observed.ObservedPointEnv> to Function <Node method:point_mass_observed.ObservedPointEnv.viewer_setup>
+Set viewer_setup in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.viewer_setup>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Call print
+Name print in context <class '_ast.Load'>
+Get print in <Scope: function viewer_setup>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.viewer_setup> to Name <Node ???:*.print>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.viewer_setup> to Name <Node ???:*.print>
+FunctionDef render
+Def from <Node class:point_mass_observed.ObservedPointEnv> to Function <Node method:point_mass_observed.ObservedPointEnv.render>
+Set render in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.render>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Call print
+Attribute _state of self in context <class '_ast.Load'>
+Resolve self._state in context <class '_ast.Load'>
+Get self in <Scope: function render>, found in <Scope: function render>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _state on self returns <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.render> to <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.render> to <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Name print in context <class '_ast.Load'>
+Get print in <Scope: function render>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.render> to Name <Node ???:*.print>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.render> to Name <Node ???:*.print>
+FunctionDef seed
+Def from <Node class:point_mass_observed.ObservedPointEnv> to Function <Node method:point_mass_observed.ObservedPointEnv.seed>
+Set seed in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.seed>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Assign ['np.random.seed'] ['seed']
+Name seed in context <class '_ast.Load'>
+Get seed in <Scope: function seed>, found in <Scope: function seed>, value <Node ---:point_mass_observed.ObservedPointEnv.seed.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.seed> to Name <Node ---:point_mass_observed.ObservedPointEnv.seed.^^^argument^^^>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.seed> to Name <Node ---:point_mass_observed.ObservedPointEnv.seed.^^^argument^^^>
+Attribute seed of np.random in context <class '_ast.Store'>
+Resolve np.random.seed in context <class '_ast.Store'>
+Resolve np.random in context <class '_ast.Load'>
+Get np in <Scope: function seed>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr random of <Node module:numpy>
+Unresolved, returning attr seed of unknown
+Resolving base classes
+Get Env in <Scope: module >, found in <Scope: module >, value <Node import:gym.Env>
+All base classes (non-recursive, local level only): {<Node class:point_mass_observed.ObservedPointEnv>: [<Node import:gym.Env>]}
+Resolving method resolution order (MRO) for all analyzed classes
+MRO: analyzing class <Node class:point_mass_observed.ObservedPointEnv>
+MRO: C3 linearizing <Node class:point_mass_observed.ObservedPointEnv>
+MRO: C3 linearizing <Node import:gym.Env>
+MRO: C3 linearized <Node import:gym.Env>, result [<Node import:gym.Env>]
+MRO: parents of <Node class:point_mass_observed.ObservedPointEnv>: [<Node import:gym.Env>]
+MRO: C3 merging [[<Node import:gym.Env>], [<Node import:gym.Env>]]
+MRO: C3 merge: out: [], lists: [[<Node import:gym.Env>], [<Node import:gym.Env>]]
+MRO: C3 merge: heads: [<Node import:gym.Env>, <Node import:gym.Env>], tails: [[], []]
+MRO: C3 merge: chose head <Node import:gym.Env>
+MRO: C3 merge: out: [<Node import:gym.Env>], lists: [[], []]
+MRO: C3 linearized <Node class:point_mass_observed.ObservedPointEnv>, result [<Node class:point_mass_observed.ObservedPointEnv>, <Node import:gym.Env>]
+Method resolution order (MRO) for all analyzed classes: {<Node class:point_mass_observed.ObservedPointEnv>: [<Node class:point_mass_observed.ObservedPointEnv>, <Node import:gym.Env>]}
+========== pass 2, file 'point_mass_observed.py' ==========
+Scopes now: {'point_mass_observed': <Scope: module >, 'point_mass_observed.ObservedPointEnv': <Scope: class ObservedPointEnv>, 'point_mass_observed.ObservedPointEnv.__init__': <Scope: function __init__>, 'point_mass_observed.ObservedPointEnv.reset_task': <Scope: function reset_task>, 'point_mass_observed.ObservedPointEnv.reset': <Scope: function reset>, 'point_mass_observed.ObservedPointEnv._get_obs': <Scope: function _get_obs>, 'point_mass_observed.ObservedPointEnv.step': <Scope: function step>, 'point_mass_observed.ObservedPointEnv.viewer_setup': <Scope: function viewer_setup>, 'point_mass_observed.ObservedPointEnv.render': <Scope: function render>, 'point_mass_observed.ObservedPointEnv.seed': <Scope: function seed>}
+Module
+Import ['numpy as np']
+Set np in <Scope: module > to <Node module:numpy>
+Use from <Node module:point_mass_observed> to Import <Node import:np>
+ImportFrom: from gym import ['spaces']
+Use from <Node module:point_mass_observed> to ImportFrom <Node module:gym>
+Set spaces in <Scope: module > to <Node import:gym.spaces>
+From setting name spaces to <Node import:gym.spaces>
+ImportFrom: from gym import ['Env']
+Use from <Node module:point_mass_observed> to ImportFrom <Node module:gym>
+Set Env in <Scope: module > to <Node import:gym.Env>
+From setting name Env to <Node import:gym.Env>
+ClassDef ObservedPointEnv
+Set ObservedPointEnv in <Scope: module > to <Node class:point_mass_observed.ObservedPointEnv>
+Name Env in context <class '_ast.Load'>
+Get Env in <Scope: class ObservedPointEnv>, found in <Scope: module >, value <Node import:gym.Env>
+Use from <Node class:point_mass_observed.ObservedPointEnv> to Name <Node import:gym.Env>
+FunctionDef __init__
+Set __init__ in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.__init__>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Assign ['self.tasks'] [<_ast.Subscript object at 0x101d9d3c8>]
+Name num_tasks in context <class '_ast.Load'>
+Get num_tasks in <Scope: function __init__>, found in <Scope: function __init__>, value <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to Name <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Attribute tasks of self in context <class '_ast.Store'>
+Resolve self.tasks in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr tasks of <Node class:point_mass_observed.ObservedPointEnv>
+setattr tasks on self to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Assign ['self.task_idx'] [<_ast.UnaryOp object at 0x101d9d630>]
+Attribute task_idx of self in context <class '_ast.Store'>
+Call self.reset_task
+Attribute reset_task of self in context <class '_ast.Load'>
+Resolve self.reset_task in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr reset_task of <Node class:point_mass_observed.ObservedPointEnv>
+getattr reset_task on self returns <Node method:point_mass_observed.ObservedPointEnv.reset_task>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node method:point_mass_observed.ObservedPointEnv.reset_task>
+Call self.reset
+Attribute reset of self in context <class '_ast.Load'>
+Resolve self.reset in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr reset of <Node class:point_mass_observed.ObservedPointEnv>
+getattr reset on self returns <Node method:point_mass_observed.ObservedPointEnv.reset>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node method:point_mass_observed.ObservedPointEnv.reset>
+Assign ['self.observation_space'] [<_ast.Call object at 0x101d9d908>]
+Call spaces.Box
+Attribute inf of np in context <class '_ast.Load'>
+Resolve np.inf in context <class '_ast.Load'>
+Get np in <Scope: function __init__>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr inf of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.inf> (target obj <Node module:numpy> known but target attr inf not resolved; maybe fwd ref or unanalyzed import)
+Attribute inf of np in context <class '_ast.Load'>
+Resolve np.inf in context <class '_ast.Load'>
+Get np in <Scope: function __init__>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr inf of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.inf> (target obj <Node module:numpy> known but target attr inf not resolved; maybe fwd ref or unanalyzed import)
+Attribute Box of spaces in context <class '_ast.Load'>
+Resolve spaces.Box in context <class '_ast.Load'>
+Get spaces in <Scope: function __init__>, found in <Scope: module >, value <Node import:gym.spaces>
+Resolved to attr Box of <Node import:gym.spaces>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:gym.spaces.Box> (target obj <Node import:gym.spaces> known but target attr Box not resolved; maybe fwd ref or unanalyzed import)
+Attribute observation_space of self in context <class '_ast.Store'>
+Resolve self.observation_space in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr observation_space of <Node class:point_mass_observed.ObservedPointEnv>
+setattr observation_space on self to <Node attribute:gym.spaces.Box>
+Assign ['arr'] [<_ast.Call object at 0x101d9dc50>]
+Call np.zeros
+Attribute zeros of np in context <class '_ast.Load'>
+Resolve np.zeros in context <class '_ast.Load'>
+Get np in <Scope: function __init__>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr zeros of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.zeros> (target obj <Node module:numpy> known but target attr zeros not resolved; maybe fwd ref or unanalyzed import)
+Name arr in context <class '_ast.Store'>
+Set arr in <Scope: function __init__> to <Node attribute:numpy.zeros>
+Assign [<_ast.Subscript object at 0x101d9dd68>] [<_ast.Num object at 0x101d9de80>]
+Name arr in context <class '_ast.Load'>
+Get arr in <Scope: function __init__>, found in <Scope: function __init__>, value <Node attribute:numpy.zeros>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to Name <Node attribute:numpy.zeros>
+Attribute task_idx of self in context <class '_ast.Load'>
+Resolve self.task_idx in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+getattr task_idx on self returns <Node ???:*.randint>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node ???:*.randint>
+New edge added for Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node ???:*.randint>
+Assign ['self.observation_space'] [<_ast.Call object at 0x101d9df60>]
+Call np.concatenate
+Attribute observation_space of self in context <class '_ast.Load'>
+Resolve self.observation_space in context <class '_ast.Load'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr observation_space of <Node class:point_mass_observed.ObservedPointEnv>
+getattr observation_space on self returns <Node attribute:gym.spaces.Box>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:gym.spaces.Box>
+Name arr in context <class '_ast.Load'>
+Get arr in <Scope: function __init__>, found in <Scope: function __init__>, value <Node attribute:numpy.zeros>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to Name <Node attribute:numpy.zeros>
+Attribute concatenate of np in context <class '_ast.Load'>
+Resolve np.concatenate in context <class '_ast.Load'>
+Get np in <Scope: function __init__>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr concatenate of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.concatenate> (target obj <Node module:numpy> known but target attr concatenate not resolved; maybe fwd ref or unanalyzed import)
+Attribute observation_space of self in context <class '_ast.Store'>
+Resolve self.observation_space in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr observation_space of <Node class:point_mass_observed.ObservedPointEnv>
+setattr observation_space on self to <Node attribute:numpy.concatenate>
+Assign ['self.action_space'] [<_ast.Call object at 0x101d9c240>]
+Call spaces.Box
+Attribute Box of spaces in context <class '_ast.Load'>
+Resolve spaces.Box in context <class '_ast.Load'>
+Get spaces in <Scope: function __init__>, found in <Scope: module >, value <Node import:gym.spaces>
+Resolved to attr Box of <Node import:gym.spaces>
+Use from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:gym.spaces.Box> (target obj <Node import:gym.spaces> known but target attr Box not resolved; maybe fwd ref or unanalyzed import)
+Attribute action_space of self in context <class '_ast.Store'>
+Resolve self.action_space in context <class '_ast.Store'>
+Get self in <Scope: function __init__>, found in <Scope: function __init__>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr action_space of <Node class:point_mass_observed.ObservedPointEnv>
+setattr action_space on self to <Node attribute:gym.spaces.Box>
+FunctionDef reset_task
+Set reset_task in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.reset_task>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Name is_evaluation in context <class '_ast.Load'>
+Get is_evaluation in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node ---:point_mass_observed.ObservedPointEnv.reset_task.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ---:point_mass_observed.ObservedPointEnv.reset_task.^^^argument^^^>
+Assign ['self.task_idx'] [<_ast.BinOp object at 0x101d9c6d8>]
+Attribute task_idx of self in context <class '_ast.Load'>
+Resolve self.task_idx in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+getattr task_idx on self returns <Node ???:*.randint>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint>
+Call len
+Attribute tasks of self in context <class '_ast.Load'>
+Resolve self.tasks in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr tasks of <Node class:point_mass_observed.ObservedPointEnv>
+getattr tasks on self returns <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Name len in context <class '_ast.Load'>
+Get len in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.len>
+Attribute task_idx of self in context <class '_ast.Store'>
+Resolve self.task_idx in context <class '_ast.Store'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+setattr task_idx on self to <Node ???:*.len>
+Assign ['self.task_idx'] [<_ast.Call object at 0x101d9c978>]
+Call np.random.randint
+Call len
+Attribute tasks of self in context <class '_ast.Load'>
+Resolve self.tasks in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr tasks of <Node class:point_mass_observed.ObservedPointEnv>
+getattr tasks on self returns <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Name len in context <class '_ast.Load'>
+Get len in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.len>
+Attribute randint of np.random in context <class '_ast.Load'>
+Resolve np.random.randint in context <class '_ast.Load'>
+Resolve np.random in context <class '_ast.Load'>
+Get np in <Scope: function reset_task>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr random of <Node module:numpy>
+Unresolved, returning attr randint of unknown
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint> (target obj np.random not resolved; maybe fwd ref, function argument, or unanalyzed import)
+Attribute task_idx of self in context <class '_ast.Store'>
+Resolve self.task_idx in context <class '_ast.Store'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+setattr task_idx on self to <Node ???:*.randint>
+Assign ['self._task'] [<_ast.Subscript object at 0x101d9cbe0>]
+Attribute tasks of self in context <class '_ast.Load'>
+Resolve self.tasks in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr tasks of <Node class:point_mass_observed.ObservedPointEnv>
+getattr tasks on self returns <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^>
+Attribute task_idx of self in context <class '_ast.Load'>
+Resolve self.task_idx in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+getattr task_idx on self returns <Node ???:*.randint>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint>
+Attribute _task of self in context <class '_ast.Store'>
+Resolve self._task in context <class '_ast.Store'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _task of <Node class:point_mass_observed.ObservedPointEnv>
+setattr _task on self to <Node ???:*.randint>
+Call print
+Attribute _task of self in context <class '_ast.Load'>
+Resolve self._task in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _task of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _task on self returns <Node ???:*.randint>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint>
+Name print in context <class '_ast.Load'>
+Get print in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.print>
+Call exit
+Name exit in context <class '_ast.Load'>
+Get exit in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.exit>
+Assign ['goals'] [<_ast.List object at 0x101d9cf98>, <_ast.List object at 0x101da10f0>, <_ast.List object at 0x101da11d0>, <_ast.List object at 0x101da12b0>]
+Name goals in context <class '_ast.Store'>
+Set goals in <Scope: function reset_task>: value None is not a Node
+Assign ['self._goal'] [<_ast.BinOp object at 0x101da1400>]
+Call np.array
+Name goals in context <class '_ast.Load'>
+Get goals in <Scope: function reset_task>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to Name <Node ???:*.goals>
+Attribute task_idx of self in context <class '_ast.Load'>
+Resolve self.task_idx in context <class '_ast.Load'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr task_idx of <Node class:point_mass_observed.ObservedPointEnv>
+getattr task_idx on self returns <Node ???:*.randint>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ???:*.randint>
+Attribute array of np in context <class '_ast.Load'>
+Resolve np.array in context <class '_ast.Load'>
+Get np in <Scope: function reset_task>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr array of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node attribute:numpy.array> (target obj <Node module:numpy> known but target attr array not resolved; maybe fwd ref or unanalyzed import)
+Attribute _goal of self in context <class '_ast.Store'>
+Resolve self._goal in context <class '_ast.Store'>
+Get self in <Scope: function reset_task>, found in <Scope: function reset_task>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _goal of <Node class:point_mass_observed.ObservedPointEnv>
+setattr _goal on self to <Node attribute:numpy.array>
+FunctionDef reset
+Set reset in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.reset>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Assign ['self._state'] [<_ast.Call object at 0x101da1780>]
+Call np.array
+Attribute float32 of np in context <class '_ast.Load'>
+Resolve np.float32 in context <class '_ast.Load'>
+Get np in <Scope: function reset>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr float32 of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:numpy.float32> (target obj <Node module:numpy> known but target attr float32 not resolved; maybe fwd ref or unanalyzed import)
+Attribute array of np in context <class '_ast.Load'>
+Resolve np.array in context <class '_ast.Load'>
+Get np in <Scope: function reset>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr array of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:numpy.array> (target obj <Node module:numpy> known but target attr array not resolved; maybe fwd ref or unanalyzed import)
+Attribute _state of self in context <class '_ast.Store'>
+Resolve self._state in context <class '_ast.Store'>
+Get self in <Scope: function reset>, found in <Scope: function reset>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+setattr _state on self to <Node attribute:numpy.array>
+Call self._get_obs
+Attribute _get_obs of self in context <class '_ast.Load'>
+Resolve self._get_obs in context <class '_ast.Load'>
+Get self in <Scope: function reset>, found in <Scope: function reset>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _get_obs of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _get_obs on self returns <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Use from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+FunctionDef _get_obs
+Set _get_obs in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Call np.copy
+Attribute _state of self in context <class '_ast.Load'>
+Resolve self._state in context <class '_ast.Load'>
+Get self in <Scope: function _get_obs>, found in <Scope: function _get_obs>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _state on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv._get_obs> to <Node attribute:numpy.array>
+Attribute copy of np in context <class '_ast.Load'>
+Resolve np.copy in context <class '_ast.Load'>
+Get np in <Scope: function _get_obs>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr copy of <Node module:numpy>
+Use from <Node method:point_mass_observed.ObservedPointEnv._get_obs> to <Node attribute:numpy.copy> (target obj <Node module:numpy> known but target attr copy not resolved; maybe fwd ref or unanalyzed import)
+FunctionDef step
+Set step in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.step>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Assign ['x', 'y'] ['self._state']
+Attribute _state of self in context <class '_ast.Load'>
+Resolve self._state in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _state on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+Name x in context <class '_ast.Store'>
+Set x in <Scope: function step> to <Node attribute:numpy.array>
+Name y in context <class '_ast.Store'>
+Set y in <Scope: function step> to <Node attribute:numpy.array>
+AugAssign ['x'] <class '_ast.Sub'> [<_ast.Subscript object at 0x101da1ef0>]
+Attribute _goal of self in context <class '_ast.Load'>
+Resolve self._goal in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _goal of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _goal on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+Name x in context <class '_ast.Store'>
+Set x in <Scope: function step> to <Node attribute:numpy.array>
+AugAssign ['y'] <class '_ast.Sub'> [<_ast.Subscript object at 0x101da70b8>]
+Attribute _goal of self in context <class '_ast.Load'>
+Resolve self._goal in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _goal of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _goal on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+Name y in context <class '_ast.Store'>
+Set y in <Scope: function step> to <Node attribute:numpy.array>
+Assign ['reward'] [<_ast.UnaryOp object at 0x101da7240>]
+Name x in context <class '_ast.Load'>
+Get x in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name y in context <class '_ast.Load'>
+Get y in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name reward in context <class '_ast.Store'>
+Set reward in <Scope: function step> to <Node attribute:numpy.array>
+Assign ['done'] [<_ast.BoolOp object at 0x101da74e0>]
+Call abs
+Name x in context <class '_ast.Load'>
+Get x in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name abs in context <class '_ast.Load'>
+Get abs in <Scope: function step>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.abs>
+Call abs
+Name y in context <class '_ast.Load'>
+Get y in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name abs in context <class '_ast.Load'>
+Get abs in <Scope: function step>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.abs>
+Name done in context <class '_ast.Store'>
+Set done in <Scope: function step> to <Node ???:*.abs>
+Assign ['self._state'] [<_ast.BinOp object at 0x101da77f0>]
+Attribute _state of self in context <class '_ast.Load'>
+Resolve self._state in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _state on self returns <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array>
+Name action in context <class '_ast.Load'>
+Get action in <Scope: function step>, found in <Scope: function step>, value <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Attribute _state of self in context <class '_ast.Store'>
+Resolve self._state in context <class '_ast.Store'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+setattr _state on self to <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Assign ['ob'] [<_ast.Call object at 0x101da7940>]
+Call self._get_obs
+Attribute _get_obs of self in context <class '_ast.Load'>
+Resolve self._get_obs in context <class '_ast.Load'>
+Get self in <Scope: function step>, found in <Scope: function step>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _get_obs of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _get_obs on self returns <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Name ob in context <class '_ast.Store'>
+Set ob in <Scope: function step> to <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Name ob in context <class '_ast.Load'>
+Get ob in <Scope: function step>, found in <Scope: function step>, value <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node method:point_mass_observed.ObservedPointEnv._get_obs>
+Name reward in context <class '_ast.Load'>
+Get reward in <Scope: function step>, found in <Scope: function step>, value <Node attribute:numpy.array>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node attribute:numpy.array>
+Name done in context <class '_ast.Load'>
+Get done in <Scope: function step>, found in <Scope: function step>, value <Node ???:*.abs>
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.abs>
+Call dict
+Name dict in context <class '_ast.Load'>
+Get dict in <Scope: function step>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.step> to Name <Node ???:*.dict>
+FunctionDef viewer_setup
+Set viewer_setup in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.viewer_setup>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Call print
+Name print in context <class '_ast.Load'>
+Get print in <Scope: function viewer_setup>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.viewer_setup> to Name <Node ???:*.print>
+FunctionDef render
+Set render in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.render>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Call print
+Attribute _state of self in context <class '_ast.Load'>
+Resolve self._state in context <class '_ast.Load'>
+Get self in <Scope: function render>, found in <Scope: function render>, value <Node class:point_mass_observed.ObservedPointEnv>
+Resolved to attr _state of <Node class:point_mass_observed.ObservedPointEnv>
+getattr _state on self returns <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.render> to <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^>
+Name print in context <class '_ast.Load'>
+Get print in <Scope: function render>: no Node value (or name not in scope)
+Use from <Node method:point_mass_observed.ObservedPointEnv.render> to Name <Node ???:*.print>
+FunctionDef seed
+Set seed in <Scope: class ObservedPointEnv> to <Node method:point_mass_observed.ObservedPointEnv.seed>
+Method def: setting self name "self" to <Node class:point_mass_observed.ObservedPointEnv>
+Assign ['np.random.seed'] ['seed']
+Name seed in context <class '_ast.Load'>
+Get seed in <Scope: function seed>, found in <Scope: function seed>, value <Node ---:point_mass_observed.ObservedPointEnv.seed.^^^argument^^^>
+Use from <Node method:point_mass_observed.ObservedPointEnv.seed> to Name <Node ---:point_mass_observed.ObservedPointEnv.seed.^^^argument^^^>
+Attribute seed of np.random in context <class '_ast.Store'>
+Resolve np.random.seed in context <class '_ast.Store'>
+Resolve np.random in context <class '_ast.Load'>
+Get np in <Scope: function seed>, found in <Scope: module >, value <Node module:numpy>
+Resolved to attr random of <Node module:numpy>
+Unresolved, returning attr seed of unknown
+Contracting non-existent from <Node module:point_mass_observed> to <Node module:gym> as <Node ---:*.gym>
+Contracting non-existent from <Node module:point_mass_observed> to <Node import:np> as <Node ---:*.np>
+Contracting non-existent from <Node class:point_mass_observed.ObservedPointEnv> to <Node import:gym.Env> as <Node ---:*.Env>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:gym.spaces.Box> as <Node ---:*.Box>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.zeros> as <Node ---:*.zeros>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.inf> as <Node ---:*.inf>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:numpy.concatenate> as <Node ---:*.concatenate>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.__init__> to <Node attribute:point_mass_observed.ObservedPointEnv.task_idx> as <Node ---:*.task_idx>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node attribute:numpy.array> as <Node ---:*.array>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.__init__.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node ---:point_mass_observed.ObservedPointEnv.reset_task.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.reset_task> to <Node attribute:point_mass_observed.ObservedPointEnv.task_idx> as <Node ---:*.task_idx>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:numpy.float32> as <Node ---:*.float32>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.reset> to <Node attribute:numpy.array> as <Node ---:*.array>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv._get_obs> to <Node attribute:numpy.copy> as <Node ---:*.copy>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv._get_obs> to <Node attribute:numpy.array> as <Node ---:*.array>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.step> to <Node attribute:numpy.array> as <Node ---:*.array>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.render> to <Node ---:point_mass_observed.ObservedPointEnv.step.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Contracting non-existent from <Node method:point_mass_observed.ObservedPointEnv.seed> to <Node ---:point_mass_observed.ObservedPointEnv.seed.^^^argument^^^> as <Node ---:*.^^^argument^^^>
+Looking at point_mass_observed
+Coloring point_mass_observed from file 'point_mass_observed.py'
+Looking at ObservedPointEnv
+Coloring ObservedPointEnv from file 'point_mass_observed.py'
+New namespace point_mass_observed, old was 
+Looking at __init__
+Coloring __init__ from file 'point_mass_observed.py'
+New namespace point_mass_observed.ObservedPointEnv, old was 
+Looking at _get_obs
+Coloring _get_obs from file 'point_mass_observed.py'
+New namespace point_mass_observed.ObservedPointEnv, old was 
+Looking at render
+Coloring render from file 'point_mass_observed.py'
+New namespace point_mass_observed.ObservedPointEnv, old was 
+Looking at reset
+Coloring reset from file 'point_mass_observed.py'
+New namespace point_mass_observed.ObservedPointEnv, old was 
+Looking at reset_task
+Coloring reset_task from file 'point_mass_observed.py'
+New namespace point_mass_observed.ObservedPointEnv, old was 
+Looking at seed
+Coloring seed from file 'point_mass_observed.py'
+New namespace point_mass_observed.ObservedPointEnv, old was 
+Looking at step
+Coloring step from file 'point_mass_observed.py'
+New namespace point_mass_observed.ObservedPointEnv, old was 
+Looking at viewer_setup
+Coloring viewer_setup from file 'point_mass_observed.py'
+New namespace point_mass_observed.ObservedPointEnv, old was 
+<class 'pyan.writers.DotWriter'> running
+Start subgraph 
+Write node point_mass_observed
+Start subgraph point_mass_observed
+Write node ObservedPointEnv\n(point_mass_observed.py:6)
+Finish subgraph point_mass_observed
+Start subgraph point_mass_observed.ObservedPointEnv
+Write node __init__\n(point_mass_observed.py:19)
+Finish subgraph point_mass_observed.ObservedPointEnv
+Start subgraph point_mass_observed.ObservedPointEnv
+Write node _get_obs\n(point_mass_observed.py:50)
+Finish subgraph point_mass_observed.ObservedPointEnv
+Start subgraph point_mass_observed.ObservedPointEnv
+Write node render\n(point_mass_observed.py:70)
+Finish subgraph point_mass_observed.ObservedPointEnv
+Start subgraph point_mass_observed.ObservedPointEnv
+Write node reset\n(point_mass_observed.py:46)
+Finish subgraph point_mass_observed.ObservedPointEnv
+Start subgraph point_mass_observed.ObservedPointEnv
+Write node reset_task\n(point_mass_observed.py:32)
+Finish subgraph point_mass_observed.ObservedPointEnv
+Start subgraph point_mass_observed.ObservedPointEnv
+Write node seed\n(point_mass_observed.py:73)
+Finish subgraph point_mass_observed.ObservedPointEnv
+Start subgraph point_mass_observed.ObservedPointEnv
+Write node step\n(point_mass_observed.py:53)
+Finish subgraph point_mass_observed.ObservedPointEnv
+Start subgraph point_mass_observed.ObservedPointEnv
+Write node viewer_setup\n(point_mass_observed.py:66)
+Finish subgraph point_mass_observed.ObservedPointEnv
+Finish subgraph 
