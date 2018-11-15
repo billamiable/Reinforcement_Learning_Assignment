@@ -1,6 +1,6 @@
 {"animate"	:	false,
 "env_name"	:	"pm-obs",
-"exp_name"	:	"Ji3",
+"exp_name"	:	"p1",
 "gamma"	:	0.99,
 "gru_size"	:	32,
 "history"	:	1,

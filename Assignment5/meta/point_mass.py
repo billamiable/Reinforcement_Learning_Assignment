@@ -34,7 +34,11 @@ class PointEnv(Env):
         # print(granularity)
         # exit()
         if train_test:
+<<<<<<< HEAD
             print('running problem 3!')
+=======
+            # print('running problem 3!')
+>>>>>>> a2caffb7e8a6af10b0acb9fd9e82c1da4502032d
             # Define x and y
             # Test
             if is_evaluation:
@@ -57,7 +61,11 @@ class PointEnv(Env):
             # Train
             else:
                 if granularity==1:
+<<<<<<< HEAD
                     print('using granularity 1')
+=======
+                    # print('using granularity 1')
+>>>>>>> a2caffb7e8a6af10b0acb9fd9e82c1da4502032d
                     x = np.random.uniform(-10, 10)
                     if x<=0:
                         y = np.random.uniform(0, 1)
@@ -68,7 +76,11 @@ class PointEnv(Env):
                         x = x + 2 * np.random.randint(-5,5)
                         y = y + 2 * np.random.randint(-4,6)
                 elif granularity==10:
+<<<<<<< HEAD
                     print('using granularity 10')
+=======
+                    # print('using granularity 10')
+>>>>>>> a2caffb7e8a6af10b0acb9fd9e82c1da4502032d
                     x = np.random.uniform(-10, 10)
                     if x<=0:
                         y = np.random.uniform(0, 10)
@@ -79,7 +91,11 @@ class PointEnv(Env):
             # print(self._goal)
             # exit()
         else:
+<<<<<<< HEAD
             print('not running problem 3!')
+=======
+            # print('not running problem 3!')
+>>>>>>> a2caffb7e8a6af10b0acb9fd9e82c1da4502032d
             x = np.random.uniform(-10, 10)
             y = np.random.uniform(-10, 10)
             self._goal = np.array([x, y])
