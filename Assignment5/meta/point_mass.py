@@ -15,7 +15,7 @@ class PointEnv(Env):
         self.observation_space = spaces.Box(low=-np.inf, high=np.inf, shape=(2,))
         self.action_space = spaces.Box(low=-0.1, high=0.1, shape=(2,))
 
-    def reset_task(self, is_evaluation=False):
+    def reset_task(self, is_evaluation=False, train_test=False, granularity=1):
         '''
         sample a new task randomly
 
@@ -27,9 +27,64 @@ class PointEnv(Env):
         #                           ----------PROBLEM 3----------
         #====================================================================================#
         # YOUR CODE HERE
-        x = np.random.uniform(-10, 10)
-        y = np.random.uniform(-10, 10)
-        self._goal = np.array([x, y])
+        # FOR DIFFERENT SETTING, TRAINNING IS ONE TASK, EVALUATION IS ANOTHER
+        # TO-DO: How to construct chessboarder?
+        # Actually do not need to construct, but mannually set 
+        # print(train_test)
+        # print(granularity)
+        # exit()
+        if train_test:
+            # print('running problem 3!')
+            # Define x and y
+            # Test
+            if is_evaluation:
+                if granularity==1:
+                    x = np.random.uniform(-10, 10)
+                    if x<=0:
+                        y = np.random.uniform(-1, 0)
+                        x = x + 2 * np.random.randint(-4,6)
+                        y = y + 2 * np.random.randint(-4,6)
+                    else:
+                        y = np.random.uniform(0, 1)
+                        x = x + 2 * np.random.randint(-5,5)
+                        y = y + 2 * np.random.randint(-5,5)
+                elif granularity==10:
+                    x = np.random.uniform(-10, 10)
+                    if x<=0:
+                        y = np.random.uniform(-10, 0)
+                    else:
+                        y = np.random.uniform(0, 10)
+            # Train
+            else:
+                if granularity==1:
+                    # print('using granularity 1')
+                    x = np.random.uniform(-10, 10)
+                    if x<=0:
+                        y = np.random.uniform(0, 1)
+                        x = x + 2 * np.random.randint(-4,6)
+                        y = y + 2 * np.random.randint(-5,5)
+                    else:
+                        y = np.random.uniform(-1, 0)
+                        x = x + 2 * np.random.randint(-5,5)
+                        y = y + 2 * np.random.randint(-4,6)
+                elif granularity==10:
+                    # print('using granularity 10')
+                    x = np.random.uniform(-10, 10)
+                    if x<=0:
+                        y = np.random.uniform(0, 10)
+                    else:
+                        y = np.random.uniform(-10, 0)
+            self._goal = np.array([x, y])
+            # print('actually get in')
+            # print(self._goal)
+            # exit()
+        else:
+            # print('not running problem 3!')
+            x = np.random.uniform(-10, 10)
+            y = np.random.uniform(-10, 10)
+            self._goal = np.array([x, y])
+            # print(self._goal)
+            # exit()
 
     def reset(self):
         self._state = np.array([0, 0], dtype=np.float32)

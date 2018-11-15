@@ -219,6 +219,11 @@ class Agent(object):
         self.num_value_iters = computation_graph_args['num_value_iters']
         self.l2reg = computation_graph_args['l2reg']
         self.recurrent = computation_graph_args['recurrent']
+        self.train_test = computation_graph_args['train_test']
+        self.granularity = computation_graph_args['granularity']
+        # print(self.train_test)
+        # print(self.granularity)
+        # exit()
 
         self.animate = sample_trajectory_args['animate']
         self.max_path_length = sample_trajectory_args['max_path_length']
@@ -421,7 +426,11 @@ class Agent(object):
             animate_this_episode: if True then render
             val: whether this is training or evaluation
         """
-        env.reset_task(is_evaluation=is_evaluation)
+        # HHH I FOUND YOU! Where defines different task for training and testing
+        # print(self.train_test)
+        # print(self.granularity)
+        # exit()
+        env.reset_task(is_evaluation=is_evaluation, train_test=self.train_test, granularity=self.granularity)
         stats = []
         #====================================================================================#
         #                           ----------PROBLEM 1----------
@@ -587,7 +596,6 @@ class Agent(object):
         advantages = (advantages - np.mean(advantages, axis=0)) / np.std(advantages, axis=0)
         return advantages, returns
 
-
     def estimate_return(self, ob_no, re_n, hidden, masks):
         """
         estimates the returns over a set of trajectories.
@@ -717,6 +725,8 @@ def train_PG(
         num_tasks,
         l2reg,
         recurrent,
+        train_test,
+        granularity
         ):
 
     start = time.time()
@@ -734,6 +744,7 @@ def train_PG(
     envs = {'pm': PointEnv,
             'pm-obs': ObservedPointEnv,
             }
+    # Specify environment used
     env = envs[env_name](num_tasks)
 
     # Set random seeds
@@ -765,6 +776,8 @@ def train_PG(
         'num_value_iters': num_value_iters,
         'l2reg': l2reg,
         'recurrent': recurrent,
+        'train_test': train_test,
+        'granularity': granularity,
         }
 
     sample_trajectory_args = {
@@ -783,7 +796,6 @@ def train_PG(
 
     # build computation graph
     agent.build_computation_graph()
-
 
     # tensorflow: config, session, variable initialization
     agent.init_tf_sess()
@@ -811,6 +823,8 @@ def train_PG(
         ppo_buffer.flush()
 
         # sample trajectories to fill agent's replay buffer
+        # This part is for training!
+        # TO-DO: Find places to define task
         print("********** Iteration %i ************"%itr)
         stats = []
         for _ in range(num_tasks):
@@ -845,6 +859,7 @@ def train_PG(
             agent.update_parameters(ob_no, hidden, ac_na, fixed_log_probs, q_n, adv_n)
 
         # compute validation statistics
+        # There it goes! what i am finding!
         print('Validating...')
         val_stats = []
         for _ in range(num_tasks):
@@ -904,6 +919,8 @@ def main():
     parser.add_argument('--size', '-s', type=int, default=64)
     parser.add_argument('--gru_size', '-rs', type=int, default=32)
     parser.add_argument('--history', '-ho', type=int, default=1)
+    parser.add_argument('--granularity', '-gran', type=int, default=1)
+    parser.add_argument('--train_test', '-tt', action='store_true')
     parser.add_argument('--l2reg', '-reg', action='store_true')
     parser.add_argument('--recurrent', '-rec', action='store_true')
     args = parser.parse_args()
@@ -947,6 +964,8 @@ def main():
                 num_tasks=args.num_tasks,
                 l2reg=args.l2reg,
                 recurrent=args.recurrent,
+                train_test=args.train_test,
+                granularity=args.granularity
                 )
         # # Awkward hacky process runs, because Tensorflow does not like
         # # repeatedly calling train_PG in the same thread.

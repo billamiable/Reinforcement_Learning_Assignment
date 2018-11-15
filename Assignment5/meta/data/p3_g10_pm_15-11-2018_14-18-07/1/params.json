@@ -1,12 +1,13 @@
 {"animate"	:	false,
 "env_name"	:	"pm",
-"exp_name"	:	"p2_60_r",
+"exp_name"	:	"p3_g10",
 "gamma"	:	0.9,
+"granularity"	:	10,
 "gru_size"	:	32,
 "history"	:	60,
 "l2reg"	:	false,
 "learning_rate"	:	0.0005,
-"logdir"	:	"data/p2_1_pm_14-11-2018_16-43-05/1",
+"logdir"	:	"data/p3_g10_pm_15-11-2018_14-18-07/1",
 "max_path_length"	:	20,
 "min_timesteps_per_batch"	:	10000,
 "mini_batch_size"	:	64,
@@ -19,4 +20,5 @@
 "num_value_iters"	:	1,
 "recurrent"	:	true,
 "seed"	:	1,
-"size"	:	64}
+"size"	:	64,
+"train_test"	:	true}
