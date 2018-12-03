@@ -183,24 +183,15 @@ class QLearner(object):
 
     
     # For boltzmann exploration
-    if self.explore == 'soft_q':
+    if self.explore == 'boltzmann':
         print('Boltzman variables defined!')
         self.Temp = tf.placeholder(shape=None, dtype=tf.float32)
-        # print(q_t)
-        
-        value = tf.reduce_mean(q_t, 1)
-        # print(value)
-        
-        self.q_dist = tf.nn.softmax(q_t - value)
-        # print(q_t - value)
-        # print(self.q_dist)
-        # exit()
-        #self.q_dist = tf.nn.softmax(q_t/self.Temp)
+        self.q_dist = tf.nn.softmax(q_t/self.Temp)
 
     # Max operation
     self.q_t_action = tf.argmax(q_t, axis=1)
-    # value = tf.reduce_mean(q_t)
-    # self.q_t_action = tf.nn.softmax(q_t - value)
+    print(q_t)
+    # exit()
         
     # Specify double Q function difference
     if self.double_q:
@@ -213,16 +204,11 @@ class QLearner(object):
                                                      depth=self.num_actions, 
                                                      on_value=1.0, off_value=0.0), axis=1)
     else:
-        print('using soft q learning')
+        print('using vanilla q learning')
         q_tp1_max = tf.reduce_max(q_tp1, 1)
-        # print(q_tp1)
-        # print(tf.exp(q_tp1))
-        # print(tf.reduce_sum(tf.exp(q_tp1),1))
-        q_tp1_max = tf.log( tf.reduce_sum(tf.exp(q_tp1),1) )
-        # print(q_tp1_max)
-        # exit()
+
     # Get target value
-    q_tp1 = gamma * (1.0 - self.done_mask_ph) * q_tp1_max 
+    q_tp1 = gamma * (1.0 - self.done_mask_ph) * q_tp1_max    
     target = self.rew_t_ph + q_tp1
     # Get Q_fai(si,ai)
     # TO-DO: VERY VERY IMPORTANT! use reduce_sum instead of reduce_max since exist negative value
@@ -357,7 +343,7 @@ class QLearner(object):
             action = action[0]
             # print(np.shape(action))
             # exit()
-    if self.explore == 'soft_q':
+    if self.explore == 'boltzmann':
         # print("using boltzmann exploration!")
         if (not self.model_initialized):
             action = np.random.randint(0, self.num_actions)
@@ -366,11 +352,12 @@ class QLearner(object):
             q_d = self.session.run(self.q_dist, feed_dict={self.obs_t_ph: [recent_obs], 
                                                            self.Temp: self.exploration.value(self.t),
                                                            self.keep_per: 1.0})
+            print(q_d)
             # action = np.random.choice(q_d[0], p=q_d[0])
             # action = np.argmax(q_d[0] == action)
             action = np.random.choice(self.num_actions, p=q_d[0])
-            # print(action)
-            # exit()
+            print(action)
+            exit()
     if self.explore == 'bayesian':
         # print("using bayesian exploration!")
         if (not self.model_initialized):

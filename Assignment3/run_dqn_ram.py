@@ -13,7 +13,7 @@ from dqn_utils import *
 from atari_wrappers import *
 
 
-def atari_model(ram_in, num_actions, scope, reuse=False):
+def atari_model(ram_in, num_actions, scope, reuse=False, dropout=False, keep_prob=1.0):
     with tf.variable_scope(scope, reuse=reuse):
         out = ram_in
         #out = tf.concat(1,(ram_in[:,4:5],ram_in[:,8:9],ram_in[:,11:13],ram_in[:,21:22],ram_in[:,50:51], ram_in[:,60:61],ram_in[:,64:65]))
@@ -27,7 +27,9 @@ def atari_model(ram_in, num_actions, scope, reuse=False):
 
 def atari_learn(env,
                 session,
-                num_timesteps):
+                num_timesteps,
+                double_q,
+                explore):
     # This is just a rough estimate
     num_iterations = float(num_timesteps) / 4.0
 
@@ -73,7 +75,9 @@ def atari_learn(env,
         frame_history_len=1,
         target_update_freq=10000,
         grad_norm_clipping=10,
-        rew_file='./pkl/ram_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl'
+        double_q=double_q,
+        rew_file='./pkl/ram_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
+        explore=explore
     )
     env.close()
 
@@ -114,11 +118,18 @@ def get_env(seed):
     return env
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser()
+    # parser.add_argument('env_name', type=str, default='PongNoFrameskip-v4')
+    parser.add_argument('--double_q', action='store_true')
+    parser.add_argument('--explore', type=str, default='e-greedy')
+    args = parser.parse_args()
+
     # Run training
     seed = 0 # Use a seed of zero (you may want to randomize the seed!)
     env = get_env(seed)
     session = get_session()
-    atari_learn(env, session, num_timesteps=int(4e7))
+    atari_learn(env, session, num_timesteps=int(4e7), double_q=args.double_q, explore=args.explore)
 
 if __name__ == "__main__":
     main()
