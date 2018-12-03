@@ -77,7 +77,7 @@ def lander_learn(env,
         # double_q=True,
         double_q = double_q,
         rew_file='./pkl/lander_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
-        explore=explore
+        explore=explore,
         **lander_kwargs()
     )
     env.close()

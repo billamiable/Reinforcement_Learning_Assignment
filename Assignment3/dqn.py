@@ -366,12 +366,13 @@ class QLearner(object):
             action = np.random.randint(0, self.num_actions)
         else:
             recent_obs = self.replay_buffer.encode_recent_observation()
-            q_d = self.session.run(self.q_dist, feed_dict={self.obs_t_ph: [recent_obs], 
+            t_loss, q_d = self.session.run([self.total_error,self.q_dist], feed_dict={self.obs_t_ph: [recent_obs], 
                                                            self.Temp: self.exploration.value(self.t),
                                                            self.keep_per: 1.0})
             # action = np.random.choice(q_d[0], p=q_d[0])
             # action = np.argmax(q_d[0] == action)
-            print(q_d)
+            print(t_loss)
+            #print(q_d)
             action = np.random.choice(self.num_actions, p=q_d[0])
             # print(action)
             # exit()
