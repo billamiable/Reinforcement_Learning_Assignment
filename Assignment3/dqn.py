@@ -213,14 +213,17 @@ class QLearner(object):
                                                      depth=self.num_actions, 
                                                      on_value=1.0, off_value=0.0), axis=1)
     else:
-        print('using soft q learning')
-        q_tp1_max = tf.reduce_max(q_tp1, 1)
-        # print(q_tp1)
-        # print(tf.exp(q_tp1))
-        # print(tf.reduce_sum(tf.exp(q_tp1),1))
-        q_tp1_max = tf.log( tf.reduce_sum(tf.exp(q_tp1),1) )
-        # print(q_tp1_max)
-        # exit()
+        if self.explore == 'soft_q':
+            print('using soft q learning')
+            # print(q_tp1)  
+            # print(tf.exp(q_tp1))
+            # print(tf.reduce_sum(tf.exp(q_tp1),1))
+            q_tp1_max = tf.log( tf.reduce_sum(tf.exp(q_tp1),1) )
+            # print(q_tp1_max)
+            # exit()
+        else:
+            q_tp1_max = tf.reduce_max(q_tp1, 1)
+        
     # Get target value
     q_tp1 = gamma * (1.0 - self.done_mask_ph) * q_tp1_max 
     target = self.rew_t_ph + q_tp1
