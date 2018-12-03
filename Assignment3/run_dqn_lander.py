@@ -11,7 +11,7 @@ import time
 import dqn
 from dqn_utils import *
 
-def lander_model(obs, num_actions, scope, reuse=False):
+def lander_model(obs, num_actions, scope, reuse=False, dropout=False, keep_prob=1.0):
     with tf.variable_scope(scope, reuse=reuse):
         out = obs
         with tf.variable_scope("action_value"):

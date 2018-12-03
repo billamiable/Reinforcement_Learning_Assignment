@@ -178,6 +178,7 @@ class QLearner(object):
         dropout = False
     q_t   = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False, 
                        dropout=dropout, keep_prob=self.keep_per)
+    self.q_test = q_t
     q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False, 
                        dropout=dropout, keep_prob=self.keep_per)
 
@@ -190,12 +191,18 @@ class QLearner(object):
         
         #value = tf.reduce_mean(q_t, 1)
         # print(value)
-        value = tf.log( tf.reduce_sum(tf.exp(q_t),1) )
-        self.q_dist = tf.exp(q_t - value)
+        
         # print(q_t - value)
         # print(self.q_dist)
         # exit()
-        #self.q_dist = tf.nn.softmax(q_t/self.Temp)
+        # self.q_dist = tf.nn.softmax(q_t/self.Temp)
+
+        # # Old version
+        # value = tf.log( tf.reduce_sum(tf.exp(q_t),1) )
+        # self.q_dist = tf.exp(q_t - value)
+
+        # New version
+        self.q_dist = tf.nn.softmax(q_t/self.Temp)
 
     # Max operation
     self.q_t_action = tf.argmax(q_t, axis=1)
@@ -366,13 +373,15 @@ class QLearner(object):
             action = np.random.randint(0, self.num_actions)
         else:
             recent_obs = self.replay_buffer.encode_recent_observation()
-            t_loss, q_d = self.session.run([self.total_error,self.q_dist], feed_dict={self.obs_t_ph: [recent_obs], 
+            q_d, q_t = self.session.run([self.q_dist, self.q_test], feed_dict={self.obs_t_ph: [recent_obs], 
                                                            self.Temp: self.exploration.value(self.t),
                                                            self.keep_per: 1.0})
             # action = np.random.choice(q_d[0], p=q_d[0])
             # action = np.argmax(q_d[0] == action)
-            print(t_loss)
-            #print(q_d)
+            # print('loss',t_loss)
+            print('qt',q_t)
+            print('qd',q_d)
+            
             action = np.random.choice(self.num_actions, p=q_d[0])
             # print(action)
             # exit()
