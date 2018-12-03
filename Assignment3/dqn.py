@@ -188,10 +188,10 @@ class QLearner(object):
         self.Temp = tf.placeholder(shape=None, dtype=tf.float32)
         # print(q_t)
         
-        value = tf.reduce_mean(q_t, 1)
+        #value = tf.reduce_mean(q_t, 1)
         # print(value)
-        
-        self.q_dist = tf.nn.softmax(q_t - value)
+        value = tf.log( tf.reduce_sum(tf.exp(q_t),1) )
+        self.q_dist = tf.exp(q_t - value)
         # print(q_t - value)
         # print(self.q_dist)
         # exit()
@@ -371,6 +371,7 @@ class QLearner(object):
                                                            self.keep_per: 1.0})
             # action = np.random.choice(q_d[0], p=q_d[0])
             # action = np.argmax(q_d[0] == action)
+            print(q_d)
             action = np.random.choice(self.num_actions, p=q_d[0])
             # print(action)
             # exit()
