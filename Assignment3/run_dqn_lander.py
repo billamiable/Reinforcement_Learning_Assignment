@@ -106,6 +106,7 @@ def get_env(seed):
 
     expt_dir = '/tmp/hw3_vid_dir/'
     env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True, video_callable=False)
+    # env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True)
 
     return env
 
