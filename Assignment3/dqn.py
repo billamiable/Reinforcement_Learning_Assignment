@@ -223,7 +223,9 @@ class QLearner(object):
         if self.explore == 'soft_q':
             print('using soft q learning')
             # q_tp1_max = tf.log( tf.reduce_sum(tf.exp(q_tp1),1) )
-            q_tp1_max = tf.reduce_logsumexp(q_tp1)
+            q_tp1_max = tf.reduce_logsumexp(q_tp1, 1)
+            # print(q_tp1_max)
+            # exit()
         else:
             q_tp1_max = tf.reduce_max(q_tp1, 1)
         
