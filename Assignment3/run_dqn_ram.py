@@ -33,8 +33,7 @@ def atari_learn(env,
     # This is just a rough estimate
     num_iterations = float(num_timesteps) / 4.0
 
-    # lr_multiplier = 1.0
-    lr_multiplier = 0.1
+    lr_multiplier = 1.0
     lr_schedule = PiecewiseSchedule([
                                          (0,                   1e-4 * lr_multiplier),
                                          (num_iterations / 10, 1e-4 * lr_multiplier),
@@ -113,8 +112,8 @@ def get_env(seed):
     env.seed(seed)
 
     expt_dir = '/tmp/hw3_vid_dir/'
-    env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True)
-    # env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True, video_callable=False)
+    # env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True)
+    env = wrappers.Monitor(env, osp.join(expt_dir, "gym"), force=True, video_callable=False)
     env = wrap_deepmind_ram(env)
 
     return env
