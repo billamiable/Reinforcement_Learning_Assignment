@@ -358,3 +358,16 @@ class ReplayBuffer(object):
         self.reward[idx] = reward
         self.done[idx]   = done
 
+    def sample_positive(self, length, batch_size):
+        assert self.can_sample(batch_size)
+        idxes = sample_n_unique(lambda: random.randint(self.next_idx-length+1, self.next_idx), batch_size)
+        return self._encode_sample(idxes)
+    
+    def sample_negative(self, length, batch_size):
+        assert self.can_sample(batch_size)
+        mod_start = (self.next_idx+1) % self.num_in_buffer
+        mod_end = (self.num_in_buffer+self.next_idx-length) % self.num_in_buffer
+        idxes = sample_n_unique(lambda: random.randint(self.next_idx+1, mod_end), batch_size)
+        return self._encode_sample(idxes)
+
+

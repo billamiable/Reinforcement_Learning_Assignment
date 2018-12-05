@@ -129,6 +129,8 @@ class QLearner(object):
     # placeholder for next observation (or state)
     self.obs_tp1_ph            = tf.placeholder(
         tf.float32 if lander else tf.uint8, [None] + list(input_shape))
+    print('obs dim', self.obs_t_ph)
+
     # placeholder for end of episode mask
     # this value is 1 if the next state corresponds to the end of an episode,
     # in which case there is no Q-value at the next state; at the end of an
@@ -222,10 +224,10 @@ class QLearner(object):
         # Soft maximum
         if self.explore == 'soft_q':
             print('using soft q learning')
+            # This one has precision error
             # q_tp1_max = tf.log( tf.reduce_sum(tf.exp(q_tp1),1) )
+            # Current version
             q_tp1_max = tf.reduce_logsumexp(q_tp1, 1)
-            # print(q_tp1_max)
-            # exit()
         else:
             q_tp1_max = tf.reduce_max(q_tp1, 1)
         
@@ -371,6 +373,9 @@ class QLearner(object):
             action = np.random.randint(0, self.num_actions)
         else:
             recent_obs = self.replay_buffer.encode_recent_observation()
+            # print(recent_obs)
+            print('5',np.shape(recent_obs))
+            exit()
             q_d = self.session.run(self.q_dist, feed_dict={self.obs_t_ph: [recent_obs], 
                                                            self.Temp: self.exploration.value(self.t),
                                                            self.keep_per: 1.0})
