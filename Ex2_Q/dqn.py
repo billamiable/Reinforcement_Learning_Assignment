@@ -35,10 +35,10 @@ class QLearner(object):
     double_q=True,
     lander=False,
     explore='e-greedy',
-    ex2= False,
-    min_replay_size=1e4,
+    ex2= True,
+    min_replay_size=10000,
     # not sure
-    ex_len= 1e3 ):
+    ex2_len= 1e3 ):
     """Run Deep Q-learning algorithm.
 
     You can specify your own convnet using q_func.
@@ -108,12 +108,14 @@ class QLearner(object):
     self.double_q = double_q
     self.explore = explore
     # EX2
+    # [1e-3, 1e-4, 1e-5]
+    self.coef = 1e-4
+    self.first_train = True
+    self.first_train_itrs = int(5e3)
+    self.train_itrs = int(1e3)
     self.ex2 = ex2
-    if self.ex2:
-        print('Use Exemplar Model')
-        self.exemplar = Exemplar(train_itrs=1e3, first_train_itrs=5e3)
-    self.min_replay_size = min_replay_size,
-    self.ex_len = ex_len
+    self.min_replay_size = min_replay_size
+    self.ex2_len = ex2_len
     self.count = 0
     print('exploration strategy', explore)
     
@@ -129,7 +131,7 @@ class QLearner(object):
         img_h, img_w, img_c = self.env.observation_space.shape
         input_shape = (img_h, img_w, frame_history_len * img_c)
     self.num_actions = self.env.action_space.n
-
+    
     # set up placeholders
     # placeholder for current observation (or state)
     self.obs_t_ph              = tf.placeholder(
@@ -192,7 +194,10 @@ class QLearner(object):
                        dropout=dropout, keep_prob=self.keep_per)
     q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False, 
                        dropout=dropout, keep_prob=self.keep_per)
-
+    # EX2
+    if self.ex2:
+        print('Use Exemplar Model')
+        self.exemplar = Exemplar(input_shape)
     
     # For boltzmann exploration
     if self.explore == 'soft_q':
@@ -424,7 +429,7 @@ class QLearner(object):
     self.replay_buffer.store_effect(ret, action, reward, done)
     
     # EX2
-    if self.ex2 and self.buffer.num_in_buffer>self.min_replay_size and self.count == self.ex2_len:
+    if self.ex2 and (self.replay_buffer.num_in_buffer > self.min_replay_size) and (self.count >= self.ex2_len):
         self.count = 0
         # fit ex2 model
         if self.first_train:
@@ -433,14 +438,17 @@ class QLearner(object):
         else:
             train_itrs = self.train_itrs
         for _  in range(train_itrs):
-            postives, negatives = self.buffer.sample_idx(self.ex2_len)
-            self.exemplar.fit(postives, negatives)
+            positive = self.replay_buffer.sample_positive(self.ex2_len, 128)
+            negative = self.replay_buffer.sample_negative(self.ex2_len, 128)
+            print(self.replay_buffer.num_in_buffer)
+            print(positive)
+            print(len(positive))
+            exit()
+            self.exemplar.fit(positive, negative)
         # update rewards
-        paths = self.buffer.get_len_data()
+        paths = self.replay_buffer.get_all_positive(self.ex2_len)
         bonus_reward = self.exemplar.predict(paths)
-        self.replay.update_reward(bonus_reward)
-        
-
+        self.replay.update_reward(bonus_reward, self.coef)
     # exit()
     #####
     # YOUR CODE HERE

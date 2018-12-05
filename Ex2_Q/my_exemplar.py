@@ -1,4 +1,4 @@
-from fan import MODEL
+from siamese_tf import Siamese
 import numpy as np
 import tensorflow as tf
 
@@ -6,23 +6,27 @@ import tensorflow as tf
 class Exemplar(object):
     def __init__(
             self,
-            bonus_form="1/sqrt(p)",
+            input_dim, 
+            feature_dim = 4, 
+            hidden_sizes = (32,32),
+            bonus_form= "1/sqrt(p)",
         ):
         self.first_train = False
         self.bonus_form = bonus_form
-        self.model = MODEL()
+        self.model = Siamese(input_dim, feature_dim, hidden_sizes)
+        self.model.init_tf_sess()
 
-    def fit(self, postives, negatives):
+    def fit(self, positive, negative):
         #log_step = self.train_itrs * self.log_freq
-        labels = np.expand_dims(np.concatenate([np.ones(self.batch_size), np.zeros(self.batch_size)]), 1).astype(np.float32)
-        pos_batch = sample_batch(positives, positives.shape[0], self.batch_size)
-        neg_batch = self.replay.random_batch(self.batch_size)
-        x1 = np.concatenate([pos_batch, pos_batch])
-        x2 = np.concatenate([pos_batch, neg_batch])
-        loss, class_loss, kl_loss = self.model.train_batch(x1, x2, labels)
+        print('pshape', len(positive))
+        batch_size = len(positive)
+        labels = np.expand_dims(np.concatenate([np.ones(batch_size), np.zeros(batch_size)]), 1).astype(np.float32)
+        x1 = np.concatenate([positive, positive])
+        x2 = np.concatenate([positive, negative])
+        loss, class_loss, kl_loss = self.model.train(x1, x2, labels)
 
-    def predict(self, path, negatives):
-        counts = self.model.test(positives)
+    def predict(self, path):
+        counts = self.model.predict(path, path)
         # if self.rank == 0:
         #     logger.record_tabular('Average Prob', np.mean(counts))
         #     logger.record_tabular('Average Discrim', np.mean(1/(5.01*counts + 1)))
