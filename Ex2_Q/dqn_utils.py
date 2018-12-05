@@ -387,7 +387,9 @@ class ReplayBuffer(object):
         reward -= median_bonus
         idxes = list( range(next_idx-length+1 , next_idx) )
         idxes = [idx % self.num_in_buffer for idx in idxes]
+        print('previous', np.sum(self.reward[idxes]))
         self.reward[idxes] += coef * reward
+        print('after', np.sum(self.reward[idxes]))
 
 
 
