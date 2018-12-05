@@ -65,6 +65,7 @@ class Siamese():
 		self.batch_norm = batch_norm
 		self.dropout = dropout
 		self.kl_weight = kl_weight
+		self.build_graph()
 	
 	def build_graph(self):
 

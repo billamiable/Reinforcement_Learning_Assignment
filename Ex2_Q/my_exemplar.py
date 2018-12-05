@@ -18,12 +18,13 @@ class Exemplar(object):
 
     def fit(self, positive, negative):
         #log_step = self.train_itrs * self.log_freq
-        print('pshape', len(positive))
+        #print('pshape', len(positive))
         batch_size = len(positive)
         labels = np.expand_dims(np.concatenate([np.ones(batch_size), np.zeros(batch_size)]), 1).astype(np.float32)
         x1 = np.concatenate([positive, positive])
         x2 = np.concatenate([positive, negative])
-        loss, class_loss, kl_loss = self.model.train(x1, x2, labels)
+        loss = self.model.train(x1, x2, labels)
+        return loss
 
     def predict(self, path):
         counts = self.model.predict(path, path)

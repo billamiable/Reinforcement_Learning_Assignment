@@ -38,7 +38,7 @@ class QLearner(object):
     ex2= True,
     min_replay_size=10000,
     # not sure
-    ex2_len= 1e3 ):
+    ex2_len= 1000 ):
     """Run Deep Q-learning algorithm.
 
     You can specify your own convnet using q_func.
@@ -197,7 +197,7 @@ class QLearner(object):
     # EX2
     if self.ex2:
         print('Use Exemplar Model')
-        self.exemplar = Exemplar(input_shape)
+        self.exemplar = Exemplar(input_dim= input_shape[0])
     
     # For boltzmann exploration
     if self.explore == 'soft_q':
@@ -440,15 +440,17 @@ class QLearner(object):
         for _  in range(train_itrs):
             positive = self.replay_buffer.sample_positive(self.ex2_len, 128)
             negative = self.replay_buffer.sample_negative(self.ex2_len, 128)
-            print(self.replay_buffer.num_in_buffer)
-            print(positive)
-            print(len(positive))
-            exit()
+            # positive_np = np.asarray(positive)
+            # print(positive_np.shape)
+            # print(self.replay_buffer.num_in_buffer)
+            # print(positive)
+            # print(len(positive))
+            # exit()
             self.exemplar.fit(positive, negative)
         # update rewards
         paths = self.replay_buffer.get_all_positive(self.ex2_len)
         bonus_reward = self.exemplar.predict(paths)
-        self.replay.update_reward(bonus_reward, self.coef)
+        self.replay_buffer.update_reward(self.ex2_len, bonus_reward, self.coef)
     # exit()
     #####
     # YOUR CODE HERE

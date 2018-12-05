@@ -362,7 +362,7 @@ class ReplayBuffer(object):
         assert self.can_sample(batch_size)
         idxes = sample_n_unique(lambda: random.randint(self.next_idx-length+1, self.next_idx), batch_size)
         idxes = [idx % self.num_in_buffer for idx in idxes]
-        return self._encode_sample(idxes)
+        return self._encode_sample(idxes)[0]
     
     def sample_negative(self, length, batch_size):
         assert self.can_sample(batch_size)
@@ -371,15 +371,19 @@ class ReplayBuffer(object):
         # idxes = sample_n_unique(lambda: random.randint(mod_start, mod_end), batch_size)
         idxes = sample_n_unique(lambda: random.randint(mod_start, mod_start+self.num_in_buffer-length-1), batch_size)
         idxes = [idx % self.num_in_buffer for idx in idxes]
-        return self._encode_sample(idxes)
+        return self._encode_sample(idxes)[0]
 
     def get_all_positive(self, length):
-        return self._encode_sample([self.next_idx-length+1, self.next_idx])
+        idxes = list( range(self.next_idx-length+1 , self.next_idx) )
+        idxes = [idx % self.num_in_buffer for idx in idxes]
+        return self._encode_sample( idxes )[0]
     
-    def update_reward(self, reward, coef):
+    def update_reward(self, length, reward, coef):
         median_bonus = np.median(reward)
         reward -= median_bonus
-        self.reward[self.next_idx-length+1, self.next_idx] += coef * reward
+        idxes = list( range(self.next_idx-length+1 , self.next_idx) )
+        idxes = [idx % self.num_in_buffer for idx in idxes]
+        self.reward[idxes] += coef * reward
 
 
 
