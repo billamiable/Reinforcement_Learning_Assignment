@@ -125,7 +125,7 @@ def main():
     args = parser.parse_args()
 
     # Run training
-    seed = 4565 # you may want to randomize this
+    seed = 250 # you may want to randomize this
     print('random seed = %d' % seed)
     env = get_env(seed)
     session = get_session()
