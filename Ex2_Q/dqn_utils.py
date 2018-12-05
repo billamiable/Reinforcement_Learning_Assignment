@@ -370,4 +370,14 @@ class ReplayBuffer(object):
         idxes = sample_n_unique(lambda: random.randint(self.next_idx+1, mod_end), batch_size)
         return self._encode_sample(idxes)
 
+    def get_all_positive(self, length):
+        return self._encode_sample([self.next_idx-length+1, self.next_idx])
+    
+    def update_reward(self, reward, coef):
+        median_bonus = np.median(reward)
+        reward -= median_bonus
+        self.reward[self.next_idx-length+1, self.next_idx] += coef * reward
+
+
+
 
