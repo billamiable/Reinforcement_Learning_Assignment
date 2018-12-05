@@ -10,6 +10,7 @@ import tensorflow                as tf
 import tensorflow.contrib.layers as layers
 from collections import namedtuple
 from dqn_utils import *
+from my_exemplar import Exemplar
 
 OptimizerSpec = namedtuple("OptimizerSpec", ["constructor", "kwargs", "lr_schedule"])
 
@@ -33,7 +34,11 @@ class QLearner(object):
     rew_file=None,
     double_q=True,
     lander=False,
-    explore='e-greedy'):
+    explore='e-greedy',
+    ex2= False,
+    min_replay_size=1e4,
+    # not sure
+    ex_len= 1e3 ):
     """Run Deep Q-learning algorithm.
 
     You can specify your own convnet using q_func.
@@ -102,7 +107,14 @@ class QLearner(object):
     self.rew_file = str(uuid.uuid4()) + '.pkl' if rew_file is None else rew_file
     self.double_q = double_q
     self.explore = explore
-    
+    # EX2
+    self.ex2 = ex2
+    if self.ex2:
+        print('Use Exemplar Model')
+        self.exemplar = Exemplar(train_itrs=1e3, first_train_itrs=5e3)
+    self.min_replay_size = min_replay_size,
+    self.ex_len = ex_len
+    self.count = 0
     print('exploration strategy', explore)
     
     ###############
@@ -335,8 +347,7 @@ class QLearner(object):
     # might as well be random, since you haven't trained your net...)
     
     # Ex2
-    self.e_sample_length = 0  # length of not updated sample length
-    self.n_current_sample
+    self.count += 1
     # Store observation
     ret = self.replay_buffer.store_frame(self.last_obs)
     self.e_current_idx = ret 
@@ -413,12 +424,22 @@ class QLearner(object):
     self.replay_buffer.store_effect(ret, action, reward, done)
     
     # EX2
-    if done:
-        self.e_current_sample += 1
-        if self.e_current_sample == self.samples_number:
-            # fit ex2 model
-            self.exemplar.fit()
-            # update reward
+    if self.ex2 and self.buffer.num_in_buffer>self.min_replay_size and self.count == self.ex2_len:
+        self.count = 0
+        # fit ex2 model
+        if self.first_train:
+            train_itrs = self.first_train_itrs
+            self.first_train = False
+        else:
+            train_itrs = self.train_itrs
+        for _  in range(train_itrs):
+            postives, negatives = self.buffer.sample_idx(self.ex2_len)
+            self.exemplar.fit(postives, negatives)
+        # update rewards
+        paths = self.buffer.get_len_data()
+        bonus_reward = self.exemplar.predict(paths)
+        self.replay.update_reward(bonus_reward)
+        
 
     # exit()
     #####
