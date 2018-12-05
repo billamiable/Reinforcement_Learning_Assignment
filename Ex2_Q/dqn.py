@@ -297,10 +297,7 @@ class QLearner(object):
     ###############
     # RUN ENV     #
     ###############
-    if self.ex2:
-        self.model_initialized = True
-    else:
-        self.model_initialized = False
+    self.model_initialized = False
     self.num_param_updates = 0
     self.mean_episode_reward      = -float('nan')
     self.best_mean_episode_reward = -float('inf')
