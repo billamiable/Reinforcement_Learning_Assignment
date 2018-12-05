@@ -38,7 +38,8 @@ class QLearner(object):
     ex2= True,
     min_replay_size=10000,
     # not sure
-    ex2_len= 1000 ):
+    ex2_len= 1000,
+    coef=0.01 ):
     """Run Deep Q-learning algorithm.
 
     You can specify your own convnet using q_func.
@@ -109,7 +110,7 @@ class QLearner(object):
     self.explore = explore
     # EX2
     # [1e-3, 1e-4, 1e-5]
-    self.coef = 1e-2
+    self.coef = coef
     self.first_train = True
     self.first_train_itrs = int(5e3)
     self.train_itrs = int(1e3)
@@ -118,6 +119,8 @@ class QLearner(object):
     self.ex2_len = ex2_len
     self.count = 0
     print('exploration strategy', explore)
+    print('using ex2', ex2)
+    print('using coef', coef)
     
     ###############
     # BUILD MODEL #

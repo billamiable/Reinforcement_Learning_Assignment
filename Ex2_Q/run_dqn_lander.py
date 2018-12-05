@@ -63,7 +63,9 @@ def lander_learn(env,
                  num_timesteps,
                  seed,
                  double_q,
-                 explore):
+                 explore,
+                 ex2,
+                 coef):
 
     optimizer = lander_optimizer()
     stopping_criterion = lander_stopping_criterion(num_timesteps)
@@ -78,6 +80,8 @@ def lander_learn(env,
         double_q = double_q,
         rew_file='./pkl/lander_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
         explore=explore,
+        ex2=ex2,
+        coef=coef,
         **lander_kwargs()
     )
     env.close()
@@ -116,6 +120,8 @@ def main():
     # parser.add_argument('env_name', type=str, default='PongNoFrameskip-v4')
     parser.add_argument('--double_q', action='store_true')
     parser.add_argument('--explore', type=str, default='e-greedy')
+    parser.add_argument('--ex2', action='store_true')
+    parser.add_argument('--coef', type=float, default=0.01)
     args = parser.parse_args()
 
     # Run training
@@ -124,7 +130,8 @@ def main():
     env = get_env(seed)
     session = get_session()
     set_global_seeds(seed)
-    lander_learn(env, session, num_timesteps=500000, seed=seed, double_q=args.double_q, explore=args.explore)
+    lander_learn(env, session, num_timesteps=500000, seed=seed, 
+                 double_q=args.double_q, explore=args.explore, ex2=args.ex2, coef=args.coef)
 
 if __name__ == "__main__":
     main()
