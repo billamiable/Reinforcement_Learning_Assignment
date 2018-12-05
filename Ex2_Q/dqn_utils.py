@@ -221,7 +221,7 @@ class ReplayBuffer(object):
         obs_batch      = np.concatenate([self._encode_observation(idx)[None] for idx in idxes], 0)
         act_batch      = self.action[idxes]
         rew_batch      = self.reward[idxes]
-        next_obs_batch = np.concatenate([self._encode_observation(idx + 1)[None] for idx in idxes], 0)
+        next_obs_batch = np.concatenate([self._encode_observation( (idx + 1)%self.size )[None] for idx in idxes], 0)
         done_mask      = np.array([1.0 if self.done[idx] else 0.0 for idx in idxes], dtype=np.float32)
 
         return obs_batch, act_batch, rew_batch, next_obs_batch, done_mask
@@ -360,13 +360,15 @@ class ReplayBuffer(object):
 
     def sample_positive(self, length, batch_size):
         assert self.can_sample(batch_size)
-        idxes = sample_n_unique(lambda: random.randint(self.next_idx-length+1, self.next_idx), batch_size)
-        idxes = [idx % self.num_in_buffer for idx in idxes]
+        next_idx = (self.next_idx - 1) % self.num_in_buffer
+        idxes = sample_n_unique(lambda: random.randint( next_idx-length+1, next_idx), batch_size)
+        idxes = [idx % (self.num_in_buffer) for idx in idxes]
         return self._encode_sample(idxes)[0]
     
     def sample_negative(self, length, batch_size):
         assert self.can_sample(batch_size)
-        mod_start = (self.next_idx+1) % self.num_in_buffer
+        next_idx = (self.next_idx - 1) % self.num_in_buffer
+        mod_start = (next_idx+1) % self.num_in_buffer
         # mod_end = (self.num_in_buffer+self.next_idx-length) % self.num_in_buffer
         # idxes = sample_n_unique(lambda: random.randint(mod_start, mod_end), batch_size)
         idxes = sample_n_unique(lambda: random.randint(mod_start, mod_start+self.num_in_buffer-length-1), batch_size)
@@ -374,14 +376,16 @@ class ReplayBuffer(object):
         return self._encode_sample(idxes)[0]
 
     def get_all_positive(self, length):
-        idxes = list( range(self.next_idx-length+1 , self.next_idx) )
+        next_idx = (self.next_idx - 1) % self.num_in_buffer
+        idxes = list( range(next_idx-length+1 , next_idx) )
         idxes = [idx % self.num_in_buffer for idx in idxes]
         return self._encode_sample( idxes )[0]
     
     def update_reward(self, length, reward, coef):
+        next_idx = (self.next_idx - 1) % self.num_in_buffer
         median_bonus = np.median(reward)
         reward -= median_bonus
-        idxes = list( range(self.next_idx-length+1 , self.next_idx) )
+        idxes = list( range(next_idx-length+1 , next_idx) )
         idxes = [idx % self.num_in_buffer for idx in idxes]
         self.reward[idxes] += coef * reward
 

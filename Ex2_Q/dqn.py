@@ -109,7 +109,7 @@ class QLearner(object):
     self.explore = explore
     # EX2
     # [1e-3, 1e-4, 1e-5]
-    self.coef = 1e-4
+    self.coef = 1e-2
     self.first_train = True
     self.first_train_itrs = int(5e3)
     self.train_itrs = int(1e3)
