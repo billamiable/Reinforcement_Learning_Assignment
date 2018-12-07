@@ -35,7 +35,7 @@ class QLearner(object):
     double_q=True,
     lander=False,
     explore='e-greedy',
-    ex2= True,
+    ex2= False,
     min_replay_size=10000,
     # not sure
     ex2_len= 1000,
@@ -193,14 +193,16 @@ class QLearner(object):
         dropout = True
     else:
         dropout = False
-    q_t   = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False, 
-                       dropout=dropout, keep_prob=self.keep_per)
-    q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False, 
-                       dropout=dropout, keep_prob=self.keep_per)
+
     # EX2
     if self.ex2:
         print('Use Exemplar Model')
         self.exemplar = Exemplar(input_dim= input_shape[0])
+
+    q_t   = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False, 
+                       dropout=dropout, keep_prob=self.keep_per)
+    q_tp1 = q_func(obs_tp1_float, self.num_actions, scope='target_q_func_vars', reuse=False, 
+                       dropout=dropout, keep_prob=self.keep_per)
     
     # For boltzmann exploration
     if self.explore == 'soft_q':
@@ -310,6 +312,9 @@ class QLearner(object):
 
     self.start_time = None
     self.t = 0
+
+    # EX2
+    self.exemplar.model.init_tf_sess(self.session)
 
   def stopping_criterion_met(self):
     return self.stopping_criterion is not None and self.stopping_criterion(self.env, self.t)
@@ -488,10 +493,15 @@ class QLearner(object):
 
       # TO-DO: is it only initialize once when first start
       if not self.model_initialized:
-          initialize_interdependent_variables(self.session, tf.global_variables(), {
-              self.obs_t_ph: obs_t_batch,
-              self.obs_tp1_ph: obs_tp1_batch,
-          })
+          if self.ex2:
+              # initialized in Siamese model
+              pass
+          else:
+            initialize_interdependent_variables(self.session, tf.global_variables(), {
+                self.obs_t_ph: obs_t_batch,
+                self.obs_tp1_ph: obs_tp1_batch,
+            })
+            # self.session.run(tf.global_variables_initializer())
           # TO-DO: VERY VERY IMPORTATNT!!
           self.model_initialized = True
 

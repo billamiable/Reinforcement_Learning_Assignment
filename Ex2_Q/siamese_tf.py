@@ -144,10 +144,11 @@ class Siamese():
 
 		return Loss
 
-	def init_tf_sess(self):
+	def init_tf_sess(self, sess):
 		tf_config = tf.ConfigProto(inter_op_parallelism_threads=1, intra_op_parallelism_threads=1)
 		tf_config.gpu_options.allow_growth = True
-		self.sess = tf.Session(config=tf_config)
+		#self.sess = tf.Session(config=tf_config)
+		self.sess = sess
 		self.sess.__enter__()
 		tf.global_variables_initializer().run()
 	

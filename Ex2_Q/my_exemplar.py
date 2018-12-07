@@ -6,7 +6,7 @@ import tensorflow as tf
 class Exemplar(object):
     def __init__(
             self,
-            input_dim, 
+            input_dim,
             feature_dim = 4, 
             hidden_sizes = (32,32),
             bonus_form= "1/sqrt(p)",
@@ -14,7 +14,7 @@ class Exemplar(object):
         self.first_train = False
         self.bonus_form = bonus_form
         self.model = Siamese(input_dim, feature_dim, hidden_sizes)
-        self.model.init_tf_sess()
+        #self.model.init_tf_sess(sess)
 
     def fit(self, positive, negative):
         #log_step = self.train_itrs * self.log_freq
