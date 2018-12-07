@@ -65,7 +65,8 @@ def lander_learn(env,
                  double_q,
                  explore,
                  ex2,
-                 coef):
+                 coef
+                 ):
 
     optimizer = lander_optimizer()
     stopping_criterion = lander_stopping_criterion(num_timesteps)
@@ -82,6 +83,7 @@ def lander_learn(env,
         explore=explore,
         ex2=ex2,
         coef=coef,
+        seed=seed,
         **lander_kwargs()
     )
     env.close()
@@ -114,6 +116,8 @@ def get_env(seed):
 
     return env
 
+seed = 300 # you may want to randomize this
+
 def main():
     import argparse
     parser = argparse.ArgumentParser()
@@ -125,7 +129,7 @@ def main():
     args = parser.parse_args()
 
     # Run training
-    seed = 250 # you may want to randomize this
+    # seed = 250 # you may want to randomize this
     print('random seed = %d' % seed)
     env = get_env(seed)
     session = get_session()

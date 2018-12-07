@@ -7,13 +7,14 @@ class Exemplar(object):
     def __init__(
             self,
             input_dim,
+            seed = 250,
             feature_dim = 4, 
             hidden_sizes = (32,32),
             bonus_form= "1/sqrt(p)",
         ):
         self.first_train = False
         self.bonus_form = bonus_form
-        self.model = Siamese(input_dim, feature_dim, hidden_sizes)
+        self.model = Siamese(input_dim, feature_dim, hidden_sizes, seed = seed)
         #self.model.init_tf_sess(sess)
 
     def fit(self, positive, negative):

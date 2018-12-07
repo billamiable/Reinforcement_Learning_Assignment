@@ -12,7 +12,7 @@ class SimpleSampleLayer():
 
 	def __init__(self, mean, log_var, seed=np.random.randint(1, 2147462579)):
 		
-		self._srng = np.random.RandomState(seed=seed)
+		# self._srng = np.random.RandomState(seed=seed)
 		self.mean = mean
 		self.log_var = log_var
 		self.seed = seed
@@ -74,7 +74,7 @@ class Siamese():
 				 kl_weight=1,
 				 batch_norm=False,
 				 dropout=False,
-                 seed=200):
+				 seed=200):
 		
 		self.input_dim = input_dim
 		self.feature_dim = feature_dim
@@ -84,8 +84,8 @@ class Siamese():
 		self.batch_norm = batch_norm
 		self.dropout = dropout
 		self.kl_weight = kl_weight
-        self.seed = seed
-
+		self.seed = seed
+		print("siamese seed is ", self.seed)
 		self.build_graph()
 	
 	def build_graph(self):
