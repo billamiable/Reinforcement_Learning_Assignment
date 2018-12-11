@@ -88,6 +88,37 @@ def lander_learn(env,
     )
     env.close()
 
+def lander_eval(env,
+                 session,
+                 num_timesteps,
+                 seed,
+                 double_q,
+                 explore,
+                 ex2,
+                 coef
+                 ):
+
+    optimizer = lander_optimizer()
+    stopping_criterion = lander_stopping_criterion(num_timesteps)
+    exploration_schedule = lander_exploration_schedule(num_timesteps)
+
+    dqn.evaluate(
+        env=env,
+        session=session,
+        exploration=lander_exploration_schedule(num_timesteps),
+        stopping_criterion=lander_stopping_criterion(num_timesteps),
+        # double_q=True,
+        double_q = double_q,
+        rew_file='./pkl/lander_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
+        explore=explore,
+        ex2=ex2,
+        coef=coef,
+        seed=seed,
+        eval=True,
+        **lander_kwargs()
+    )
+    env.close()
+
 def set_global_seeds(i):
     tf.set_random_seed(i)
     np.random.seed(i)
@@ -134,8 +165,9 @@ def main():
     env = get_env(seed)
     session = get_session()
     set_global_seeds(seed)
-    lander_learn(env, session, num_timesteps=500000, seed=seed, 
+    #lander_learn(env, session, num_timesteps=500000, seed=seed, 
+    #            double_q=args.double_q, explore=args.explore, ex2=args.ex2, coef=args.coef)
+    lander_eval(env, session, num_timesteps=500000, seed=seed, 
                  double_q=args.double_q, explore=args.explore, ex2=args.ex2, coef=args.coef)
-
 if __name__ == "__main__":
     main()

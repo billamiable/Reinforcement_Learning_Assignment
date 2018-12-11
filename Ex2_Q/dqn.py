@@ -40,7 +40,8 @@ class QLearner(object):
     # not sure
     ex2_len= 1000,
     coef=0.01,
-    seed=250 ):
+    seed=250,
+    eval=False):
     """Run Deep Q-learning algorithm.
 
     You can specify your own convnet using q_func.
@@ -120,6 +121,7 @@ class QLearner(object):
     self.ex2_len = ex2_len
     self.count = 0
     self.seed = seed
+    self.eval = eval
     print('exploration strategy', explore)
     print('using ex2', ex2)
     print('using coef', coef)
@@ -199,7 +201,7 @@ class QLearner(object):
     # EX2
     if self.ex2:
         print('Use Exemplar Model')
-        self.exemplar = Exemplar(input_dim= input_shape[0], seed=self.seed )
+        self.exemplar = Exemplar(input_dim= input_shape[0], seed=self.seed, eval=self.eval )
 
     q_t   = q_func(obs_t_float, self.num_actions, scope='q_func', reuse=False, 
                        dropout=dropout, keep_prob=self.keep_per)
@@ -316,8 +318,15 @@ class QLearner(object):
     self.t = 0
 
     # EX2
-    self.exemplar.model.init_tf_sess(self.session)
-
+    self.saver = tf.train.Saver()    
+    if self.ex2:
+        self.exemplar.model.init_tf_sess(self.session)
+    # eval
+    if self.eval:
+        print("Initialize Evaluation Mode")
+        self.saver.restore(self.session, "./bstmodel/model.ckpt")
+        self.model_initialized = True
+        print("Initialized models")
   def stopping_criterion_met(self):
     return self.stopping_criterion is not None and self.stopping_criterion(self.env, self.t)
 
@@ -438,29 +447,32 @@ class QLearner(object):
     # Store others
     self.replay_buffer.store_effect(ret, action, reward, done)
     
-    # EX2
-    if self.ex2 and (self.replay_buffer.num_in_buffer > self.min_replay_size) and (self.count >= self.ex2_len):
-        self.count = 0
-        # fit ex2 model
-        if self.first_train:
-            train_itrs = self.first_train_itrs
-            self.first_train = False
-        else:
-            train_itrs = self.train_itrs
-        for _  in range(train_itrs):
-            positive = self.replay_buffer.sample_positive(self.ex2_len, 128)
-            negative = self.replay_buffer.sample_negative(self.ex2_len, 128)
-            # positive_np = np.asarray(positive)
-            # print(positive_np.shape)
-            # print(self.replay_buffer.num_in_buffer)
-            # print(positive)
-            # print(len(positive))
-            # exit()
-            self.exemplar.fit(positive, negative)
-        # update rewards
-        paths = self.replay_buffer.get_all_positive(self.ex2_len)
-        bonus_reward = self.exemplar.predict(paths)
-        self.replay_buffer.update_reward(self.ex2_len, bonus_reward, self.coef)
+    # Update EX2 model and rewards
+    if not self.eval:
+        if self.ex2 and (self.replay_buffer.num_in_buffer > self.min_replay_size) and (self.count >= self.ex2_len):
+            self.count = 0
+            # fit ex2 model
+            if self.first_train:
+                train_itrs = self.first_train_itrs
+                self.first_train = False
+            else:
+                train_itrs = self.train_itrs
+            for _  in range(train_itrs):
+                positive = self.replay_buffer.sample_positive(self.ex2_len, 128)
+                negative = self.replay_buffer.sample_negative(self.ex2_len, 128)
+                # positive_np = np.asarray(positive)
+                # print(positive_np.shape)
+                # print(self.replay_buffer.num_in_buffer)
+                # print(positive)
+                # print(len(positive))
+                # exit()
+                self.exemplar.fit(positive, negative)
+            # update rewards
+            paths = self.replay_buffer.get_all_positive(self.ex2_len)
+            bonus_reward = self.exemplar.predict(paths)
+            self.replay_buffer.update_reward(self.ex2_len, bonus_reward, self.coef)
+    if self.eval:
+        self.t += 1
     # exit()
     #####
     # YOUR CODE HERE
@@ -495,16 +507,21 @@ class QLearner(object):
 
       # TO-DO: is it only initialize once when first start
       if not self.model_initialized:
+          print("initializing model")
           if self.ex2:
-              # initialized in Siamese model
-              pass
+            # initialized in Siamese model
+            print("Ex2 no need to initialize")
+            pass
           else:
+            print("interdependent init")
             initialize_interdependent_variables(self.session, tf.global_variables(), {
                 self.obs_t_ph: obs_t_batch,
                 self.obs_tp1_ph: obs_tp1_batch,
             })
             # self.session.run(tf.global_variables_initializer())
           # TO-DO: VERY VERY IMPORTATNT!!
+          #self.saver = tf.train.Saver()
+          print("set model_initialized True")
           self.model_initialized = True
 
       # 3.c: train the model. To do this, you'll need to use the self.train_fn and
@@ -554,7 +571,16 @@ class QLearner(object):
       self.mean_episode_reward = np.mean(episode_rewards[-100:])
 
     if len(episode_rewards) > 100:
-      self.best_mean_episode_reward = max(self.best_mean_episode_reward, self.mean_episode_reward)
+      if self.mean_episode_reward > self.best_mean_episode_reward:
+        # store the best_mean_reward
+        self.best_mean_episode_reward = self.mean_episode_reward
+        print(self.model_initialized)
+        print(self.eval)
+        if self.model_initialized and not self.eval:
+            # store the best model
+            save_path = self.saver.save(self.session, "./bstmodel/model.ckpt")
+            print("Model saved in path: %s" % save_path)
+            #self.best_mean_episode_reward = max(self.best_mean_episode_reward, self.mean_episode_reward)
 
     if self.t % self.log_every_n_steps == 0 and self.model_initialized:
       print("Timestep %d" % (self.t,))
@@ -590,6 +616,18 @@ def learn(*args, **kwargs):
     # reset if done was true), and self.last_obs should point to the new latest
     # observation
     alg.update_model()
+    alg.log_progress()
+    # print('end')
+    # exit()
+
+def evaluate(*args, **kwargs):
+  alg = QLearner(*args, **kwargs)
+  while not alg.stopping_criterion_met():
+    alg.step_env()
+    # at this point, the environment should have been advanced one step (and
+    # reset if done was true), and self.last_obs should point to the new latest
+    # observation
+    #alg.update_model()
     alg.log_progress()
     # print('end')
     # exit()

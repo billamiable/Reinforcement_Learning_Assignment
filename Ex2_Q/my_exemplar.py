@@ -11,10 +11,11 @@ class Exemplar(object):
             feature_dim = 4, 
             hidden_sizes = (32,32),
             bonus_form= "1/sqrt(p)",
+            eval= False
         ):
         self.first_train = False
         self.bonus_form = bonus_form
-        self.model = Siamese(input_dim, feature_dim, hidden_sizes, seed = seed)
+        self.model = Siamese(input_dim, feature_dim, hidden_sizes, seed = seed, eval=eval)
         #self.model.init_tf_sess(sess)
 
     def fit(self, positive, negative):

@@ -74,7 +74,8 @@ class Siamese():
 				 kl_weight=1,
 				 batch_norm=False,
 				 dropout=False,
-				 seed=200):
+				 seed=200,
+				 eval=eval):
 		
 		self.input_dim = input_dim
 		self.feature_dim = feature_dim
@@ -85,6 +86,7 @@ class Siamese():
 		self.dropout = dropout
 		self.kl_weight = kl_weight
 		self.seed = seed
+		self.eval = eval
 		print("siamese seed is ", self.seed)
 		self.build_graph()
 	
@@ -152,8 +154,11 @@ class Siamese():
 		#self.sess = tf.Session(config=tf_config)
 		self.sess = sess
 		self.sess.__enter__()
-		tf.global_variables_initializer().run()
-	
+		if not self.eval:
+			print("initialize all variables in Siamese Model")
+			tf.global_variables_initializer().run()
+		else:
+			print("Only set session in Samese not initialize")
 	def train(self, input_train_1, input_train_2, label_train):
 		_, loss = self.sess.run([self.optimizer, self.loss], feed_dict = {self.lin1: input_train_1, self.lin2: input_train_2, self.label: label_train})
 
