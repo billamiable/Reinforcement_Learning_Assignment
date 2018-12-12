@@ -65,6 +65,7 @@ def lander_learn(env,
                  double_q,
                  explore,
                  ex2,
+                 eval,
                  coef
                  ):
 
@@ -95,6 +96,7 @@ def lander_eval(env,
                  double_q,
                  explore,
                  ex2,
+                 evaluation,
                  coef
                  ):
 
@@ -114,7 +116,7 @@ def lander_eval(env,
         ex2=ex2,
         coef=coef,
         seed=seed,
-        eval=True,
+        eval=evaluation,
         **lander_kwargs()
     )
     env.close()
@@ -154,6 +156,7 @@ def main():
     parser = argparse.ArgumentParser()
     # parser.add_argument('env_name', type=str, default='PongNoFrameskip-v4')
     parser.add_argument('--double_q', action='store_true')
+    parser.add_argument('--eval', action='store_true')
     parser.add_argument('--explore', type=str, default='e-greedy')
     parser.add_argument('--ex2', action='store_true')
     parser.add_argument('--coef', type=float, default=0.01)
@@ -165,9 +168,7 @@ def main():
     env = get_env(seed)
     session = get_session()
     set_global_seeds(seed)
-    # lander_learn(env, session, num_timesteps=500000, seed=seed, 
-    #            double_q=args.double_q, explore=args.explore, ex2=args.ex2, coef=args.coef)
-    lander_eval(env, session, num_timesteps=500000, seed=seed, 
-                 double_q=args.double_q, explore=args.explore, ex2=args.ex2, coef=args.coef)
+    lander_learn(env, session, num_timesteps=500000, seed=seed, 
+                double_q=args.double_q, explore=args.explore, ex2=args.ex2, evaluation=args.eval, coef=args.coef)
 if __name__ == "__main__":
     main()

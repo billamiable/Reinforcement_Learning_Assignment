@@ -31,6 +31,9 @@ def atari_learn(env,
                 double_q,
                 explore,
                 ex2,
+                seed,
+                evaluation,
+                directory,
                 coef):
     # This is just a rough estimate
     num_iterations = float(num_timesteps) / 4.0
@@ -81,6 +84,9 @@ def atari_learn(env,
         rew_file='./pkl/ram_'+ time.strftime("%d-%m-%Y_%H-%M-%S") +'.pkl',
         explore=explore,
         ex2=ex2,
+        seed = seed,
+        evaluation = evaluation,
+        directory = directory,
         coef=coef
     )
     env.close()
@@ -127,18 +133,20 @@ def main():
     parser = argparse.ArgumentParser()
     # parser.add_argument('env_name', type=str, default='PongNoFrameskip-v4')
     parser.add_argument('--double_q', action='store_true')
+    parser.add_argument('--eval', action='store_true')
     parser.add_argument('--explore', type=str, default='e-greedy')
+    parser.add_argument('--directory', type=str, default='./models/test_model')
     parser.add_argument('--ex2', action='store_true')
     parser.add_argument('--coef', type=float, default=0.01)
     args = parser.parse_args()
 
     # Run training
-    seed = 0 # Use a seed of zero (you may want to randomize the seed!)
+    seed = 250 # Use a seed of zero (you may want to randomize the seed!)
     env = get_env(seed)
     session = get_session()
     atari_learn(env, session, num_timesteps=int(4e7), 
                 double_q=args.double_q, explore=args.explore,
-                ex2=args.ex2, coef=args.coef)
+                ex2=args.ex2, seed=seed, evaluation=args.eval, directory=args.directory, coef=args.coef)
 
 if __name__ == "__main__":
     main()

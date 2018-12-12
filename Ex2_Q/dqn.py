@@ -14,6 +14,16 @@ from my_exemplar import Exemplar
 
 OptimizerSpec = namedtuple("OptimizerSpec", ["constructor", "kwargs", "lr_schedule"])
 
+def set_global_seeds(i):
+    try:
+        import tensorflow as tf
+    except ImportError:
+        pass
+    else:
+        tf.set_random_seed(i)
+    np.random.seed(i)
+    random.seed(i)
+
 class QLearner(object):
   def __init__(
     self,
@@ -41,7 +51,8 @@ class QLearner(object):
     ex2_len= 1000,
     coef=0.01,
     seed=250,
-    eval=False):
+    evaluation=False,
+    directory = './models/model1'):
     """Run Deep Q-learning algorithm.
 
     You can specify your own convnet using q_func.
@@ -110,6 +121,7 @@ class QLearner(object):
     self.rew_file = str(uuid.uuid4()) + '.pkl' if rew_file is None else rew_file
     self.double_q = double_q
     self.explore = explore
+    self.directory = directory
     # EX2
     # [1e-3, 1e-4, 1e-5]
     self.coef = coef
@@ -121,12 +133,12 @@ class QLearner(object):
     self.ex2_len = ex2_len
     self.count = 0
     self.seed = seed
-    self.eval = eval
+    self.eval = evaluation
     print('eval?', self.eval)
     print('exploration strategy', explore)
     print('using ex2', ex2)
     print('using coef', coef)
-    
+    set_global_seeds(self.seed)
     ###############
     # BUILD MODEL #
     ###############
@@ -139,8 +151,8 @@ class QLearner(object):
         input_shape = (img_h, img_w, frame_history_len * img_c)
     self.num_actions = self.env.action_space.n
     if self.eval:
-        saver1 = tf.train.import_meta_graph('./bstmodel/model.meta')
-        saver1.restore(self.session, './bstmodel/model')
+        saver1 = tf.train.import_meta_graph(self.directory+'.meta')
+        saver1.restore(self.session, self.directory)
         self.obs_t_ph = tf.get_collection('obs_t_ph')[0]
         self.Temp = tf.get_collection('Temp')[0]
         self.keep_per = tf.get_collection('keep_per')[0]
@@ -340,7 +352,7 @@ class QLearner(object):
     self.t = 0
 
     # EX2
-    if not eval:
+    if not self.eval:
         self.saver = tf.train.Saver()
         tf.add_to_collection('obs_t_ph', self.obs_t_ph)
         tf.add_to_collection('Temp', self.Temp)
@@ -468,8 +480,8 @@ class QLearner(object):
                 # print("ex2 dis_out", ex2_out)
                 # print("ex2 pb_out", ex2_pb)
                 #for _ in range(10):
-                #    ex2_out, ex2_pb = self.session.run([self.ex2_dis_output, self.ex2_prob], feed_dict={self.ex2_in1: np.ones((1,9))/9, 
-                #                                                           self.ex2_in2: np.ones((1,9))/9 })
+                ex2_out, ex2_pb = self.session.run([self.ex2_dis_output, self.ex2_prob], feed_dict={self.ex2_in1: [recent_obs], 
+                                                                           self.ex2_in2: [recent_obs] })
                 #    print("ex2_pb", ex2_pb)
             #exit()
             if 0:
@@ -639,7 +651,7 @@ class QLearner(object):
         #print("eval?",self.eval)
         if self.model_initialized and not self.eval:
             # store the best model
-            save_path = self.saver.save(self.session, "./bstmodel/model")
+            save_path = self.saver.save(self.session, self.directory)
             print("Model saved in path: %s" % save_path)
             #self.best_mean_episode_reward = max(self.best_mean_episode_reward, self.mean_episode_reward)
             #print("Exemplar test output")
@@ -679,19 +691,8 @@ def learn(*args, **kwargs):
     # at this point, the environment should have been advanced one step (and
     # reset if done was true), and self.last_obs should point to the new latest
     # observation
-    alg.update_model()
-    alg.log_progress()
-    # print('end')
-    # exit()
-
-def evaluate(*args, **kwargs):
-  alg = QLearner(*args, **kwargs)
-  while not alg.stopping_criterion_met():
-    alg.step_env()
-    # at this point, the environment should have been advanced one step (and
-    # reset if done was true), and self.last_obs should point to the new latest
-    # observation
-    #alg.update_model()
+    if not alg.eval:
+        alg.update_model()
     alg.log_progress()
     # print('end')
     # exit()
