@@ -105,7 +105,13 @@ class QLearner(object):
     self.learning_starts = learning_starts
     self.stopping_criterion = stopping_criterion
     self.env = env
-    self.session = session
+    
+    # Double (need to modify)
+    graph_1 = tf.Graph()
+    graph_2 = tf.Graph()
+    self.session1 = session
+    self.session2 = session
+    
     self.exploration = exploration
     self.rew_file = str(uuid.uuid4()) + '.pkl' if rew_file is None else rew_file
     self.double_q = double_q
@@ -139,19 +145,36 @@ class QLearner(object):
         input_shape = (img_h, img_w, frame_history_len * img_c)
     self.num_actions = self.env.action_space.n
     if self.eval:
-        saver1 = tf.train.import_meta_graph('./bstmodel/model.meta')
-        saver1.restore(self.session, './bstmodel/model')
-        self.obs_t_ph = tf.get_collection('obs_t_ph')[0]
-        self.Temp = tf.get_collection('Temp')[0]
-        self.keep_per = tf.get_collection('keep_per')[0]
-        self.q_dist = tf.get_collection('q_dist')[0]
-        self.q_t = tf.get_collection('q_t')[0]
-        # Ex2
-        if self.ex2:
-            self.ex2_in1 = tf.get_collection('ex2_in1')[0]
-            self.ex2_in2 = tf.get_collection('ex2_in2')[0]
-            self.ex2_dis_output = tf.get_collection('ex2_dis_output')[0]
-            self.ex2_prob = tf.get_collection('ex2_prob')[0]
+        # Model 1
+        with graph_1.as_default():
+            saver1 = tf.train.import_meta_graph('./bstmodel/model1.meta')
+            saver1.restore(self.session1, './bstmodel/model1')
+            self.obs_t_ph1 = tf.get_collection('obs_t_ph')[0]
+            self.Temp1 = tf.get_collection('Temp')[0]
+            self.keep_per1 = tf.get_collection('keep_per')[0]
+            self.q_dist1 = tf.get_collection('q_dist')[0]
+            self.q_t1 = tf.get_collection('q_t')[0]
+            # Ex2
+            if self.ex2:
+                self.ex2_in1_1 = tf.get_collection('ex2_in1')[0]
+                self.ex2_in2_1 = tf.get_collection('ex2_in2')[0]
+                self.ex2_dis_output1 = tf.get_collection('ex2_dis_output')[0]
+                self.ex2_prob1 = tf.get_collection('ex2_prob')[0]
+        # Model 2
+        with graph_2.as_default():
+            saver2 = tf.train.import_meta_graph('./bstmodel/model2.meta')
+            saver2.restore(self.session2, './bstmodel/model2')
+            self.obs_t_ph2 = tf.get_collection('obs_t_ph')[0]
+            self.Temp2 = tf.get_collection('Temp')[0]
+            self.keep_per2 = tf.get_collection('keep_per')[0]
+            self.q_dist2 = tf.get_collection('q_dist')[0]
+            self.q_t2 = tf.get_collection('q_t')[0]
+            # Ex2
+            if self.ex2:
+                self.ex2_in1_2 = tf.get_collection('ex2_in1')[0]
+                self.ex2_in2_2 = tf.get_collection('ex2_in2')[0]
+                self.ex2_dis_output_2 = tf.get_collection('ex2_dis_output')[0]
+                self.ex2_prob_2 = tf.get_collection('ex2_prob')[0]
         self.model_initialized = True
         # print('obs is here',self.obs_t_ph)
         # print(self.Temp)
@@ -456,9 +479,20 @@ class QLearner(object):
             #print(self.Temp)
             #print(self.keep_per)
             #exit()
-            q_d = self.session.run(self.q_dist, feed_dict={self.obs_t_ph: [recent_obs], 
-                                                           self.Temp: self.exploration.value(self.t),
-                                                           self.keep_per: 1.0})
+            q_t1 = self.session1.run(self.q_t1, feed_dict={self.obs_t_ph1: [recent_obs], 
+                                                           self.Temp1: self.exploration.value(self.t),
+                                                           self.keep_per1: 1.0})
+            q_t2 = self.session2.run(self.q_t2, feed_dict={self.obs_t_ph2: [recent_obs], 
+                                                           self.Temp2: self.exploration.value(self.t),
+                                                           self.keep_per2: 1.0})
+            ex1_out, _ = self.session.run([self.ex2_dis_output1, self.ex2_prob1], feed_dict={self.ex2_in1_1: [recent_obs], 
+                                                self.ex2_in2_1: [recent_obs] })
+            ex2_out, _ = self.session.run([self.ex2_dis_output2, self.ex2_prob2], feed_dict={self.ex2_in1_2: [recent_obs], 
+                                                self.ex2_in2_2: [recent_obs] })
+            alphas = np_softmax( [ex1_out, ex2_out] ) 
+            q_t = alphas * np.array( [q_t1,  q_t2] )
+            q_dist = tf.nn.softmax(q_t/self.Temp)
+            action = np.random.choice(self.num_actions, p=q_d[0])
             if self.eval and (self.replay_buffer.num_in_buffer > self.min_replay_size) and (self.count >= self.ex2_len):
                 self.count = 0
                 #paths = self.replay_buffer.get_all_positive(self.ex2_len)
@@ -695,4 +729,7 @@ def evaluate(*args, **kwargs):
     alg.log_progress()
     # print('end')
     # exit()
-
+# https://stackoverflow.com/questions/34968722/how-to-implement-the-softmax-function-in-python
+def np_softmax(x):
+    """Compute softmax values for each sets of scores in x."""
+    return np.exp(x) / np.sum(np.exp(x), axis=0)

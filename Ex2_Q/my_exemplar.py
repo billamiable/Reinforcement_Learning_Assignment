@@ -11,10 +11,11 @@ class Exemplar(object):
             feature_dim = 4, 
             hidden_sizes = (32,32),
             bonus_form= "1/sqrt(p)",
+            eval= False
         ):
         self.first_train = False
         self.bonus_form = bonus_form
-        self.model = Siamese(input_dim, feature_dim, hidden_sizes, seed = seed)
+        self.model = Siamese(input_dim, feature_dim, hidden_sizes, seed = seed, eval=eval)
         #self.model.init_tf_sess(sess)
 
     def fit(self, positive, negative):
@@ -29,6 +30,7 @@ class Exemplar(object):
 
     def predict(self, path):
         counts = self.model.predict(path, path)
+        # print(counts)
         # if self.rank == 0:
         #     logger.record_tabular('Average Prob', np.mean(counts))
         #     logger.record_tabular('Average Discrim', np.mean(1/(5.01*counts + 1)))
