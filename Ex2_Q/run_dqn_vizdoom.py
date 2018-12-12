@@ -47,7 +47,8 @@ def vizdoom_learn(game,
                   ex2,
                   coef,
                   vizdoom,
-                  seed):
+                  seed,
+                  evaluation):
     # This is just a rough estimate
     num_iterations = float(num_timesteps) / 4.0
 
@@ -108,9 +109,14 @@ def vizdoom_learn(game,
         rew_file='./pkl/vizdoom_'+time.strftime("%d-%m-%Y_%H-%M-%S")+'.pkl',
         explore=explore,
         ex2=ex2,
+        ex2_len=128,
+        min_replay_size=128,
         coef=coef,
         seed=seed,
-        vizdoom=vizdoom
+        eval= evaluation,
+        vizdoom=vizdoom,
+        # model_path= './bstmodel/vizdoom_'+time.strftime("%d-%m-%Y_%H-%M-%S")
+        model_path = './bstmodel/vizdoom_12-12-2018_01-28-25'
     )
     game.close()
 
@@ -168,6 +174,7 @@ def main():
     # parser.add_argument('env_name', type=str, default='PongNoFrameskip-v4')
     parser.add_argument('--vizdoom', action='store_true')
     parser.add_argument('--double_q', action='store_true')
+    parser.add_argument('--eval', action='store_true')
     parser.add_argument('--explore', type=str, default='e-greedy')
     parser.add_argument('--ex2', action='store_true')
     parser.add_argument('--coef', type=float, default=0.01)
@@ -191,7 +198,7 @@ def main():
     # OMG, 200M Maximum steps
     # TO-DO: num_timesteps need to be changed, here 8e4 = epochs * it_per_epochs
     vizdoom_learn(game, session, num_timesteps=8e4, vizdoom = args.vizdoom, double_q=args.double_q, 
-                  explore=args.explore, ex2=args.ex2, coef=args.coef, seed=seed)
+                  explore=args.explore, ex2=args.ex2, coef=args.coef, seed=seed, evaluation=args.eval)
 
 if __name__ == "__main__":
     main()
