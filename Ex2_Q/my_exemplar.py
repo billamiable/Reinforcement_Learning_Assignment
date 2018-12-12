@@ -30,6 +30,7 @@ class Exemplar(object):
 
     def predict(self, path):
         counts = self.model.predict(path, path)
+        # print(counts)
         # if self.rank == 0:
         #     logger.record_tabular('Average Prob', np.mean(counts))
         #     logger.record_tabular('Average Discrim', np.mean(1/(5.01*counts + 1)))

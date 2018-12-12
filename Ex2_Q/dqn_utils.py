@@ -212,7 +212,7 @@ class ReplayBuffer(object):
         self.action   = None
         self.reward   = None
         self.done     = None
-
+        self.not_encode = True
     def can_sample(self, batch_size):
         """Returns true if `batch_size` different transitions can be sampled from the buffer."""
         return batch_size + 1 <= self.num_in_buffer
@@ -285,7 +285,7 @@ class ReplayBuffer(object):
         # That is why the result is the same dimension, 
         # this checks if we are using low-dimensional observations, such as RAM
         # state, in which case we just directly return the latest RAM.
-        if len(self.obs.shape) == 2:
+        if len(self.obs.shape) == 2 or self.not_encode:
             return self.obs[end_idx-1]
         # if there weren't enough frames ever in the buffer for context
         if start_idx < 0 and self.num_in_buffer != self.size:

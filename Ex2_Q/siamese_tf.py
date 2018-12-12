@@ -165,12 +165,17 @@ class Siamese():
 		return loss
 	
 	def predict(self, input_1, input_2):
-
 		dis_output = self.sess.run(self.vae_output, feed_dict = {self.lin1: input_1, self.lin2: input_2})
 		dis_output = np.clip(np.squeeze(dis_output), 1e-5, 1-1e-5)
 		prob = (1 - dis_output) / (dis_output)
-
+		print('ex2 prob',prob)
 		return prob
+		
+	# Tensor Version
+	def predict_tensor(self):
+		dis_output = tf.clip_by_value( tf.squeeze(self.vae_output), 1e-5, 1-1e-5)
+		prob = (1 - dis_output) / (dis_output)
+		return self.lin1, self.lin2, dis_output, prob
 
 
 

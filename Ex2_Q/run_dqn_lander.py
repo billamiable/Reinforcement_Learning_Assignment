@@ -165,7 +165,7 @@ def main():
     env = get_env(seed)
     session = get_session()
     set_global_seeds(seed)
-    #lander_learn(env, session, num_timesteps=500000, seed=seed, 
+    # lander_learn(env, session, num_timesteps=500000, seed=seed, 
     #            double_q=args.double_q, explore=args.explore, ex2=args.ex2, coef=args.coef)
     lander_eval(env, session, num_timesteps=500000, seed=seed, 
                  double_q=args.double_q, explore=args.explore, ex2=args.ex2, coef=args.coef)
