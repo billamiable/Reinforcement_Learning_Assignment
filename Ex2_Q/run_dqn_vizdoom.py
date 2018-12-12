@@ -8,12 +8,11 @@ import tensorflow as tf
 import tensorflow.contrib.layers as layers
 import time
 
-import dqn
+# VIP: different from other tasks
+import dqn_vizdoom as dqn
 from dqn_utils import *
 import vizdoom as vzd
-import skimage.color, skimage.transform
-
-
+from tqdm import trange
 
 def vizdoom_model(img_in, num_actions, scope, reuse=False, dropout=False, keep_prob=1.0):
     # as described in https://storage.googleapis.com/deepmind-data/assets/papers/DeepMindNature14236Paper.pdf
@@ -21,75 +20,97 @@ def vizdoom_model(img_in, num_actions, scope, reuse=False, dropout=False, keep_p
         out = img_in
         with tf.variable_scope("convnet"):
             # original architecture
-            out = layers.convolution2d(out, num_outputs=32, kernel_size=8, stride=4, activation_fn=tf.nn.relu)
-            out = layers.convolution2d(out, num_outputs=64, kernel_size=4, stride=2, activation_fn=tf.nn.relu)
-            out = layers.convolution2d(out, num_outputs=64, kernel_size=3, stride=1, activation_fn=tf.nn.relu)
+            out = layers.convolution2d(out, num_outputs=8, kernel_size=[6, 6], stride=[3, 3],
+                                            activation_fn=tf.nn.relu,
+                                            weights_initializer=layers.xavier_initializer_conv2d(),
+                                            biases_initializer=tf.constant_initializer(0.1))
+            out = layers.convolution2d(out, num_outputs=8, kernel_size=[3, 3], stride=[2, 2],
+                                            activation_fn=tf.nn.relu,
+                                            weights_initializer=layers.xavier_initializer_conv2d(),
+                                            biases_initializer=tf.constant_initializer(0.1))           
         out = layers.flatten(out)
         with tf.variable_scope("action_value"):
-            out = layers.fully_connected(out, num_outputs=512,         activation_fn=tf.nn.relu)
-            if dropout:
-                out = layers.dropout(out, keep_prob=keep_prob)
-            out = layers.fully_connected(out, num_outputs=num_actions, activation_fn=None)
+            out = layers.fully_connected(out, num_outputs=128,                     activation_fn=tf.nn.relu,
+                                              weights_initializer=layers.xavier_initializer(),
+                                              biases_initializer=tf.constant_initializer(0.1))
+            out = layers.fully_connected(out, num_outputs=num_actions, activation_fn=None,
+                                              weights_initializer=layers.xavier_initializer(),
+                                              biases_initializer=tf.constant_initializer(0.1))
 
         return out
 
 def vizdoom_learn(game,
-                session,
-                num_timesteps,
-                double_q,
-                explore,
-                ex2=ex2,
-                coef=coef):
+                  session,
+                  num_timesteps,
+                  double_q,
+                  explore,
+                  ex2,
+                  coef,
+                  vizdoom,
+                  seed):
     # This is just a rough estimate
     num_iterations = float(num_timesteps) / 4.0
 
     lr_multiplier = 1.0
-    lr_schedule = PiecewiseSchedule([
-                                         (0,                   1e-4 * lr_multiplier),
-                                         (num_iterations / 10, 1e-4 * lr_multiplier),
-                                         (num_iterations / 2,  5e-5 * lr_multiplier),
-                                    ],
-                                    outside_value=5e-5 * lr_multiplier)
+    lr_schedule = ConstantSchedule(2.5e-4)
+    # lr_schedule = PiecewiseSchedule([
+    #                                      (0,                   1e-4 * lr_multiplier),
+    #                                      (num_iterations / 10, 1e-4 * lr_multiplier),
+    #                                      (num_iterations / 2,  5e-5 * lr_multiplier),
+    #                                 ],
+    #                                 outside_value=5e-5 * lr_multiplier)
     optimizer = dqn.OptimizerSpec(
         constructor=tf.train.AdamOptimizer,
         kwargs=dict(epsilon=1e-4),
         lr_schedule=lr_schedule
     )
 
-    def stopping_criterion(env, t):
-        # notice that here t is the number of steps of the wrapped env,
-        # which is different from the number of steps in the underlying env
-        return get_wrapper_by_name(env, "Monitor").get_total_steps() >= num_timesteps
+    # TO-DO: FIGURE OUT HOW TO WRAP UP
+    # TO-DO: CHECK MONITOR SETTING
+    # ONLY NEED IS TO STOP THE ENVIRONMENT
+    # SEEMS THAT WE CAN DEFINE BY OURSELVES
+    # TO-DO: see if works
+    if vizdoom:
+        def stopping_criterion(env, t):
+            None
+    else:
+        def stopping_criterion(env, t):
+            # notice that here t is the number of steps of the wrapped env,
+            # which is different from the number of steps in the underlying env
+            return get_wrapper_by_name(game, "Monitor").get_total_steps() >= num_timesteps
     # therefore, the exploration gradually decrease
     exploration_schedule = PiecewiseSchedule(
         [
             (0, 1.0),
-            (1e6, 0.1),
-            (num_iterations / 2, 0.01),
-        ], outside_value=0.01
+            (0.6*8e4, 0.1),
+        ], outside_value=0.1
     )
 
     # TO-DO: Pay attention to arg here, double_q
     dqn.learn(
-        env=env,
+        env=game,
         q_func=vizdoom_model,
         optimizer_spec=optimizer,
         session=session,
         exploration=exploration_schedule,
         stopping_criterion=stopping_criterion,
-        replay_buffer_size=1000000,
-        batch_size=32,
+        # changed for vizdoom
+        replay_buffer_size=10000,
+        batch_size=64,
         gamma=0.99,
-        learning_starts=50000,
-        learning_freq=4,
-        frame_history_len=4,
-        target_update_freq=10000,
+        # Changed for vizdoom
+        learning_starts=0,
+        learning_freq=1,
+        frame_history_len=1,
+        target_update_freq=1,
         grad_norm_clipping=10,
         double_q=double_q,
         rew_file='./pkl/vizdoom_'+time.strftime("%d-%m-%Y_%H-%M-%S")+'.pkl',
         explore=explore,
         ex2=ex2,
-        coef=coef
+        coef=coef,
+        seed=seed,
+        vizdoom=vizdoom
     )
     game.close()
 
@@ -99,12 +120,7 @@ def get_available_gpus():
     return [x.physical_device_desc for x in local_device_protos if x.device_type == 'GPU']
 
 def set_global_seeds(i):
-    try:
-        import tensorflow as tf
-    except ImportError:
-        pass
-    else:
-        tf.set_random_seed(i)
+    tf.set_random_seed(i)
     np.random.seed(i)
     random.seed(i)
 
@@ -150,6 +166,7 @@ def main():
     import argparse
     parser = argparse.ArgumentParser()
     # parser.add_argument('env_name', type=str, default='PongNoFrameskip-v4')
+    parser.add_argument('--vizdoom', action='store_true')
     parser.add_argument('--double_q', action='store_true')
     parser.add_argument('--explore', type=str, default='e-greedy')
     parser.add_argument('--ex2', action='store_true')
@@ -157,19 +174,24 @@ def main():
     args = parser.parse_args()
     
     # Run training
-    seed = random.randint(0, 9999)
+    # seed = random.randint(0, 9999)
+    seed = 300
     print('random seed = %d' % seed)
+    set_global_seeds(seed)
 
     # Get Vizdoom games.
     # Create Doom instance
-    game = initialize_vizdoom(args.config, seed)
+    DEFAULT_CONFIG = "/Users/wangyujie/Desktop/iProud/iCourse/US/294-Reinforcement_Learning/Group_Project/ViZDoom/scenarios/simpler_basic.cfg"
+    game = initialize_vizdoom(DEFAULT_CONFIG, seed)
     print('using game vizdoom')
 
     # env = get_env(task, seed, args.env_name)
     session = get_session()
+    
     # OMG, 200M Maximum steps
-    vizdoom_learn(game, session, num_timesteps=2e8, double_q=args.double_q, 
-                explore=args.explore, ex2=args.ex2, coef=args.coef)
+    # TO-DO: num_timesteps need to be changed, here 8e4 = epochs * it_per_epochs
+    vizdoom_learn(game, session, num_timesteps=8e4, vizdoom = args.vizdoom, double_q=args.double_q, 
+                  explore=args.explore, ex2=args.ex2, coef=args.coef, seed=seed)
 
 if __name__ == "__main__":
     main()

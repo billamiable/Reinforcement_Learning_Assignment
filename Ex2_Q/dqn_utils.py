@@ -174,7 +174,7 @@ def get_wrapper_by_name(env, classname):
             raise ValueError("Couldn't find wrapper named %s"%classname)
 
 class ReplayBuffer(object):
-    def __init__(self, size, frame_history_len, lander=False):
+    def __init__(self, size, frame_history_len, lander=False, vizdoom=False):
         """This is a memory efficient implementation of the replay buffer.
 
         The sepecific memory optimizations use here are:
@@ -201,6 +201,7 @@ class ReplayBuffer(object):
             Number of memories to be retried for each observation.
         """
         self.lander = lander
+        self.vizdoom = vizdoom
 
         self.size = size
         self.frame_history_len = frame_history_len
@@ -218,7 +219,15 @@ class ReplayBuffer(object):
         return batch_size + 1 <= self.num_in_buffer
 
     def _encode_sample(self, idxes):
+        # print(idxes)
+        # exit()
+        # print('1',np.shape(self._encode_observation))
+        # print('2',np.shape(self._encode_observation(0)))
+        # print('3',np.shape(self._encode_observation(0)[None]))
+        
         obs_batch      = np.concatenate([self._encode_observation(idx)[None] for idx in idxes], 0)
+        # print('4',np.shape(obs_batch))
+        # exit()
         act_batch      = self.action[idxes]
         rew_batch      = self.reward[idxes]
         next_obs_batch = np.concatenate([self._encode_observation( (idx + 1)%self.size )[None] for idx in idxes], 0)
@@ -285,7 +294,14 @@ class ReplayBuffer(object):
         # That is why the result is the same dimension, 
         # this checks if we are using low-dimensional observations, such as RAM
         # state, in which case we just directly return the latest RAM.
+<<<<<<< HEAD
         if len(self.obs.shape) == 2 or self.not_encode:
+=======
+        if len(self.obs.shape) == 2 or self.vizdoom:
+            # print('11', np.shape(self.obs))
+            # print('22', np.shape(self.obs[end_idx-1]))
+            # exit()
+>>>>>>> 465e3172da2192d1aae95a05c3d8afdb30680fb1
             return self.obs[end_idx-1]
         # if there weren't enough frames ever in the buffer for context
         if start_idx < 0 and self.num_in_buffer != self.size:
@@ -325,7 +341,9 @@ class ReplayBuffer(object):
             Index at which the frame is stored. To be used for `store_effect` later.
         """
         if self.obs is None:
-            self.obs      = np.empty([self.size] + list(frame.shape), dtype=np.float32 if self.lander else np.uint8)
+            self.obs      = np.empty([self.size] + list(frame.shape), dtype=np.float32 if (self.lander or self.vizdoom) else np.uint8)
+            # print('here',np.shape(self.obs))
+            # exit()
             self.action   = np.empty([self.size],                     dtype=np.int32)
             self.reward   = np.empty([self.size],                     dtype=np.float32)
             self.done     = np.empty([self.size],                     dtype=np.bool)
