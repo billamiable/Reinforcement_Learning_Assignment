@@ -5,7 +5,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Basic Q Learning
-with open (os.path.join('./pkl','atari_28-09-2018_04-23-28_vanilla.pkl'), 'rb') as fo:
+with open (os.path.join('./pkl','lander_05-12-2018_04-19-36_0.01.pkl'), 'rb') as fo:
     bas = pickle.load(fo)
 bas_r, bas_t, bas_mean_r, bas_best_mean_r = bas['reward'], bas['timestep'], bas['mean_reward'], bas['best_reward']
 
@@ -19,6 +19,6 @@ ax.legend()
 plt.ticklabel_format(style='sci', axis='x', scilimits=(0,0))
 plt.ylabel("Episode Rewards", fontsize=15)
 plt.xlabel("Number of Timesteps", fontsize=15, labelpad=4)
-plt.title ("Vanilla Q Learning Performance for Pong", fontsize=20)
+plt.title ("Soft Q Learning with EX2 Exploration Performance for Lander", fontsize=20)
 plt.legend(loc='lower right')
 plt.show()
