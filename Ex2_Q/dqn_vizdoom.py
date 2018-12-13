@@ -10,7 +10,7 @@ import tensorflow                as tf
 import tensorflow.contrib.layers as layers
 from collections import namedtuple
 from dqn_utils import *
-from my_exemplar import Exemplar
+from my_exemplar_conv import Exemplar
 
 import skimage.color, skimage.transform
 import itertools as it

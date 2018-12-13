@@ -15,7 +15,7 @@ class Exemplar(object):
         ):
         self.first_train = False
         self.bonus_form = bonus_form
-        self.model = Siamese(input_dim, feature_dim, hidden_sizes, seed = seed, eval=eval)
+        self.model = SiameseConv(feature_dim, hidden_sizes, 45, 30, 1,seed = seed, eval=eval)
         #self.model.init_tf_sess(sess)
 
     def fit(self, positive, negative):
