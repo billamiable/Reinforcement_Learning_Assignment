@@ -58,7 +58,7 @@ def atari_learn(env,
 
     exploration_schedule = PiecewiseSchedule(
         [
-            (0, 0.2),
+            (0, 10),
             (1e6, 0.1),
             (num_iterations / 2, 0.01),
         ], outside_value=0.01
