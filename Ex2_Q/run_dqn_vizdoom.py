@@ -83,7 +83,7 @@ def vizdoom_learn(game,
     exploration_schedule = PiecewiseSchedule(
         [
             (0, 1.0),
-            (0.6*8e4, 0.1),
+            (0.6*16e4, 0.1),
         ], outside_value=0.1
     )
 
@@ -109,7 +109,7 @@ def vizdoom_learn(game,
         rew_file='./pkl/vizdoom_'+time.strftime("%d-%m-%Y_%H-%M-%S")+'.pkl',
         explore=explore,
         ex2=ex2,
-        ex2_len=128,
+        ex2_len=64,
         min_replay_size=128,
         coef=coef,
         seed=seed,
@@ -188,7 +188,7 @@ def main():
 
     # Get Vizdoom games.
     # Create Doom instance
-    DEFAULT_CONFIG = "/Users/wangyujie/Desktop/iProud/iCourse/US/294-Reinforcement_Learning/Group_Project/ViZDoom/scenarios/simpler_basic.cfg"
+    DEFAULT_CONFIG = "/home/FanZhang/Reinforcement_Learning_Assignment/Ex2_Q/ViZDoom/scenarios/simpler_basic.cfg"
     game = initialize_vizdoom(DEFAULT_CONFIG, seed)
     print('using game vizdoom')
 
@@ -197,7 +197,7 @@ def main():
     
     # OMG, 200M Maximum steps
     # TO-DO: num_timesteps need to be changed, here 8e4 = epochs * it_per_epochs
-    vizdoom_learn(game, session, num_timesteps=8e4, vizdoom = args.vizdoom, double_q=args.double_q, 
+    vizdoom_learn(game, session, num_timesteps=16e4, vizdoom = args.vizdoom, double_q=args.double_q, 
                   explore=args.explore, ex2=args.ex2, coef=args.coef, seed=seed, evaluation=args.eval)
 
 if __name__ == "__main__":

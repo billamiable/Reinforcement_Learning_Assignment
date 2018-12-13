@@ -15,10 +15,11 @@ from my_exemplar import Exemplar
 import skimage.color, skimage.transform
 import itertools as it
 from tqdm import trange
+import logging
 
 frame_repeat = 12
 resolution = (30, 45)
-epochs = 40
+epochs = 80
 learning_steps_per_epoch = 2000
 test_episodes_per_epoch = 100
 
@@ -574,9 +575,9 @@ class QLearner(object):
                 self.first_train = False
             else:
                 train_itrs = self.train_itrs
-            for _  in range(train_itrs):
-                positive = self.replay_buffer.sample_positive(self.ex2_len, 128)
-                negative = self.replay_buffer.sample_negative(self.ex2_len, 128)
+            for i  in range(train_itrs):
+                positive = self.replay_buffer.sample_positive(self.ex2_len, 32)
+                negative = self.replay_buffer.sample_negative(self.ex2_len, 32)
                 # positive_np = np.asarray(positive)
                 # print(positive_np.shape)
                 # print(self.replay_buffer.num_in_buffer)
@@ -584,6 +585,7 @@ class QLearner(object):
                 # print(len(positive))
                 # exit()
                 self.exemplar.fit(positive, negative)
+                # print("%d in %d" %(i, train_itrs))
             # update rewards
             paths = self.replay_buffer.get_all_positive(self.ex2_len)
             bonus_reward = self.exemplar.predict(paths)
@@ -774,7 +776,9 @@ class QLearner(object):
                           print("Model saved in path: %s" % save_path)
           print("%d training episodes played." % train_episodes_finished)
           train_scores = np.array(train_scores)
-          print("Results: mean: %.1f±%.1f," % (train_scores.mean(), train_scores.std()), \
+          logging.basicConfig(filename='myapp.log', level=logging.INFO)
+          logging.info("Results mean: {} and Result sta: {}".format(train_scores.mean(), train_scores.std()))
+          print("Results: mean: %.1f +- %.1f," % (train_scores.mean(), train_scores.std()), \
                 "min: %.1f," % train_scores.min(), "max: %.1f," % train_scores.max())
           print("best_score", best_score)
           if 0:

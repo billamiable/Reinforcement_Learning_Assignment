@@ -4,6 +4,7 @@ import gym
 import tensorflow as tf
 import numpy as np
 import random
+import logging
 
 def huber_loss(x, delta=1.0):
     # https://en.wikipedia.org/wiki/Huber_loss
@@ -387,6 +388,7 @@ class ReplayBuffer(object):
         # mod_end = (self.num_in_buffer+self.next_idx-length) % self.num_in_buffer
         # idxes = sample_n_unique(lambda: random.randint(mod_start, mod_end), batch_size)
         idxes = sample_n_unique(lambda: random.randint(mod_start, mod_start+self.num_in_buffer-length-1), batch_size)
+        # print("sample neg")
         idxes = [idx % self.num_in_buffer for idx in idxes]
         return self._encode_sample(idxes)[0]
 
@@ -402,8 +404,11 @@ class ReplayBuffer(object):
         reward -= median_bonus
         idxes = list( range(next_idx-length+1 , next_idx) )
         idxes = [idx % self.num_in_buffer for idx in idxes]
+        logging.basicConfig(filename='myapp.log', level=logging.INFO)
+        logging.info("previous is {}".format(np.sum(self.reward[idxes])))
         print('previous', np.sum(self.reward[idxes]))
         self.reward[idxes] += coef * reward
+        logging.info("after is {}".format(np.sum(self.reward[idxes])))
         print('after', np.sum(self.reward[idxes]))
 
 
