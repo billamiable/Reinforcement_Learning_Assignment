@@ -14,6 +14,16 @@ from my_exemplar import Exemplar
 
 OptimizerSpec = namedtuple("OptimizerSpec", ["constructor", "kwargs", "lr_schedule"])
 
+def set_global_seeds(i):
+    try:
+        import tensorflow as tf
+    except ImportError:
+        pass
+    else:
+        tf.set_random_seed(i)
+    np.random.seed(i)
+    random.seed(i)
+
 class QLearner(object):
   def __init__(
     self,
@@ -41,7 +51,8 @@ class QLearner(object):
     ex2_len= 1000,
     coef=0.01,
     seed=250,
-    eval=False):
+    evaluation=False,
+    directory = './models/model1'):
     """Run Deep Q-learning algorithm.
 
     You can specify your own convnet using q_func.
@@ -109,8 +120,14 @@ class QLearner(object):
     # Double (need to modify)
     graph_1 = tf.Graph()
     graph_2 = tf.Graph()
-    self.session1 = session
-    self.session2 = session
+    # Settings for Atari Ram
+    tf_config = tf.ConfigProto(
+        inter_op_parallelism_threads=1,
+        intra_op_parallelism_threads=1)
+    self.session1 = tf.Session(config=tf_config, graph=graph_1)
+    self.session2 = tf.Session(config=tf_config, graph=graph_2)
+
+    # print("AVAILABLE GPUS: ", get_available_gpus())
     
     self.exploration = exploration
     self.rew_file = str(uuid.uuid4()) + '.pkl' if rew_file is None else rew_file
@@ -127,7 +144,7 @@ class QLearner(object):
     self.ex2_len = ex2_len
     self.count = 0
     self.seed = seed
-    self.eval = eval
+    self.eval = evaluation
     print('eval?', self.eval)
     print('exploration strategy', explore)
     print('using ex2', ex2)
@@ -147,8 +164,8 @@ class QLearner(object):
     if self.eval:
         # Model 1
         with graph_1.as_default():
-            saver1 = tf.train.import_meta_graph('./bstmodel/model1.meta')
-            saver1.restore(self.session1, './bstmodel/model1')
+            saver1 = tf.train.import_meta_graph('./models/test_model.meta')
+            saver1.restore(self.session1, './models/test_model')
             self.obs_t_ph1 = tf.get_collection('obs_t_ph')[0]
             self.Temp1 = tf.get_collection('Temp')[0]
             self.keep_per1 = tf.get_collection('keep_per')[0]
@@ -162,8 +179,8 @@ class QLearner(object):
                 self.ex2_prob1 = tf.get_collection('ex2_prob')[0]
         # Model 2
         with graph_2.as_default():
-            saver2 = tf.train.import_meta_graph('./bstmodel/model2.meta')
-            saver2.restore(self.session2, './bstmodel/model2')
+            saver2 = tf.train.import_meta_graph('./models/model2.meta')
+            saver2.restore(self.session2, './models/model2')
             self.obs_t_ph2 = tf.get_collection('obs_t_ph')[0]
             self.Temp2 = tf.get_collection('Temp')[0]
             self.keep_per2 = tf.get_collection('keep_per')[0]
@@ -173,8 +190,8 @@ class QLearner(object):
             if self.ex2:
                 self.ex2_in1_2 = tf.get_collection('ex2_in1')[0]
                 self.ex2_in2_2 = tf.get_collection('ex2_in2')[0]
-                self.ex2_dis_output_2 = tf.get_collection('ex2_dis_output')[0]
-                self.ex2_prob_2 = tf.get_collection('ex2_prob')[0]
+                self.ex2_dis_output2 = tf.get_collection('ex2_dis_output')[0]
+                self.ex2_prob2 = tf.get_collection('ex2_prob')[0]
         self.model_initialized = True
         # print('obs is here',self.obs_t_ph)
         # print(self.Temp)
@@ -485,32 +502,40 @@ class QLearner(object):
             q_t2 = self.session2.run(self.q_t2, feed_dict={self.obs_t_ph2: [recent_obs], 
                                                            self.Temp2: self.exploration.value(self.t),
                                                            self.keep_per2: 1.0})
-            ex1_out, _ = self.session.run([self.ex2_dis_output1, self.ex2_prob1], feed_dict={self.ex2_in1_1: [recent_obs], 
+            ex1_out, _ = self.session1.run([self.ex2_dis_output1, self.ex2_prob1], feed_dict={self.ex2_in1_1: [recent_obs], 
                                                 self.ex2_in2_1: [recent_obs] })
-            ex2_out, _ = self.session.run([self.ex2_dis_output2, self.ex2_prob2], feed_dict={self.ex2_in1_2: [recent_obs], 
+            ex2_out, _ = self.session2.run([self.ex2_dis_output2, self.ex2_prob2], feed_dict={self.ex2_in1_2: [recent_obs], 
                                                 self.ex2_in2_2: [recent_obs] })
-            alphas = np_softmax( [ex1_out, ex2_out] ) 
-            q_t = alphas * np.array( [q_t1,  q_t2] )
-            q_dist = tf.nn.softmax(q_t/self.Temp)
-            action = np.random.choice(self.num_actions, p=q_d[0])
-            if self.eval and (self.replay_buffer.num_in_buffer > self.min_replay_size) and (self.count >= self.ex2_len):
-                self.count = 0
-                #paths = self.replay_buffer.get_all_positive(self.ex2_len)
-                #ex2_out, ex2_pb = self.session.run([self.ex2_dis_output, self.ex2_prob], feed_dict={self.ex2_in1: paths, 
-                #                                                       self.ex2_in2: paths})
+            # print( "q_t1 shape", q_t1.shape)
+            alphas = np_softmax( [ex1_out, ex2_out] )
+            # print("alphas shape:",alphas.shape)
+            alphas = alphas[np.newaxis, :]
+            # print("alphas shape:",alphas.shape)
+            q_t = np.concatenate((q_t1,  q_t2))
+            # print("q_t shape:", q_t.shape)
+            q_t = np.dot( alphas, q_t )
+            # print("q_t final shape", q_t.shape)           
+            q_dist = np_softmax(q_t[0])
+            print("q_t final shape", q_dist.shape)           
+            action = np.random.choice(self.num_actions, p=q_dist)
+            # if self.eval and (self.replay_buffer.num_in_buffer > self.min_replay_size) and (self.count >= self.ex2_len):
+            #     self.count = 0
+            #     #paths = self.replay_buffer.get_all_positive(self.ex2_len)
+            #     #ex2_out, ex2_pb = self.session.run([self.ex2_dis_output, self.ex2_prob], feed_dict={self.ex2_in1: paths, 
+            #     #                                                       self.ex2_in2: paths})
                 
-                # print("ex2 dis_out", ex2_out)
-                # print("ex2 pb_out", ex2_pb)
-                #for _ in range(10):
-                #    ex2_out, ex2_pb = self.session.run([self.ex2_dis_output, self.ex2_prob], feed_dict={self.ex2_in1: np.ones((1,9))/9, 
-                #                                                           self.ex2_in2: np.ones((1,9))/9 })
-                #    print("ex2_pb", ex2_pb)
-            #exit()
-            if 0:
-                print('in',input_q)
-                print('qt',q_t)
-                print('qd',q_d)
-            action = np.random.choice(self.num_actions, p=q_d[0])
+            #     # print("ex2 dis_out", ex2_out)
+            #     # print("ex2 pb_out", ex2_pb)
+            #     #for _ in range(10):
+            #     #    ex2_out, ex2_pb = self.session.run([self.ex2_dis_output, self.ex2_prob], feed_dict={self.ex2_in1: np.ones((1,9))/9, 
+            #     #                                                           self.ex2_in2: np.ones((1,9))/9 })
+            #     #    print("ex2_pb", ex2_pb)
+            # #exit()
+            # if 0:
+            #     print('in',input_q)
+            #     print('qt',q_t)
+            #     print('qd',q_d)
+            # action = np.random.choice(self.num_actions, p=q_d[0])
 
     if self.explore == 'bayesian':
         # print("using bayesian exploration!")
