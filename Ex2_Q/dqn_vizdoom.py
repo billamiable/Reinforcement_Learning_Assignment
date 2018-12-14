@@ -755,6 +755,8 @@ class QLearner(object):
           train_scores = []
 
           print("Training...")
+          logging.basicConfig(filename='myapp.log', level=logging.INFO)
+          logging.info("epoch is : {}".format(epoch))
           self.env.new_episode()
           for learning_step in trange(learning_steps_per_epoch, leave=False):
               self.step_env()
