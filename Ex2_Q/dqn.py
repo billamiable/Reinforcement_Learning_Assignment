@@ -357,8 +357,8 @@ class QLearner(object):
         tf.add_to_collection('obs_t_ph', self.obs_t_ph)
         if self.explore == 'soft_q':
             tf.add_to_collection('Temp', self.Temp)
+            tf.add_to_collection('q_dist', self.q_dist)
         tf.add_to_collection('keep_per', self.keep_per)
-        tf.add_to_collection('q_dist', self.q_dist)
         tf.add_to_collection('q_t', q_t)
         if self.ex2:
             in1, in2, dis_output, prob = self.exemplar.model.predict_tensor()
