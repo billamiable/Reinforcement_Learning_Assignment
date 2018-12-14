@@ -355,7 +355,8 @@ class QLearner(object):
     if not self.eval:
         self.saver = tf.train.Saver()
         tf.add_to_collection('obs_t_ph', self.obs_t_ph)
-        tf.add_to_collection('Temp', self.Temp)
+        if self.explore == 'soft_q':
+            tf.add_to_collection('Temp', self.Temp)
         tf.add_to_collection('keep_per', self.keep_per)
         tf.add_to_collection('q_dist', self.q_dist)
         tf.add_to_collection('q_t', q_t)

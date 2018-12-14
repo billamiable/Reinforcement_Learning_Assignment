@@ -497,10 +497,10 @@ class QLearner(object):
             #print(self.keep_per)
             #exit()
             q_t1 = self.session1.run(self.q_t1, feed_dict={self.obs_t_ph1: [recent_obs], 
-                                                           self.Temp1: self.exploration.value(self.t),
+                                                           self.Temp1: 0.1,
                                                            self.keep_per1: 1.0})
             q_t2 = self.session2.run(self.q_t2, feed_dict={self.obs_t_ph2: [recent_obs], 
-                                                           self.Temp2: self.exploration.value(self.t),
+                                                           self.Temp2: 0.1,
                                                            self.keep_per2: 1.0})
             ex1_out, _ = self.session1.run([self.ex2_dis_output1, self.ex2_prob1], feed_dict={self.ex2_in1_1: [recent_obs], 
                                                 self.ex2_in2_1: [recent_obs] })
