@@ -115,8 +115,8 @@ def vizdoom_learn(game,
         seed=seed,
         eval= evaluation,
         vizdoom=vizdoom,
-        # model_path= './bstmodel/vizdoom_'+time.strftime("%d-%m-%Y_%H-%M-%S")
-        model_path = './bstmodel/vizdoom_12-12-2018_01-28-25'
+        model_path= './bstmodel/vizdoom_'+time.strftime("%d-%m-%Y_%H-%M-%S")
+        # model_path = './bstmodel/vizdoom_12-12-2018_01-28-25'
     )
     game.close()
 
@@ -178,6 +178,7 @@ def main():
     parser.add_argument('--explore', type=str, default='e-greedy')
     parser.add_argument('--ex2', action='store_true')
     parser.add_argument('--coef', type=float, default=0.01)
+    parser.add_argument('--env_path', type=str, default='/Users/wangyujie/Desktop/iProud/iCourse/US/294-Reinforcement_Learning/Group_Project/DirectFuturePrediction/maps/D1_basic.cfg')
     args = parser.parse_args()
     
     # Run training
@@ -188,7 +189,8 @@ def main():
 
     # Get Vizdoom games.
     # Create Doom instance
-    DEFAULT_CONFIG = "/home/FanZhang/Reinforcement_Learning_Assignment/Ex2_Q/ViZDoom/scenarios/simpler_basic.cfg"
+    # DEFAULT_CONFIG = "/home/FanZhang/Reinforcement_Learning_Assignment/Ex2_Q/ViZDoom/scenarios/simpler_basic.cfg"
+    DEFAULT_CONFIG = '/Users/wangyujie/Desktop/iProud/iCourse/US/294-Reinforcement_Learning/Group_Project/DirectFuturePrediction/maps/D1_basic.cfg'
     game = initialize_vizdoom(DEFAULT_CONFIG, seed)
     print('using game vizdoom')
 

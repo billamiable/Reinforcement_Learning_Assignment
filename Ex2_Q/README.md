@@ -38,19 +38,26 @@ python p1_q1.py
 #### 1. Training
 
 ```ruby
-python run_dqn_atari.py PongNoFrameskip-v4 --explore e-greedypython run_dqn_atari.py PongNoFrameskip-v4 --double_q --explore e-greedypython run_dqn_atari.py ZaxxonNoFrameskip-v4 --explore e-greedypython run_dqn_atari.py ZaxxonNoFrameskip-v4 --double_q --explore e-greedy
+python run_dqn_atari.py PongNoFrameskip-v4 --explore e-greedy
+python run_dqn_atari.py PongNoFrameskip-v4 --double_q --explore e-greedy
+python run_dqn_atari.py ZaxxonNoFrameskip-v4 --explore e-greedy
+python run_dqn_atari.py ZaxxonNoFrameskip-v4 --double_q --explore e-greedy
 ```
 #### 2. Plot Result
 
 ```ruby
-python p1_q2.pypython p1_q2_z.py
+python p1_q2.py
+python p1_q2_z.py
 ```
 
 ### Question 3: experimenting with hyperparameters
 #### 1. Training
 
 ```ruby
-python run_dqn_atari.py PongNoFrameskip-v4 --explore greedypython run_dqn_atari.py PongNoFrameskip-v4 --explore e-greedypython run_dqn_atari.py PongNoFrameskip-v4 --explore boltzmannpython run_dqn_atari.py PongNoFrameskip-v4 --explore bayesian
+python run_dqn_atari.py PongNoFrameskip-v4 --explore greedy
+python run_dqn_atari.py PongNoFrameskip-v4 --explore e-greedy
+python run_dqn_atari.py PongNoFrameskip-v4 --explore boltzmann
+python run_dqn_atari.py PongNoFrameskip-v4 --explore bayesian
 ```
 #### 2. Plot Result
 
@@ -59,7 +66,8 @@ python p1_q3.py
 ```
 #### 3. Reference for Exploration Strategy
 ```ruby
-[Theory] https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part- 7-action-selection-strategies-for-exploration-d3a97b7cceaf[Code] https://github.com/awjuliani/DeepRL-Agents/blob/master/Q-Exploration.ipynb
+[Theory] https://medium.com/emergent-future/simple-reinforcement-learning-with-tensorflow-part- 7-action-selection-strategies-for-exploration-d3a97b7cceaf
+[Code] https://github.com/awjuliani/DeepRL-Agents/blob/master/Q-Exploration.ipynb
 ```
 
 
@@ -70,7 +78,10 @@ python p1_q3.py
 #### 1. Training
 
 ```ruby
-python train_ac_f18.py CartPole-v0 -n 100 -b 1000 -e 3  --exp_name 1_1 -ntu 1 -ngsptu 1python train_ac_f18.py CartPole-v0 -n 100 -b 1000 -e 3  --exp_name 100_1 -ntu 100 -ngsptu 1python train_ac_f18.py CartPole-v0 -n 100 -b 1000 -e 3  --exp_name 1_100 -ntu 1 -ngsptu 100python train_ac_f18.py CartPole-v0 -n 100 -b 1000 -e 3  --exp_name 10_10 -ntu 10 -ngsptu 10
+python train_ac_f18.py CartPole-v0 -n 100 -b 1000 -e 3  --exp_name 1_1 -ntu 1 -ngsptu 1
+python train_ac_f18.py CartPole-v0 -n 100 -b 1000 -e 3  --exp_name 100_1 -ntu 100 -ngsptu 1
+python train_ac_f18.py CartPole-v0 -n 100 -b 1000 -e 3  --exp_name 1_100 -ntu 1 -ngsptu 100
+python train_ac_f18.py CartPole-v0 -n 100 -b 1000 -e 3  --exp_name 10_10 -ntu 10 -ngsptu 10
 ```
 #### 2. Plot Result
 
@@ -88,9 +99,16 @@ python plot.py data/*CartPole* --value AverageReturn
 #### 2. Plot Result
 
 ```ruby
-python plot.py data/*InvertedPendulum* --value AverageReturnpython plot.py data/*HalfCheetah* --value AverageReturn
+python plot.py data/*InvertedPendulum* --value AverageReturn
+python plot.py data/*HalfCheetah* --value AverageReturn
 ```
 
 
+## Part 3: Composable Soft Q Learning
+
+```ruby
+python run_dqn_vizdoom.py --vizdoom --explore soft_q --env_path /Users/wangyujie/Desktop/iProud/iCourse/US/294-Reinforcement_Learning/Group_Project/DirectFuturePrediction/maps/D1_basic.cfg
+python run_dqn_vizdoom.py --vizdoom --explore soft_q --ex2 --coef 1e-4 --env_path /Users/wangyujie/Desktop/iProud/iCourse/US/294-Reinforcement_Learning/Group_Project/DirectFuturePrediction/maps/D1_basic.cfg
+```
 
 ## Cheers!
