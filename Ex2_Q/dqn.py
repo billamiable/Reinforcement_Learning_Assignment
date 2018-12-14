@@ -154,9 +154,10 @@ class QLearner(object):
         saver1 = tf.train.import_meta_graph(self.directory+'.meta')
         saver1.restore(self.session, self.directory)
         self.obs_t_ph = tf.get_collection('obs_t_ph')[0]
-        self.Temp = tf.get_collection('Temp')[0]
+        if self.explore == 'soft_q':
+            self.Temp = tf.get_collection('Temp')[0]
+            self.q_dist = tf.get_collection('q_dist')[0]
         self.keep_per = tf.get_collection('keep_per')[0]
-        self.q_dist = tf.get_collection('q_dist')[0]
         self.q_t = tf.get_collection('q_t')[0]
         # Ex2
         if self.ex2:
@@ -470,7 +471,8 @@ class QLearner(object):
             #print(self.keep_per)
             #exit()
             q_d = self.session.run(self.q_dist, feed_dict={self.obs_t_ph: [recent_obs], 
-                                                           self.Temp: self.exploration.value(self.t),
+                                                           #self.Temp: self.exploration.value(self.t),
+                                                           self.Temp: 1.0,
                                                            self.keep_per: 1.0})
             if self.eval and (self.replay_buffer.num_in_buffer > self.min_replay_size) and (self.count >= self.ex2_len):
                 self.count = 0
