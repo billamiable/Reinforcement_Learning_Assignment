@@ -164,8 +164,8 @@ class QLearner(object):
     if self.eval:
         # Model 1
         with graph_1.as_default():
-            saver1 = tf.train.import_meta_graph('./models/test_model.meta')
-            saver1.restore(self.session1, './models/test_model')
+            saver1 = tf.train.import_meta_graph('./models/Jamesbond_soft_q_ex2_e4.meta')
+            saver1.restore(self.session1, './models/Jamesbond_soft_q_ex2_e4')
             self.obs_t_ph1 = tf.get_collection('obs_t_ph')[0]
             self.Temp1 = tf.get_collection('Temp')[0]
             self.keep_per1 = tf.get_collection('keep_per')[0]
@@ -179,8 +179,8 @@ class QLearner(object):
                 self.ex2_prob1 = tf.get_collection('ex2_prob')[0]
         # Model 2
         with graph_2.as_default():
-            saver2 = tf.train.import_meta_graph('./models/model2.meta')
-            saver2.restore(self.session2, './models/model2')
+            saver2 = tf.train.import_meta_graph('./models/Alien_soft_q_ex2_e4.meta')
+            saver2.restore(self.session2, './models/Alien_soft_q_ex2_e4')
             self.obs_t_ph2 = tf.get_collection('obs_t_ph')[0]
             self.Temp2 = tf.get_collection('Temp')[0]
             self.keep_per2 = tf.get_collection('keep_per')[0]
@@ -497,26 +497,31 @@ class QLearner(object):
             #print(self.keep_per)
             #exit()
             q_t1 = self.session1.run(self.q_t1, feed_dict={self.obs_t_ph1: [recent_obs], 
-                                                           self.Temp1: 0.1,
+                                                           self.Temp1: 1.0,
                                                            self.keep_per1: 1.0})
             q_t2 = self.session2.run(self.q_t2, feed_dict={self.obs_t_ph2: [recent_obs], 
-                                                           self.Temp2: 0.1,
+                                                           self.Temp2: 1.0,
                                                            self.keep_per2: 1.0})
-            ex1_out, _ = self.session1.run([self.ex2_dis_output1, self.ex2_prob1], feed_dict={self.ex2_in1_1: [recent_obs], 
+            ex1_out, ex_prob1 = self.session1.run([self.ex2_dis_output1, self.ex2_prob1], feed_dict={self.ex2_in1_1: [recent_obs], 
                                                 self.ex2_in2_1: [recent_obs] })
-            ex2_out, _ = self.session2.run([self.ex2_dis_output2, self.ex2_prob2], feed_dict={self.ex2_in1_2: [recent_obs], 
+            ex2_out, ex_prob2 = self.session2.run([self.ex2_dis_output2, self.ex2_prob2], feed_dict={self.ex2_in1_2: [recent_obs], 
                                                 self.ex2_in2_2: [recent_obs] })
             # print( "q_t1 shape", q_t1.shape)
-            alphas = np_softmax( [ex1_out, ex2_out] )
+            #print([ex_prob1, ex_prob2])
+            prob = np.clip([ex_prob1, ex_prob2], 0, 50)
+            
+            alphas = np_softmax( prob )
+            # alphas = np.array([0.5, 0.5])
             # print("alphas shape:",alphas.shape)
+            # alphas = np.array([1.0, 0.0])
             alphas = alphas[np.newaxis, :]
-            # print("alphas shape:",alphas.shape)
+            # print("alpha:",alphas)
             q_t = np.concatenate((q_t1,  q_t2))
             # print("q_t shape:", q_t.shape)
             q_t = np.dot( alphas, q_t )
             # print("q_t final shape", q_t.shape)           
             q_dist = np_softmax(q_t[0])
-            print("q_t final shape", q_dist.shape)           
+            #print("q_t final shape", q_dist.shape)           
             action = np.random.choice(self.num_actions, p=q_dist)
             # if self.eval and (self.replay_buffer.num_in_buffer > self.min_replay_size) and (self.count >= self.ex2_len):
             #     self.count = 0
@@ -698,7 +703,7 @@ class QLearner(object):
         #print("eval?",self.eval)
         if self.model_initialized and not self.eval:
             # store the best model
-            save_path = self.saver.save(self.session, "./bstmodel/model")
+            save_path = self.saver.save(self.session, "./models/model")
             print("Model saved in path: %s" % save_path)
             #self.best_mean_episode_reward = max(self.best_mean_episode_reward, self.mean_episode_reward)
             #print("Exemplar test output")
@@ -738,23 +743,14 @@ def learn(*args, **kwargs):
     # at this point, the environment should have been advanced one step (and
     # reset if done was true), and self.last_obs should point to the new latest
     # observation
-    alg.update_model()
+    if not alg.eval:
+        alg.update_model()
     alg.log_progress()
     # print('end')
     # exit()
 
-def evaluate(*args, **kwargs):
-  alg = QLearner(*args, **kwargs)
-  while not alg.stopping_criterion_met():
-    alg.step_env()
-    # at this point, the environment should have been advanced one step (and
-    # reset if done was true), and self.last_obs should point to the new latest
-    # observation
-    #alg.update_model()
-    alg.log_progress()
-    # print('end')
-    # exit()
 # https://stackoverflow.com/questions/34968722/how-to-implement-the-softmax-function-in-python
 def np_softmax(x):
     """Compute softmax values for each sets of scores in x."""
-    return np.exp(x) / np.sum(np.exp(x), axis=0)
+    #x = np.clip(x, 0, 100)
+    return np.exp(x,dtype=np.float64) / np.sum(np.exp(x,dtype=np.float64), axis=0)

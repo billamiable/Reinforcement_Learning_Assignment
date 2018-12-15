@@ -116,7 +116,7 @@ def get_session():
     return session
 
 def get_env(seed):
-    env = gym.make('Pong-ram-v0')
+    env = gym.make('Jamesbond-ram-v0')
 
     set_global_seeds(seed)
     env.seed(seed)
